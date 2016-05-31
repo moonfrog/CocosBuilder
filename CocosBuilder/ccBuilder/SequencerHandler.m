@@ -260,6 +260,15 @@ static SequencerHandler* sharedSequencerHandler;
     [outlineHierarchy selectRowIndexes:indexes byExtendingSelection:NO];
 }
 
+- (void)collapseOutlineView {
+    for (int i = 0; i < outlineHierarchy.numberOfRows; i++) {
+        if ([outlineHierarchy itemAtRow:i] != [CCBGlobals globals].rootNode) {
+            [outlineHierarchy collapseItem:i collapseChildren:YES];
+        }
+    }
+    [self redrawTimeline];
+}
+
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
     
     if ([[CCBGlobals globals] rootNode] == NULL) return 0;

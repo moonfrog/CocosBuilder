@@ -2520,6 +2520,12 @@ static BOOL hideAllToNextSeparator;
     [[CocosScene cocosScene] selectBehind];
 }
 
+- (IBAction) menuCollapseAll:(id)sender
+{
+    [sequenceHandler collapseOutlineView];
+}
+
+
 - (IBAction) menuDeselect:(id)sender
 {
     [self setSelectedNodes:NULL];

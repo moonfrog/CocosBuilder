@@ -72,6 +72,7 @@
 
 - (id) initWithOutlineView:(NSOutlineView*)view;
 - (void) updateOutlineViewSelection;
+- (void) collapseOutlineView;
 - (void) updateExpandedForNode:(CCNode*)node;
 - (void) toggleSeqExpanderForRow:(int)row;
 
