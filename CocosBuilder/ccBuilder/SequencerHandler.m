@@ -409,18 +409,22 @@ static SequencerHandler* sharedSequencerHandler;
     if (!dragAndDropEnabled) return NO;
     
     CCBGlobals* g = [CCBGlobals globals];
+    NSMutableArray* itemsArray = [[NSMutableArray alloc] init];
     
-    id item = [items objectAtIndex:0];
+    for (int i = 0; i < items.count ; i++) {
+        id item = [items objectAtIndex:i];
     
-    if (![item isKindOfClass:[CCNode class]]) return NO;
-    
-    CCNode* draggedNode = item;
-    if (draggedNode == g.rootNode) return NO;
-    
-    NSMutableDictionary* clipDict = [CCBWriterInternal dictionaryFromCCObject:draggedNode];
-    
-    [clipDict setObject:[NSNumber numberWithLongLong:(long long)draggedNode] forKey:@"srcNode"];
-    NSData* clipData = [NSKeyedArchiver archivedDataWithRootObject:clipDict];
+        if (![item isKindOfClass:[CCNode class]]) return NO;
+
+        CCNode* draggedNode = item;
+        if (draggedNode == g.rootNode) return NO;
+
+        NSMutableDictionary* clipDict = [CCBWriterInternal dictionaryFromCCObject:draggedNode];
+
+        [clipDict setObject:[NSNumber numberWithLongLong:(long long)draggedNode] forKey:@"srcNode"];
+        [itemsArray addObject:clipDict];
+    }
+    NSData* clipData = [NSKeyedArchiver archivedDataWithRootObject:itemsArray];
     
     [pboard setData:clipData forType:@"com.cocosbuilder.node"];
     
@@ -439,17 +443,18 @@ static SequencerHandler* sharedSequencerHandler;
     NSData* nodeData = [pb dataForType:@"com.cocosbuilder.node"];
     if (nodeData)
     {
-        NSDictionary* clipDict = [NSKeyedUnarchiver unarchiveObjectWithData:nodeData];
-        CCNode* draggedNode = (CCNode*)[[clipDict objectForKey:@"srcNode"] longLongValue];
-        
-        CCNode* node = item;
-        CCNode* parent = [node parent];
-        while (parent && parent != g.rootNode)
-        {
-            if (parent == draggedNode) return NSDragOperationNone;
-            parent = [parent parent];
+        NSMutableArray* clipArray = [NSKeyedUnarchiver unarchiveObjectWithData:nodeData];
+        for (int i = 0; i < clipArray.count ; i++) {
+            NSDictionary* clipDict = [clipArray objectAtIndex:i];
+            CCNode* draggedNode = (CCNode*)[[clipDict objectForKey:@"srcNode"] longLongValue];
+            CCNode* node = item;
+            CCNode* parent = [node parent];
+            while (parent && parent != g.rootNode)
+            {
+                if (parent == draggedNode) return NSDragOperationNone;
+                parent = [parent parent];
+            }
         }
-        
         return NSDragOperationGeneric;
     }
     
@@ -463,16 +468,21 @@ static SequencerHandler* sharedSequencerHandler;
     NSData* clipData = [pb dataForType:@"com.cocosbuilder.node"];
     if (clipData)
     {
-        NSMutableDictionary* clipDict = [NSKeyedUnarchiver unarchiveObjectWithData:clipData];
+        NSMutableArray* clipArray = [NSKeyedUnarchiver unarchiveObjectWithData:clipData];
+        NSMutableArray* nodeArray = [[NSMutableArray alloc] init];
+        for (int i = 0; i < clipArray.count ; i++) {
+            NSDictionary* clipDict = [clipArray objectAtIndex:i];
+
+            CCNode* clipNode= [CCBReaderInternal nodeGraphFromDictionary:clipDict parentSize:CGSizeZero];
+            if (![appDelegate addCCObject:clipNode toParent:item atIndex:index]) return NO;
+
+            // Remove old node
+            CCNode* draggedNode = (CCNode*)[[clipDict objectForKey:@"srcNode"] longLongValue];
+            [appDelegate deleteNode:draggedNode];
+            [nodeArray addObject:clipNode];
+        }
         
-        CCNode* clipNode= [CCBReaderInternal nodeGraphFromDictionary:clipDict parentSize:CGSizeZero];
-        if (![appDelegate addCCObject:clipNode toParent:item atIndex:index]) return NO;
-        
-        // Remove old node
-        CCNode* draggedNode = (CCNode*)[[clipDict objectForKey:@"srcNode"] longLongValue];
-        [appDelegate deleteNode:draggedNode];
-        
-        [appDelegate setSelectedNodes:[NSArray arrayWithObject: clipNode]];
+        [appDelegate setSelectedNodes:[NSArray arrayWithArray:nodeArray]];
         
         [PositionPropertySetter refreshAllPositions];
         
