@@ -105,61 +105,83 @@ static NSInteger strSort(id num1, id num2, void *context)
     
     NSString* imgFile = [[dict objectForKey:@"metadata"] objectForKey:@"textureFileName"];
     
-    NSString* absImgFile = [NSString stringWithFormat:@"%@/%@", assetsPath,imgFile];
-    
     NSImage* tex;
-            
-    NSImageRep* imgRep = [NSImageRep imageRepWithContentsOfFile:absImgFile];
-    
-    if (![imgRep isKindOfClass:[NSBitmapImageRep class]]) return NULL;
-    NSBitmapImageRep* bitmapRep = (NSBitmapImageRep*) imgRep;
-            
-    tex = [[NSImage alloc] initWithSize:NSMakeSize([bitmapRep pixelsWide], [bitmapRep pixelsHigh])];
-    [tex addRepresentation:bitmapRep];
-    [tex setFlipped:YES];
-    [tex autorelease];
-    
-    NSDictionary* dictFrames = [dict objectForKey:@"frames"];
-    NSDictionary* frameInfo = [dictFrames objectForKey:spriteFile];
-    if (!frameInfo)
-    {
-        return NULL;
-    }
-    
-    NSRect rect = NSRectFromString([frameInfo objectForKey:@"frame"]);
-    BOOL rotated = [[frameInfo objectForKey:@"rotated"] boolValue];
-    if (rotated)
-    {
-        rect = NSMakeRect(rect.origin.x, rect.origin.y, rect.size.height, rect.size.width);
-    }
-    
     NSImage* imgFrame;
-    if (rotated)
-    {
-        imgFrame = [[NSImage alloc] initWithSize:NSMakeSize(rect.size.height, rect.size.width)];
-    }
-    else
-    {
-        imgFrame = [[NSImage alloc] initWithSize:rect.size];
-    }
-    [imgFrame setFlipped:YES];
-    [imgFrame lockFocus];
     
-    if (rotated)
-    {
-        NSAffineTransform *transform = [NSAffineTransform transform];
-        [transform rotateByDegrees:-90];
-        [transform concat];
+    if ([imgFile hasSuffix:@".pvr"] || [imgFile hasSuffix:@".ccz"]) {
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:spriteSheetFile];
+        CCSprite* sprite = [CCSprite spriteWithSpriteFrameName:spriteFile];
+        [sprite setPosition:ccp(0, 0)];
+        [sprite setAnchorPoint:ccp(0, 0)];
+        CCRenderTexture* rTexture = [CCRenderTexture renderTextureWithWidth:sprite.contentSize.width height:sprite.contentSize.height];
+        [rTexture setPosition:ccp(0, 0)];
+        [rTexture begin];
+        [sprite visit];
+        [rTexture end];
+        CGImageRef iRep = [rTexture newCGImage];
         
-        [tex drawAtPoint:NSMakePoint(-rect.size.width, 0) fromRect:rect operation:NSCompositeCopy fraction:1];
+        NSRect imageRect = NSMakeRect(0.0, 0.0, 0.0, 0.0);
+        imageRect.size.height = sprite.contentSize.height;
+        imageRect.size.width = sprite.contentSize.width;
+        tex = [[NSImage alloc] initWithCGImage:iRep size:imageRect.size];
+        [tex setFlipped:YES];
+        [tex autorelease];
+        
+        imgFrame = tex;
+    } else {
+        NSString* absImgFile = [NSString stringWithFormat:@"%@/%@", assetsPath,imgFile];
+        NSImageRep* imgRep = [NSImageRep imageRepWithContentsOfFile:absImgFile];
+        
+        if (![imgRep isKindOfClass:[NSBitmapImageRep class]]) return NULL;
+        NSBitmapImageRep* bitmapRep = (NSBitmapImageRep*) imgRep;
+        
+        tex = [[NSImage alloc] initWithSize:NSMakeSize([bitmapRep pixelsWide], [bitmapRep pixelsHigh])];
+        [tex addRepresentation:bitmapRep];
+        [tex setFlipped:YES];
+        [tex autorelease];
+        
+        NSDictionary* dictFrames = [dict objectForKey:@"frames"];
+        NSDictionary* frameInfo = [dictFrames objectForKey:spriteFile];
+        if (!frameInfo)
+        {
+            return NULL;
+        }
+        
+        NSRect rect = NSRectFromString([frameInfo objectForKey:@"frame"]);
+        BOOL rotated = [[frameInfo objectForKey:@"rotated"] boolValue];
+        if (rotated)
+        {
+            rect = NSMakeRect(rect.origin.x, rect.origin.y, rect.size.height, rect.size.width);
+        }
+        
+        NSImage* imgFrame;
+        if (rotated)
+        {
+            imgFrame = [[NSImage alloc] initWithSize:NSMakeSize(rect.size.height, rect.size.width)];
+        }
+        else
+        {
+            imgFrame = [[NSImage alloc] initWithSize:rect.size];
+        }
+        [imgFrame setFlipped:YES];
+        [imgFrame lockFocus];
+        
+        if (rotated)
+        {
+            NSAffineTransform *transform = [NSAffineTransform transform];
+            [transform rotateByDegrees:-90];
+            [transform concat];
+            
+            [tex drawAtPoint:NSMakePoint(-rect.size.width, 0) fromRect:rect operation:NSCompositeCopy fraction:1];
+        }
+        else
+        {
+            [tex drawAtPoint:NSZeroPoint fromRect:rect operation:NSCompositeCopy fraction:1];
+        }
+        
+        [imgFrame unlockFocus];
+        [imgFrame autorelease];
     }
-    else
-    {
-        [tex drawAtPoint:NSZeroPoint fromRect:rect operation:NSCompositeCopy fraction:1];
-    }
-    
-    [imgFrame unlockFocus];
-    [imgFrame autorelease];
         
     return imgFrame;
 }
