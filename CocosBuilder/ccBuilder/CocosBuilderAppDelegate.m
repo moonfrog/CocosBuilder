@@ -1425,9 +1425,10 @@ static BOOL hideAllToNextSeparator;
         [tabBar setIsEdited:NO ForTabViewItem:item];
         [self updateDirtyMark];
     }
-        
-    [currentDocument.undoManager removeAllActions];
-    currentDocument.lastEditedProperty = NULL;
+    
+// Not clearing the undo stack once we saved the file
+//    [currentDocument.undoManager removeAllActions];
+//    currentDocument.lastEditedProperty = NULL;
 }
 
 - (void) exportFile:(NSString*) fileName withPlugIn:(NSString*) ext
