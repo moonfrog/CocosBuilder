@@ -106,6 +106,19 @@
     [super dealloc];
 }
 
++ (ResolutionSetting*) settingDefaultLandscape
+{
+    ResolutionSetting* setting = [[[ResolutionSetting alloc] init] autorelease];
+
+    setting.name = @"Default";
+    setting.width = 960;
+    setting.height = 640;
+    setting.ext = @"iphone";
+    setting.scale = 1;
+
+    return setting;
+}
+
 + (ResolutionSetting*) settingIPhone
 {
     ResolutionSetting* setting = [[[ResolutionSetting alloc] init] autorelease];
