@@ -34,6 +34,7 @@
 @synthesize previewPhonehd;
 @synthesize previewTablet;
 @synthesize previewTablethd;
+@synthesize dimensionLabel;
 
 - (void) awakeFromNib
 {
@@ -45,18 +46,24 @@
     [previewPhonehd setFocusRingType:NSFocusRingTypeNone];
     [previewTablet setFocusRingType:NSFocusRingTypeNone];
     [previewTablethd setFocusRingType:NSFocusRingTypeNone];
+    [dimensionLabel setFocusRingType:NSFocusRingTypeNone];
+    [dimensionLabel setHidden:YES];
 }
 
 - (void) setPreviewFile:(id) selection
 {
     NSImage* preview = NULL;
+    [dimensionLabel setHidden:YES];
     if ([selection respondsToSelector:@selector(preview)])
     {
         preview = [selection preview];
+        if ([selection isKindOfClass:[RMSpriteFrame class]]) {
+            [dimensionLabel setHidden:NO];
+            [dimensionLabel setStringValue:[NSString stringWithFormat: @"%.0fx%.0f", [preview size].width, [preview size].height]];
+        }
     }
     
     [previewMain setImage:preview];
-    
     
     //if (preview) [lblNoPreview setHidden:YES];
     //else [lblNoPreview setHidden:NO];

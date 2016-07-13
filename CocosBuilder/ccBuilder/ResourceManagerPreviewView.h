@@ -34,12 +34,14 @@
     IBOutlet CCBImageView* previewPhonehd;
     IBOutlet CCBImageView* previewTablet;
     IBOutlet CCBImageView* previewTablethd;
+    IBOutlet NSTextField* dimensionLabel;
 }
 @property (nonatomic,readonly) IBOutlet CCBImageView* previewMain;
 @property (nonatomic,readonly) IBOutlet CCBImageView* previewPhone;
 @property (nonatomic,readonly) IBOutlet CCBImageView* previewPhonehd;
 @property (nonatomic,readonly) IBOutlet CCBImageView* previewTablet;
 @property (nonatomic,readonly) IBOutlet CCBImageView* previewTablethd;
+@property (nonatomic,readonly) IBOutlet NSTextField* dimensionLabel;
 @property (nonatomic,readonly) CocosBuilderAppDelegate* appDelegate;
 
 - (void) setPreviewFile:(NSString*) file;
