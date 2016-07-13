@@ -224,7 +224,8 @@
         // Ignore separators and graphical stuff
         if ([type isEqualToString:@"Separator"]
             || [type isEqualToString:@"SeparatorSub"]
-            || [type isEqualToString:@"StartStop"])
+            || [type isEqualToString:@"StartStop"]
+            || [type isEqualToString:@"Button"])
         {
             continue;
         }

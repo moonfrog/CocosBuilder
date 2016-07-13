@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		470D84DC1D1960DE005B31E5 /* CCBControlButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 470D84DB1D1960DE005B31E5 /* CCBControlButton.m */; };
+		472C0DDB1D364F1D006A6BFA /* InspectorButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 472C0DD61D364F13006A6BFA /* InspectorButton.xib */; };
+		472C0DDC1D364F23006A6BFA /* InspectorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 472C0DD51D364F13006A6BFA /* InspectorButton.m */; };
 		47FB399D1C7AFD1B000D286F /* CCFontDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 47FB39991C7AFD18000D286F /* CCFontDefinition.m */; };
 		581130601639C52500A86D70 /* seq-startmarker.png in Resources */ = {isa = PBXBuildFile; fileRef = 5811305F1639C52000A86D70 /* seq-startmarker.png */; };
 		581BCFE8162DADE7007DE600 /* CCBSplitHorizontalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 581BCFE7162DADE7007DE600 /* CCBSplitHorizontalView.m */; };
@@ -866,6 +869,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		470D84DA1D1960DE005B31E5 /* CCBControlButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBControlButton.h; sourceTree = "<group>"; };
+		470D84DB1D1960DE005B31E5 /* CCBControlButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBControlButton.m; sourceTree = "<group>"; };
+		472C0DD41D364F13006A6BFA /* InspectorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorButton.h; sourceTree = "<group>"; };
+		472C0DD51D364F13006A6BFA /* InspectorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorButton.m; sourceTree = "<group>"; };
+		472C0DD61D364F13006A6BFA /* InspectorButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InspectorButton.xib; sourceTree = "<group>"; };
 		47FB39981C7AFD18000D286F /* CCFontDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFontDefinition.h; sourceTree = "<group>"; };
 		47FB39991C7AFD18000D286F /* CCFontDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFontDefinition.m; sourceTree = "<group>"; };
 		5811305E1639BF1200A86D70 /* SequencerTimelineDrawDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SequencerTimelineDrawDelegate.h; sourceTree = "<group>"; };
@@ -3731,6 +3739,9 @@
 		E3B7AEE614E33E5700DFD402 /* Inspector Properties */ = {
 			isa = PBXGroup;
 			children = (
+				472C0DD41D364F13006A6BFA /* InspectorButton.h */,
+				472C0DD51D364F13006A6BFA /* InspectorButton.m */,
+				472C0DD61D364F13006A6BFA /* InspectorButton.xib */,
 				E3B7AEED14E34A4D00DFD402 /* InspectorValue.h */,
 				E3B7AEEE14E34A4D00DFD402 /* InspectorValue.m */,
 				E3214C4815D40F01002413A7 /* InspectorCustom.h */,
@@ -3863,6 +3874,8 @@
 			isa = PBXGroup;
 			children = (
 				E3B84C3C151A2C02004B743C /* Supporting Files */,
+				470D84DA1D1960DE005B31E5 /* CCBControlButton.h */,
+				470D84DB1D1960DE005B31E5 /* CCBControlButton.m */,
 			);
 			path = CCControlButton;
 			sourceTree = "<group>";
@@ -4581,6 +4594,7 @@
 				E35DBBC414F2A2900070A6E4 /* InspectorText.xib in Resources */,
 				E35DBBDF14F3D1B60070A6E4 /* FontListTTF.plist in Resources */,
 				E35DBBE114F3DCDF0070A6E4 /* InspectorFontTTF.xib in Resources */,
+				472C0DDB1D364F1D006A6BFA /* InspectorButton.xib in Resources */,
 				E35DBBFB14F3EE210070A6E4 /* InspectorFloat.xib in Resources */,
 				E35DBC1B14F4DED00070A6E4 /* InspectorStartStop.xib in Resources */,
 				E35DBC2014F4ED0E0070A6E4 /* InspectorIntegerLabeled.xib in Resources */,
@@ -5186,6 +5200,7 @@
 				E3214C4415D3C29D002413A7 /* CustomPropSettingsWindow.m in Sources */,
 				E3214C4715D3C3AF002413A7 /* CustomPropSetting.m in Sources */,
 				E3214C4B15D40F01002413A7 /* InspectorCustom.m in Sources */,
+				472C0DDC1D364F23006A6BFA /* InspectorButton.m in Sources */,
 				E3214C5D15D54356002413A7 /* InspectorCustomEdit.m in Sources */,
 				E3B7BCA015E3BCFE00CF95EF /* MainToolbarDelegate.m in Sources */,
 				E3AF6CDB15F0A9BC0048DB2A /* HelpWindow.m in Sources */,
@@ -5322,6 +5337,7 @@
 			files = (
 				E398C03B14FB8F850078E771 /* CCBXCocos2diPhone.m in Sources */,
 				E3F2C21314FC157E007B660D /* CCBXCocos2diPhoneWriter.m in Sources */,
+				470D84DC1D1960DE005B31E5 /* CCBControlButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
