@@ -25,8 +25,38 @@
 #import "cocos2d.h"
 
 @interface CCBPLabelTTF : CCLabelTTF
-
+{
+    CGFloat outlineWidth;
+    CGPoint shadowOffsetInPoints;
+    ccColor3B shadowColor;
+    ccColor3B outlineColor;
+}
 // Add property to maintain backwards compatibility
 @property (nonatomic,assign) int alignment;
+
+/// -----------------------------------------------------------------------
+/// @name Drawing a Shadow
+/// -----------------------------------------------------------------------
+
+/** The color of the text shadow. If the color is fully transparent, no shadow will be used. */
+@property (nonatomic,assign) ccColor3B shadowColor;
+
+/** The offset of the shadow in points */
+@property(nonatomic,readonly) CGPoint shadowOffsetInPoints;
+
+/** The blur radius of the shadow. */
+@property (nonatomic,assign) CGFloat shadowBlurRadius;
+
+
+/// -----------------------------------------------------------------------
+/// @name Drawing an Outline
+/// -----------------------------------------------------------------------
+
+/** The color of the text's outline.
+ @see CCColor */
+@property (nonatomic,assign) ccColor3B outlineColor;
+
+/** The width of the text's outline. */
+@property (nonatomic,assign) CGFloat outlineWidth;
 
 @end
