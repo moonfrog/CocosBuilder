@@ -61,13 +61,13 @@
 			<key>defaultSerialization</key>
 			<array>
 				<integer>0</integer>
-				<integer>0</integer>
-				<integer>0</integer>
+				<integer>1</integer>
+				<integer>1</integer>
 			</array>
 			<key>default</key>
 			<array>
-				<string>0</string>
-				<integer>0</integer>
+				<string>1</string>
+				<integer>1</integer>
 			</array>
 			<key>type</key>
 			<string>Size</string>

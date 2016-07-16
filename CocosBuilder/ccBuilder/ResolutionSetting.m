@@ -119,6 +119,19 @@
     return setting;
 }
 
++ (ResolutionSetting*) settingDefault
+{
+    ResolutionSetting* setting = [[[ResolutionSetting alloc] init] autorelease];
+
+    setting.name = @"Default";
+    setting.width = 1;
+    setting.height = 1;
+    setting.ext = @"iphone";
+    setting.scale = 1;
+
+    return setting;
+}
+
 + (ResolutionSetting*) settingIPhone
 {
     ResolutionSetting* setting = [[[ResolutionSetting alloc] init] autorelease];

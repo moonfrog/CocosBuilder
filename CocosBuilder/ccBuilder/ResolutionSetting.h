@@ -46,6 +46,7 @@
 @property (nonatomic,readonly) NSArray* exts;
 
 + (ResolutionSetting*) settingDefaultLandscape;
++ (ResolutionSetting*) settingDefault;
 
 // iOS resolutions
 + (ResolutionSetting*) settingIPhone;

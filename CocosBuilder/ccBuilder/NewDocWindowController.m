@@ -68,9 +68,10 @@
 - (void) addCustomSizeScreenResolutions
 {
     // iOS resolutions
-    ResolutionSetting* iPhone = [ResolutionSetting settingIPhone];
-    iPhone.enabled = YES;
-    [resolutionsController addObject:iPhone];
+    ResolutionSetting* defaultSetting = [ResolutionSetting settingDefault];
+    defaultSetting.enabled = YES;
+    [resolutionsController addObject:defaultSetting];
+    [resolutionsController addObject:[ResolutionSetting settingIPhone]];
     [resolutionsController addObject:[ResolutionSetting settingIPad]];
     
     // Android resolutions
