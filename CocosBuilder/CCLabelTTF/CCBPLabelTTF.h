@@ -24,15 +24,32 @@
 
 #import "cocos2d.h"
 
+typedef enum LocaleStates {
+    ENGLISH,
+    HINDI,
+    GUJARATI,
+    MARATHI,
+    TELUGU,
+    TAMIL,
+    LOCALE_COUNT
+} Locale;
+
 @interface CCBPLabelTTF : CCLabelTTF
 {
     CGFloat outlineWidth;
     CGPoint shadowOffsetInPoints;
     ccColor3B shadowColor;
     ccColor3B outlineColor;
+    Locale currentLocale;
+    NSString* localeString;
+    NSMutableDictionary* stringMap;
 }
 // Add property to maintain backwards compatibility
 @property (nonatomic,assign) int alignment;
+
+@property (nonatomic,assign) NSString* localeString;
+
+@property (nonatomic,assign) Locale* currentLocale;
 
 /// -----------------------------------------------------------------------
 /// @name Drawing a Shadow
@@ -59,4 +76,7 @@
 /** The width of the text's outline. */
 @property (nonatomic,assign) CGFloat outlineWidth;
 
+- (void)changeLocale;
+- (void) setString:(NSString*)str;
+- (id)init;
 @end

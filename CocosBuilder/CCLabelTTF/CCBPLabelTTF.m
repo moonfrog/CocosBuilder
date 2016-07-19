@@ -23,6 +23,8 @@
  */
 
 #import "CCBPLabelTTF.h"
+#import "CocosBuilderAppDelegate.h"
+#import "ProjectSettings.h"
 
 @implementation CCBPLabelTTF
 //
@@ -31,6 +33,7 @@
 @synthesize outlineWidth;
 @synthesize shadowBlurRadius;
 @synthesize shadowOffsetInPoints;
+@synthesize localeString;
 
 - (void) setAlignment:(int)alignment
 {
@@ -40,11 +43,110 @@
 - (void) setColor:(ccColor3B)fontColor
 {
     bool update = YES;
-    if (!self.string) {
+    if (!super.string) {
         update = NO;
     }
     [self setFontFillColor:fontColor updateImage:update];
     super.color = fontColor;
+}
+
+-(id)init {
+    if (self = [super init])  {
+        self->currentLocale = -1;
+        self->stringMap = [[NSMutableDictionary alloc] init];
+        [self changeLocale];
+    }
+    return self;
+}
+
+-(void) setLanguageSelection:(Locale)selectedLocale
+{
+    if (selectedLocale != currentLocale) {
+        currentLocale = selectedLocale;
+        [self changeLocale];
+    }
+}
+
+- (Locale) languageSelection
+{
+    return currentLocale;
+}
+
+- (void) changeLocale
+{
+    if (self->currentLocale == LOCALE_COUNT) {
+        self->currentLocale = 0;
+    }
+    NSString* fileName = @"";
+    switch (self->currentLocale) {
+        case ENGLISH:
+            fileName = @"Localized_en";
+            break;
+        case HINDI:
+            fileName = @"Localized_hi";
+            break;
+        case GUJARATI:
+            fileName = @"Localized_gj";
+            break;
+        case MARATHI:
+            fileName = @"Localized_ma";
+            break;
+        case TELUGU:
+            fileName = @"Localized_tl";
+            break;
+        case TAMIL:
+            fileName = @"Localized_tm";
+            break;
+        default:
+            fileName = @"Localized_en";
+            break;
+    }
+    
+    ProjectSettings* projectSettings = [CocosBuilderAppDelegate appDelegate].projectSettings;
+    for (NSString* dir in projectSettings.absoluteResourcePaths)
+    {
+        NSString* fullName = [dir stringByAppendingPathComponent:fileName];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:fullName])
+        {
+            [stringMap removeAllObjects];
+            NSLog(@"Language now is %@", fileName);
+            NSString *fileContents = [NSString stringWithContentsOfFile:fullName encoding:NSUTF8StringEncoding error:NULL];
+            for (NSString *line in [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]]) {
+                // Do something
+                if (![line isEqualToString:@""]) {
+                    NSArray *items = [line componentsSeparatedByString:@"="];
+                    if ([items count] == 2) {
+                        NSString* key = [[items objectAtIndex:0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                        NSString* value = [[items objectAtIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                        value = [value stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+                        value = [value stringByReplacingOccurrencesOfString:@";" withString:@""];
+                        [stringMap setObject:value forKey:key];
+                    }
+                }
+            }
+        }
+    }
+    [self setLocaleString:localeString];
+}
+
+-(NSString*) string
+{
+    return localeString;
+}
+
+- (void) setString:(NSString *)str
+{
+    [self setLocaleString:str];
+}
+
+- (void) setLocaleString:(NSString*)str
+{
+    self->localeString = str;
+    if (![str isEqualToString:@""] && [self->stringMap valueForKey:str] != nil) {
+        [super setString:[self->stringMap valueForKey:str]];
+    } else {
+        [super setString:str];
+    }
 }
 
 - (void) setOutlineColor:(ccColor3B)outlineClr

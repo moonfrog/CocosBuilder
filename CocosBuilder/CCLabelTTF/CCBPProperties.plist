@@ -145,6 +145,16 @@
 		</dict>
 		<dict>
 			<key>displayName</key>
+			<string>Language</string>
+			<key>type</key>
+			<string>IntegerLabeled</string>
+			<key>name</key>
+			<string>languageSelection</string>
+			<key>extra</key>
+			<string>English|0|Hindi|1|Gujarati|2|Marathi|3|Telugu|4|Tamil|5</string>
+		</dict>
+		<dict>
+			<key>displayName</key>
 			<string>Font Effects</string>
 			<key>name</key>
 			<string>Font Effects</string>
