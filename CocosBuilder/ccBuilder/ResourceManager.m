@@ -444,9 +444,22 @@
     }
     else if ([ext isEqualToString:@"png"]
         || [ext isEqualToString:@"jpg"]
+        || [ext isEqualToString:@"ccz"]
         || [ext isEqualToString:@"jpeg"])
     {
-        return kCCBResTypeImage;
+        if ([ext isEqualToString:@"ccz"])
+        {
+            NSString* plistName = [file lastPathComponent];
+            plistName = [[plistName componentsSeparatedByString:@"."] objectAtIndex:0];
+            plistName = [[file stringByDeletingLastPathComponent] stringByAppendingPathComponent:plistName];
+            if (![fm fileExistsAtPath:[plistName stringByAppendingString:@".plist"]]) {
+                return kCCBResTypeImage;
+            }
+        }
+        else
+        {
+            return kCCBResTypeImage;
+        }
     }
     else if ([ext isEqualToString:@"fnt"])
     {
