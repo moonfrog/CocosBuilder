@@ -25,9 +25,23 @@
 #import "CCBControlButton.h"
 #import "CCControlButton.h"
 
+typedef enum LocaleStates {
+    ENGLISH,
+    HINDI,
+    GUJARATI,
+    MARATHI,
+    TELUGU,
+    TAMIL,
+    LOCALE_COUNT
+} Locale;
+
 @interface CCBControlButton : CCControlButton
 {
     float iLeft, iRight, iTop, iBot;
+    Locale currentLocale;
+    NSString* localeString;
+    NSMutableDictionary* stringMap;
 }
 -(void)onSetSizeFromTexture;
+- (id)init;
 @end
