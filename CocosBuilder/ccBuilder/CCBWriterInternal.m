@@ -225,6 +225,7 @@
         if ([type isEqualToString:@"Separator"]
             || [type isEqualToString:@"SeparatorSub"]
             || [type isEqualToString:@"StartStop"]
+            || [type isEqualToString:@"languageSelection"]
             || [type isEqualToString:@"Button"])
         {
             continue;
