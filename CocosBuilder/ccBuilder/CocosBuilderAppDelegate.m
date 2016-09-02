@@ -98,6 +98,8 @@
 
 #import <ExceptionHandling/NSExceptionHandler.h>
 
+@class CCControlButton;
+@class CCLabelTTF;
 
 @implementation CocosBuilderAppDelegate
 
@@ -2693,6 +2695,38 @@ static BOOL hideAllToNextSeparator;
     [defaultBrowserMenuItem setState:NSOnState];
 }
 
+- (IBAction) menuSetDocumentLanguage:(id)sender
+{
+    int tag = (int)[sender tag];
+    CocosScene* cs = [CocosScene cocosScene];
+    if (cs.children.count > 0) {
+        for (int i = 0; i < cs.children.count; i++) {
+            [self updateDocumentLanguage:[cs.children objectAtIndex:i] language:tag];
+        }
+    }
+}
+
+- (void) updateDocumentLanguage:(CCNode*)node language:(int)lang;
+{
+    @try
+    {
+        if ([node isKindOfClass:[CCControlButton class]]) {
+            [node changeLanguageSelection:lang];
+        } else if ([node isKindOfClass:[CCLabelTTF class]]) {
+            [node setLanguageSelection:lang];
+        }
+    }
+    @catch (NSException *exception)
+    {
+        NSLog(@"Something wrong with this label/button: %@", exception.reason);
+    }
+    if (node.children.count > 0) {
+        for (int i = 0; i < node.children.count; i++) {
+            [self updateDocumentLanguage:[node.children objectAtIndex:i] language:lang];
+        }
+    }
+}
+
 - (IBAction) menuSetCanvasBorder:(id)sender
 {
     CocosScene* cs = [CocosScene cocosScene];
@@ -3711,6 +3745,11 @@ static BOOL hideAllToNextSeparator;
         } else if ([menuItem.title isEqualToString:@"Collapse Node"]) {
             return [[self.selectedNode extraPropForKey:@"isExpanded"] boolValue];
         }
+        return YES;
+    }
+    else if (menuItem.action == @selector(menuSetDocumentLanguage:))
+    {
+        if (!hasOpenedDocument) return NO;
         return YES;
     }
     

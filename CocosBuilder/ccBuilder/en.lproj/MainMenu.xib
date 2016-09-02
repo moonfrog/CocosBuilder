@@ -828,6 +828,50 @@ CA
                                     <action selector="menuEditResolutionSettings:" target="494" id="1473"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="LMi-sb-1cV"/>
+                            <menuItem title="Language" id="74a-EQ-Vzq">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Stage Border" id="s5m-9k-AG4">
+                                    <items>
+                                        <menuItem title="English" id="lwe-yD-lFD">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="menuSetDocumentLanguage:" target="-1" id="N8z-az-EY1"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Hindi" tag="1" id="NEb-KH-146">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="menuSetDocumentLanguage:" target="-1" id="KsK-kO-J1S"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Gujarati" tag="2" id="hVx-Xr-MJK">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="menuSetDocumentLanguage:" target="-1" id="Z7n-Xu-ZpE"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Marathi" tag="3" id="onX-rH-fhj">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="menuSetDocumentLanguage:" target="-1" id="nTW-i0-FH6"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Telugu" tag="4" id="0dR-nq-qCl">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="menuSetDocumentLanguage:" target="-1" id="Uuc-0v-mHD"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Tamil" tag="5" id="ask-yu-8Ur">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="menuSetDocumentLanguage:" target="-1" id="YcA-L8-usa"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="1472"/>
                             <menuItem title="Stage Border" id="1275">
                                 <modifierMask key="keyEquivalentModifierMask"/>

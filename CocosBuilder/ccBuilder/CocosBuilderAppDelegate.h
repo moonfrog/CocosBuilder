@@ -332,6 +332,8 @@ enum {
 - (IBAction) menuSetStateOriginCentered:(id)sender;
 - (void) updateCanvasBorderMenu;
 - (IBAction) menuSetCanvasBorder:(id)sender;
+- (IBAction) menuSetDocumentLanguage:(id)sender;
+- (void) updateDocumentLanguage:(CCNode*)node language:(int)lang;
 - (IBAction) menuZoomIn:(id)sender;
 - (IBAction) menuZoomOut:(id)sender;
 

@@ -109,7 +109,7 @@
         if ([[NSFileManager defaultManager] fileExistsAtPath:fullName])
         {
             [stringMap removeAllObjects];
-            NSLog(@"Language now is %@", fileName);
+//            NSLog(@"Language now is %@", fileName);
             NSString *fileContents = [NSString stringWithContentsOfFile:fullName encoding:NSUTF8StringEncoding error:NULL];
             for (NSString *line in [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]]) {
                 // Do something
