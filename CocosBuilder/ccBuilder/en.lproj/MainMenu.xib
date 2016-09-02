@@ -606,6 +606,37 @@ CA
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Select" id="bv4-Va-86v">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Select" id="bCU-Vn-Tex">
+                                    <items>
+                                        <menuItem title="Select Previous" keyEquivalent="" id="DbU-JG-yaz" userLabel="Select Previous">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="menuSelectionChange:" target="-1" id="jnd-OO-YE9"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Select Next" tag="1" keyEquivalent="" id="AQ3-m7-Jrr" userLabel="Select Next">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="menuSelectionChange:" target="-1" id="iVk-B8-fwc"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Expand Node" tag="2" keyEquivalent="" id="2Dj-3M-B6k" userLabel="Expand Node">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="menuSelectionChange:" target="-1" id="DH5-wS-boV"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Collapse Node" tag="3" keyEquivalent="" id="3Nl-M5-Dlf">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="menuSelectionChange:" target="-1" id="RWa-Hn-9gy"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="1764"/>
                             <menuItem title="Nudge" id="1088">
                                 <modifierMask key="keyEquivalentModifierMask"/>

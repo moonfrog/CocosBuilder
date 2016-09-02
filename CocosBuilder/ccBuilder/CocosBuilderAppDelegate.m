@@ -3302,6 +3302,97 @@ static BOOL hideAllToNextSeparator;
     }
 }
 
+- (IBAction)menuSelectionChange:(id)sender
+{
+    int type = [sender tag];
+    CCNode* node = self.selectedNode;
+
+    if (type == kCCBSelectExpand) {
+        if ([[node extraPropForKey:@"isExpanded"] boolValue] && node.seqExpanded) {
+            NSBeep();
+            return;
+        }
+        if ([[node extraPropForKey:@"isExpanded"] boolValue]) {
+            node.seqExpanded = !node.seqExpanded;
+        } else {
+            [node setExtraProp:[NSNumber numberWithBool:YES] forKey:@"isExpanded"];
+            [sequenceHandler updateExpandedForNode:node];
+        }
+        [sequenceHandler redrawTimeline];
+    } else if (type == kCCBSelectCollapse) {
+        if (![[node extraPropForKey:@"isExpanded"] boolValue] && !node.seqExpanded) {
+            NSBeep();
+            return;
+        }
+        if (node.seqExpanded) {
+            node.seqExpanded = !node.seqExpanded;
+        } else {
+            if (node.children.count == 0) {
+                [node.parent setExtraProp:[NSNumber numberWithBool:NO] forKey:@"isExpanded"];
+                [sequenceHandler updateExpandedForNode:node.parent];
+                [self setSelectedNodes: [NSArray arrayWithObject: node.parent]];
+            } else {
+                [node setExtraProp:[NSNumber numberWithBool:NO] forKey:@"isExpanded"];
+                [sequenceHandler updateExpandedForNode:node];
+            }
+        }
+        [sequenceHandler redrawTimeline];
+    } else {
+        CCNode* parent = node.parent;
+        if (node == [CocosScene cocosScene].rootNode) {
+            if (type == kCCBSelectPrevious || ![[node extraPropForKey:@"isExpanded"] boolValue]) {
+                NSBeep();
+                return;
+            }
+        }
+        // these are the cases to handle:
+        // 1. Move up at first child == takes you to parent
+        // 2. Move Down at last child == takes you to the next sibling of parent
+        // 3. Move down if node is expanded == takes you to first child
+        // 4. Move up if previous sibling is expanded == takes you to previous sibling last child
+
+        CCArray* siblings = [parent children];
+        int moveToNode = node.zOrder;
+        if (type == kCCBSelectNext) {
+            if ([[node extraPropForKey:@"isExpanded"] boolValue] &&
+                node.children.count > 0) { //case 3
+                [self setSelectedNodes: [NSArray arrayWithObject: [node.children objectAtIndex:0]]];
+                return;
+            }
+            moveToNode = moveToNode+1;
+            if (moveToNode >= siblings.count) {
+                CCNode* grandParent = parent.parent;
+                if (grandParent) {
+                    int moveToUncle = parent.zOrder+1;
+                    if (moveToUncle >= grandParent.children.count) {
+                        NSBeep();
+                        return;
+                    }
+                    CCNode* moveNode = [grandParent.children objectAtIndex:moveToUncle];
+                    [self setSelectedNodes: [NSArray arrayWithObject: moveNode]];
+                    return;
+                }
+            }
+        } else {
+            if (moveToNode == 0) {
+                [self setSelectedNodes: [NSArray arrayWithObject: parent]];
+                return;
+            }
+            moveToNode = moveToNode-1;
+            CCNode* prevParent = [siblings objectAtIndex:moveToNode];
+            if ([[prevParent extraPropForKey:@"isExpanded"] boolValue] &&
+                prevParent.children.count > 0) { //case 4
+                [self setSelectedNodes: [NSArray arrayWithObject: [prevParent.children objectAtIndex:prevParent.children.count-1]]];
+                return;
+            }
+        }
+        if (moveToNode >= siblings.count || moveToNode < 0) {
+            NSBeep();
+            return;
+        }
+        [self setSelectedNodes: [NSArray arrayWithObject: [siblings objectAtIndex:moveToNode]]];
+    }
+}
 
 - (IBAction)menuArrange:(id)sender
 {
@@ -3609,6 +3700,18 @@ static BOOL hideAllToNextSeparator;
     {
         if (!hasOpenedDocument) return NO;
         return (self.selectedNode != NULL);
+    }
+    else if (menuItem.action == @selector(menuSelectionChange:))
+    {
+        if (!hasOpenedDocument) return NO;
+        if (self.selectedNode == NULL) return NO;
+        if ([menuItem.title isEqualToString:@"Expand Node"]) {
+            return ([self.selectedNode.children count] != 0 ||
+                    !self.selectedNode.seqExpanded);
+        } else if ([menuItem.title isEqualToString:@"Collapse Node"]) {
+            return [[self.selectedNode extraPropForKey:@"isExpanded"] boolValue];
+        }
+        return YES;
     }
     
     return YES;

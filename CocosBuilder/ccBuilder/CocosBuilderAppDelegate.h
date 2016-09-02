@@ -74,6 +74,14 @@ enum {
 };
 
 
+enum {
+    kCCBSelectPrevious,
+    kCCBSelectNext,
+    kCCBSelectExpand,
+    kCCBSelectCollapse
+};
+
+
 @class CCBDocument;
 @class ProjectSettings;
 @class CCBHTTPServer;
