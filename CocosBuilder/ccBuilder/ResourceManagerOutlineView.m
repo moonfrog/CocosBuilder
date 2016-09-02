@@ -87,7 +87,7 @@
         {
             item.title = @"Open With External Editor";
 
-            if ([clickedItem isKindOfClass:[RMResource class]]) {
+            if (NO && [clickedItem isKindOfClass:[RMResource class]]) {
                 RMResource* clickedResource = clickedItem;
                 if (clickedResource.type == kCCBResTypeCCBFile)
                 {
@@ -102,6 +102,9 @@
                 {
                     [item setEnabled:YES];
                 }
+            } else {
+                item.title = @"Open in Finder";
+                [item setEnabled:YES];
             }
             item.tag = row;
         }
