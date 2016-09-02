@@ -2532,6 +2532,13 @@ static BOOL hideAllToNextSeparator;
     [self setSelectedNodes:NULL];
 }
 
+- (IBAction) menuToggleVisibility:(id)sender
+{
+    CCNode* node = self.selectedNode;
+    [node setVisible:!node.visible];
+    [self updateInspectorFromSelection];
+}
+
 - (IBAction) undo:(id)sender
 {
     if (!currentDocument) return;

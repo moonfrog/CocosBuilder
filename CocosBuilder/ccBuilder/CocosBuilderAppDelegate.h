@@ -304,6 +304,7 @@ enum {
 
 - (IBAction) menuSelectBehind:(id)sender;
 - (IBAction) menuDeselect:(id)sender;
+- (IBAction) menuToggleVisibility:(id)sender;
 - (IBAction) menuCollapseAll:(id)sender;
 
 - (void) closeProject;

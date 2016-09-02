@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
@@ -569,6 +569,11 @@ CA
                             <menuItem title="Deselect" keyEquivalent="A" id="1352">
                                 <connections>
                                     <action selector="menuDeselect:" target="494" id="1354"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Toggle Visibility" keyEquivalent="i" id="2Xw-yF-emh">
+                                <connections>
+                                    <action selector="menuToggleVisibility:" target="-1" id="WZO-eq-MOj"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="1351"/>
