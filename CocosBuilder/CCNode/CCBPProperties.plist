@@ -162,6 +162,8 @@
 			<string>Tag</string>
 		</dict>
 		<dict>
+			<key>defaultSerialization</key>
+			<false/>
 			<key>type</key>
 			<string>Check</string>
 			<key>name</key>

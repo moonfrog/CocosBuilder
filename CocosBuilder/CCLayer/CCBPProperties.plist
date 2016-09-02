@@ -90,7 +90,18 @@
 	<key>editorClassName</key>
 	<string>CCLayer</string>
 	<key>propertiesOverridden</key>
-	<array/>
+	<array>
+		<dict>
+			<key>default</key>
+			<false/>
+			<key>type</key>
+			<string>Check</string>
+			<key>name</key>
+			<string>ignoreAnchorPointForPosition</string>
+			<key>displayName</key>
+			<string>Ignore anchor point</string>
+		</dict>
+	</array>
 	<key>spriteFrameDrop</key>
 	<dict>
 		<key>className</key>
