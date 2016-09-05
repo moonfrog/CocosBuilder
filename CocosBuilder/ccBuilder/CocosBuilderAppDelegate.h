@@ -78,7 +78,8 @@ enum {
     kCCBSelectPrevious,
     kCCBSelectNext,
     kCCBSelectExpand,
-    kCCBSelectCollapse
+    kCCBSelectCollapse,
+    kCCBSelectKeyboardToggle
 };
 
 
@@ -155,6 +156,7 @@ enum {
     NSMutableArray* loadedSelectedNodes;
     NSMutableArray* selectedNodes;
     BOOL isInEditMode;
+    BOOL hasKeyboardSelectionEnabled;
     
     // Menus
     IBOutlet NSMenu* menuCanvasSize;
@@ -265,6 +267,7 @@ enum {
 @property (nonatomic,retain) NSArray* selectedNodes;
 @property (nonatomic,readonly) NSMutableArray* loadedSelectedNodes;
 @property (nonatomic,assign) BOOL isInEditMode;
+@property (nonatomic,assign) BOOL hasKeyboardSelectionEnabled;
 
 @property (nonatomic,assign) BOOL showGuides;
 @property (nonatomic,assign) BOOL snapToGuides;

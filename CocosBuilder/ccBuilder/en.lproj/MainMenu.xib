@@ -634,6 +634,11 @@ CA
                                                 <action selector="menuSelectionChange:" target="-1" id="RWa-Hn-9gy"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Enable Keyboard" tag="4" keyEquivalent="k" id="YTx-4C-UM3" userLabel="Enable Keyboard">
+                                            <connections>
+                                                <action selector="menuSelectionChange:" target="-1" id="yT7-Bk-yHr"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>

@@ -125,6 +125,7 @@
 @synthesize errorDescription;
 @synthesize selectedNodes;
 @synthesize isInEditMode;
+@synthesize hasKeyboardSelectionEnabled;
 @synthesize loadedSelectedNodes;
 @synthesize panelVisibilityControl;
 @synthesize connection;
@@ -339,6 +340,7 @@ static CocosBuilderAppDelegate* sharedAppDelegate;
     self.snapToGuides = YES;
     self.showStickyNotes = YES;
     self.isInEditMode = NO;
+    self.hasKeyboardSelectionEnabled = YES;
     
     [self.window makeKeyWindow];
     
@@ -3341,6 +3343,10 @@ static BOOL hideAllToNextSeparator;
 - (IBAction)menuSelectionChange:(id)sender
 {
     int type = [sender tag];
+    if (type == kCCBSelectKeyboardToggle) {
+        self.hasKeyboardSelectionEnabled = !self.hasKeyboardSelectionEnabled;
+        return;
+    }
     CCNode* node = self.selectedNode;
 
     if (type == kCCBSelectExpand) {
@@ -3741,6 +3747,15 @@ static BOOL hideAllToNextSeparator;
     {
         if (!hasOpenedDocument) return NO;
         if (isInEditMode) return NO;
+        if (menuItem.tag == kCCBSelectKeyboardToggle) {
+            if (hasKeyboardSelectionEnabled) {
+                menuItem.title = @"Disable Keyboard";
+            } else {
+                menuItem.title = @"Enable Keyboard";
+            }
+            return YES;
+        }
+        if (!hasKeyboardSelectionEnabled) return NO;
         NSResponder *firstResponder = [[NSApp keyWindow] firstResponder];
         if (firstResponder && [firstResponder isKindOfClass:[NSTextView class]]) {
             return NO;
