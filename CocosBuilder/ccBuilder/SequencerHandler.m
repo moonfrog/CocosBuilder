@@ -395,12 +395,14 @@ static SequencerHandler* sharedSequencerHandler;
         [[CocosBuilderAppDelegate appDelegate] saveUndoStateWillChangeProperty:@"*nodeDisplayName"];
         node.displayName = object;
     }
+    [CocosBuilderAppDelegate appDelegate].isInEditMode = NO;
 }
 
 - (BOOL) outlineView:(NSOutlineView *)outline shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
     NSLog(@"should edit?");
     [outline editColumn:0 row:[outline selectedRow] withEvent:[NSApp currentEvent] select:YES];
+    [CocosBuilderAppDelegate appDelegate].isInEditMode = YES;
     return YES;
 }
 

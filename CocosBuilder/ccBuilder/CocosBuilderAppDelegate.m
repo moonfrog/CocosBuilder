@@ -124,6 +124,7 @@
 @synthesize outlineProject;
 @synthesize errorDescription;
 @synthesize selectedNodes;
+@synthesize isInEditMode;
 @synthesize loadedSelectedNodes;
 @synthesize panelVisibilityControl;
 @synthesize connection;
@@ -337,6 +338,7 @@ static CocosBuilderAppDelegate* sharedAppDelegate;
     self.showGuides = YES;
     self.snapToGuides = YES;
     self.showStickyNotes = YES;
+    self.isInEditMode = NO;
     
     [self.window makeKeyWindow];
     
@@ -3738,6 +3740,11 @@ static BOOL hideAllToNextSeparator;
     else if (menuItem.action == @selector(menuSelectionChange:))
     {
         if (!hasOpenedDocument) return NO;
+        if (isInEditMode) return NO;
+        NSResponder *firstResponder = [[NSApp keyWindow] firstResponder];
+        if (firstResponder && [firstResponder isKindOfClass:[NSTextView class]]) {
+            return NO;
+        }
         if (self.selectedNode == NULL) return NO;
         if ([menuItem.title isEqualToString:@"Expand Node"]) {
             return ([self.selectedNode.children count] != 0 ||

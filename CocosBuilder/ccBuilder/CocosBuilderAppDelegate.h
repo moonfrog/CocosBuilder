@@ -154,6 +154,7 @@ enum {
     // Selections
     NSMutableArray* loadedSelectedNodes;
     NSMutableArray* selectedNodes;
+    BOOL isInEditMode;
     
     // Menus
     IBOutlet NSMenu* menuCanvasSize;
@@ -263,6 +264,7 @@ enum {
 
 @property (nonatomic,retain) NSArray* selectedNodes;
 @property (nonatomic,readonly) NSMutableArray* loadedSelectedNodes;
+@property (nonatomic,assign) BOOL isInEditMode;
 
 @property (nonatomic,assign) BOOL showGuides;
 @property (nonatomic,assign) BOOL snapToGuides;
