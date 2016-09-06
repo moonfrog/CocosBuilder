@@ -191,11 +191,16 @@
     NSMutableArray* props = [NSMutableArray array];
     
     // Get list of properties to exclude from save (if any)
-    NSArray* excludeProps = NULL;
+    NSMutableArray* excludeProps = [[NSMutableArray alloc] init];
     if ([node respondsToSelector:@selector(ccbExcludePropertiesForSave)])
     {
-        excludeProps = [node performSelector:@selector(ccbExcludePropertiesForSave)];
+        [excludeProps addObjectsFromArray:[node performSelector:@selector(ccbExcludePropertiesForSave)]];
     }
+    //add other unused stuff here in this array
+    [excludeProps addObject:@"touchEnabled"];
+    [excludeProps addObject:@"keyboardEnabled"];
+    [excludeProps addObject:@"mouseEnabled"];
+    [excludeProps addObject:@"accelerometerEnabled"];
     
     NSMutableArray* plugInProps = plugIn.nodeProperties;
     int plugInPropsCount = [plugInProps count];
