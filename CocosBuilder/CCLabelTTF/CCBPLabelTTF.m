@@ -31,8 +31,9 @@
 @synthesize outlineColor;
 @synthesize shadowColor;
 @synthesize outlineWidth;
+@synthesize shadowOpacity;
 @synthesize shadowBlurRadius;
-@synthesize shadowOffsetInPoints;
+@synthesize shadowOffset;
 @synthesize localeString;
 
 - (void) setAlignment:(int)alignment
@@ -53,6 +54,7 @@
 -(id)init {
     if (self = [super init])  {
         self->currentLocale = -1;
+        self->shadowOpacity = 255;
         self->stringMap = [[NSMutableDictionary alloc] init];
         [self changeLocale];
     }
@@ -165,10 +167,16 @@
     [self setOutlineColor:outlineColor];
 }
 
+- (void) setShadowOpacity:(CGFloat)shadowOty
+{
+    shadowOpacity = shadowOty;
+    [self enableShadowWithOffset:CGSizeMake(shadowOffset.x, shadowOffset.y) opacity:shadowOpacity blur:shadowBlurRadius updateImage:YES];
+}
+
 - (void) setShadowColor:(ccColor3B)shadowClr
 {
     shadowColor = shadowClr;
-    [self enableShadowWithOffset:CGSizeMake(shadowOffsetInPoints.x, shadowOffsetInPoints.y) opacity:255 blur:shadowBlurRadius updateImage:YES];
+    [self enableShadowWithOffset:CGSizeMake(shadowOffset.x, shadowOffset.y) opacity:shadowOpacity blur:shadowBlurRadius updateImage:YES];
 }
 
 -(void) setShadowBlurRadius:(CGFloat)shadowBlurRad
@@ -178,14 +186,14 @@
         return;
     }
     shadowBlurRadius = shadowBlurRad;
-    [self enableShadowWithOffset:CGSizeMake(shadowOffsetInPoints.x, shadowOffsetInPoints.y) opacity:255 blur:shadowBlurRadius updateImage:YES];
+    [self enableShadowWithOffset:CGSizeMake(shadowOffset.x, shadowOffset.y) opacity:shadowOpacity blur:shadowBlurRadius updateImage:YES];
 }
 
--(void) setShadowOffsetInPoints:(CGPoint)shadowOffsetInPoint
+-(void) setShadowOffset:(CGPoint)shadowOffsetInPoint
 {
-    shadowOffsetInPoints = shadowOffsetInPoint;
+    shadowOffset = shadowOffsetInPoint;
     if (shadowBlurRadius > 0) {
-        [self enableShadowWithOffset:CGSizeMake(shadowOffsetInPoints.x, shadowOffsetInPoints.y) opacity:255 blur:shadowBlurRadius updateImage:YES];
+        [self enableShadowWithOffset:CGSizeMake(shadowOffset.x, shadowOffset.y) opacity:shadowOpacity blur:shadowBlurRadius updateImage:YES];
     }
 }
 

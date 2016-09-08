@@ -37,9 +37,10 @@ typedef enum LocaleStates {
 @interface CCBPLabelTTF : CCLabelTTF
 {
     CGFloat outlineWidth;
-    CGPoint shadowOffsetInPoints;
+    CGPoint shadowOffset;
     ccColor3B shadowColor;
     ccColor3B outlineColor;
+    CGFloat shadowOpacity;
     Locale currentLocale;
     NSString* localeString;
     NSMutableDictionary* stringMap;
@@ -59,7 +60,7 @@ typedef enum LocaleStates {
 @property (nonatomic,assign) ccColor3B shadowColor;
 
 /** The offset of the shadow in points */
-@property(nonatomic,readonly) CGPoint shadowOffsetInPoints;
+@property(nonatomic,readonly) CGPoint shadowOffset;
 
 /** The blur radius of the shadow. */
 @property (nonatomic,assign) CGFloat shadowBlurRadius;
@@ -72,9 +73,10 @@ typedef enum LocaleStates {
 /** The color of the text's outline.
  @see CCColor */
 @property (nonatomic,assign) ccColor3B outlineColor;
-
 /** The width of the text's outline. */
 @property (nonatomic,assign) CGFloat outlineWidth;
+
+@property (nonatomic,assign) CGFloat shadowOpacity;
 
 - (void)changeLocale;
 - (void) setString:(NSString*)str;
