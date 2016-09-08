@@ -38,10 +38,45 @@ typedef enum LocaleStates {
 @interface CCBControlButton : CCControlButton
 {
     float iLeft, iRight, iTop, iBot;
+    CGFloat outlineWidth;
+    CGPoint shadowOffset;
+    ccColor3B shadowColor;
+    ccColor3B outlineColor;
+    CGFloat shadowOpacity;
     Locale currentLocale;
     NSString* localeString;
+    ccColor3B fontColor;
     NSMutableDictionary* stringMap;
 }
+
+@property (nonatomic,assign) ccColor3B fontColor;
+
+/// -----------------------------------------------------------------------
+/// @name Drawing a Shadow
+/// -----------------------------------------------------------------------
+
+/** The color of the text shadow. If the color is fully transparent, no shadow will be used. */
+@property (nonatomic,assign) ccColor3B shadowColor;
+
+/** The offset of the shadow in points */
+@property(nonatomic,readonly) CGPoint shadowOffset;
+
+/** The blur radius of the shadow. */
+@property (nonatomic,assign) CGFloat shadowBlurRadius;
+
+
+/// -----------------------------------------------------------------------
+/// @name Drawing an Outline
+/// -----------------------------------------------------------------------
+
+/** The color of the text's outline.
+ @see CCColor */
+@property (nonatomic,assign) ccColor3B outlineColor;
+/** The width of the text's outline. */
+@property (nonatomic,assign) CGFloat outlineWidth;
+
+@property (nonatomic,assign) CGFloat shadowOpacity;
+
 -(void)onSetSizeFromTexture;
 - (id)init;
 @end

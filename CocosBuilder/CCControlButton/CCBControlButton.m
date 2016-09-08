@@ -31,6 +31,14 @@
 
 @implementation CCBControlButton
 
+@synthesize outlineColor;
+@synthesize shadowColor;
+@synthesize outlineWidth;
+@synthesize shadowOpacity;
+@synthesize shadowBlurRadius;
+@synthesize shadowOffset;
+@synthesize fontColor;
+
 - (float) resolutionScale
 {
     CCBDocument* currentDocument = [CocosBuilderAppDelegate appDelegate].currentDocument;
@@ -183,6 +191,13 @@
         [self changeLanguageSelection:[value intValue]];
         return;
     }
+    if ([key isEqualToString:@"titleColor|1"]) {
+        ccColor3B c;
+        [value getValue:&c];
+        CCLabelTTF* label = (CCLabelTTF*)self.titleLabel;
+        [label setFontFillColor:fontColor updateImage:NO];
+        self.titleLabel.color = c;
+    }
     NSArray* chunks = [key componentsSeparatedByString:@"|"];
     if ([chunks count] == 2)
     {
@@ -200,6 +215,7 @@
     if (self = [super init])  {
         self->currentLocale = -1;
         self->stringMap = [[NSMutableDictionary alloc] init];
+        self->fontColor = ccWHITE;
         [self changeLocale];
     }
     return self;
@@ -212,6 +228,64 @@
         [super setValue:[self->stringMap valueForKey:str] forUndefinedKey:@"title|1"];
     } else {
         [super setValue:str forUndefinedKey:@"title|1"];
+    }
+}
+
+- (id) getLabel
+{
+    id label = self.titleLabel;
+    [label setFontFillColor:self.fontColor updateImage:NO];
+    return label;
+}
+
+- (void) setOutlineColor:(ccColor3B)outlineClr
+{
+    outlineColor = outlineClr;
+    id label = [self getLabel];
+    if (self.outlineWidth == 0.0) {
+        [label disableStrokeAndUpdateImage:YES];
+    } else {
+        [label enableStrokeWithColor:outlineClr size:self.outlineWidth updateImage:YES];
+    }
+}
+
+- (void) setOutlineWidth:(CGFloat)outlineWid
+{
+    outlineWidth = outlineWid;
+    [self setOutlineColor:outlineColor];
+}
+
+- (void) setShadowOpacity:(CGFloat)shadowOty
+{
+    shadowOpacity = shadowOty;
+    id label = self.titleLabel;
+    [label enableShadowWithOffset:CGSizeMake(shadowOffset.x, shadowOffset.y) opacity:shadowOpacity blur:shadowBlurRadius updateImage:YES];
+}
+
+- (void) setShadowColor:(ccColor3B)shadowClr
+{
+    shadowColor = shadowClr;
+    id label = self.titleLabel;
+    [label enableShadowWithOffset:CGSizeMake(shadowOffset.x, shadowOffset.y) opacity:shadowOpacity blur:shadowBlurRadius updateImage:YES];
+}
+
+-(void) setShadowBlurRadius:(CGFloat)shadowBlurRad
+{
+    id label = self.titleLabel;
+    if (shadowBlurRad == 0) {
+        [label disableShadowAndUpdateImage:YES];
+        return;
+    }
+    shadowBlurRadius = shadowBlurRad;
+    [label enableShadowWithOffset:CGSizeMake(shadowOffset.x, shadowOffset.y) opacity:shadowOpacity blur:shadowBlurRadius updateImage:YES];
+}
+
+-(void) setShadowOffset:(CGPoint)shadowOffsetInPoint
+{
+    shadowOffset = shadowOffsetInPoint;
+    id label = self.titleLabel;
+    if (shadowBlurRadius > 0) {
+        [label enableShadowWithOffset:CGSizeMake(shadowOffset.x, shadowOffset.y) opacity:shadowOpacity blur:shadowBlurRadius updateImage:YES];
     }
 }
 
