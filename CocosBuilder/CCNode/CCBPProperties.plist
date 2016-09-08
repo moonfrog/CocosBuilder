@@ -30,6 +30,8 @@
 			<string>CCNode</string>
 		</dict>
 		<dict>
+			<key>default</key>
+			<true/>
 			<key>animatable</key>
 			<true/>
 			<key>defaultSerialization</key>
@@ -77,6 +79,16 @@
 			<string>Content size</string>
 		</dict>
 		<dict>
+			<key>default</key>
+			<array>
+				<real>0.5</real>
+				<real>0.5</real>
+			</array>
+			<key>defaultSerialization</key>
+			<array>
+				<real>0.5</real>
+				<real>0.5</real>
+			</array>
 			<key>type</key>
 			<string>Point</string>
 			<key>name</key>
@@ -86,6 +98,12 @@
 		</dict>
 		<dict>
 			<key>defaultSerialization</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
+			<key>default</key>
 			<array>
 				<integer>0</integer>
 				<integer>0</integer>
@@ -103,6 +121,8 @@
 		<dict>
 			<key>defaultSerialization</key>
 			<integer>0</integer>
+			<key>default</key>
+			<integer>0</integer>
 			<key>animatable</key>
 			<true/>
 			<key>type</key>
@@ -115,6 +135,8 @@
 		<dict>
 			<key>defaultSerialization</key>
 			<integer>0</integer>
+			<key>default</key>
+			<integer>0</integer>
 			<key>animatable</key>
 			<true/>
 			<key>type</key>
@@ -126,6 +148,8 @@
 		</dict>
 		<dict>
 			<key>defaultSerialization</key>
+			<integer>0</integer>
+			<key>default</key>
 			<integer>0</integer>
 			<key>animatable</key>
 			<true/>
@@ -144,6 +168,11 @@
 				<integer>0</integer>
 				<integer>0</integer>
 			</array>
+			<key>default</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
 			<key>type</key>
 			<string>FloatXY</string>
 			<key>name</key>
@@ -154,6 +183,8 @@
 		<dict>
 			<key>defaultSerialization</key>
 			<integer>-1</integer>
+			<key>default</key>
+			<integer>-1</integer>
 			<key>type</key>
 			<string>Integer</string>
 			<key>name</key>
@@ -163,6 +194,8 @@
 		</dict>
 		<dict>
 			<key>defaultSerialization</key>
+			<false/>
+			<key>default</key>
 			<false/>
 			<key>type</key>
 			<string>Check</string>

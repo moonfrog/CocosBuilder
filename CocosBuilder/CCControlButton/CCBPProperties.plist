@@ -132,6 +132,18 @@
 		</dict>
 		<dict>
 			<key>displayName</key>
+			<string>Reset to Sprite size</string>
+			<key>type</key>
+			<string>Button</string>
+			<key>name</key>
+			<string>onSetSizeFromTexture</string>
+		</dict>
+		<dict>
+			<key>defaultSerialization</key>
+			<false/>
+			<key>default</key>
+			<false/>
+			<key>displayName</key>
 			<string>Zoom on touch down</string>
 			<key>type</key>
 			<string>Check</string>
@@ -150,14 +162,6 @@
 		</dict>
 		<dict>
 			<key>displayName</key>
-			<string>Reset to Sprite size</string>
-			<key>type</key>
-			<string>Button</string>
-			<key>name</key>
-			<string>onSetSizeFromTexture</string>
-		</dict>
-		<dict>
-			<key>displayName</key>
 			<string>State Normal</string>
 			<key>type</key>
 			<string>SeparatorSub</string>
@@ -165,8 +169,8 @@
 		<dict>
 			<key>default</key>
 			<array>
-				<string>ccbResources/ccbDefaultImages.plist</string>
-				<string>ccbButton.png</string>
+				<string></string>
+				<string>empty.png</string>
 			</array>
 			<key>affectsProperties</key>
 			<array>
@@ -196,8 +200,8 @@
 		<dict>
 			<key>default</key>
 			<array>
-				<string>ccbResources/ccbDefaultImages.plist</string>
-				<string>ccbButtonHilite.png</string>
+				<string></string>
+				<string>empty.png</string>
 			</array>
 			<key>displayName</key>
 			<string>Sprite frame</string>
@@ -223,8 +227,8 @@
 		<dict>
 			<key>default</key>
 			<array>
-				<string>ccbResources/ccbDefaultImages.plist</string>
-				<string>ccbButtonDisabled.png</string>
+				<string></string>
+				<string>empty.png</string>
 			</array>
 			<key>displayName</key>
 			<string>Sprite frame</string>
@@ -240,6 +244,110 @@
 			<string>Color3</string>
 			<key>name</key>
 			<string>titleColor|3</string>
+		</dict>
+		<dict>
+			<key>displayName</key>
+			<string>Font Effects</string>
+			<key>name</key>
+			<string>Font Effects</string>
+			<key>type</key>
+			<string>SeparatorSub</string>
+			<key>dontSetInEditor</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>defaultSerialization</key>
+			<array>
+				<integer>255</integer>
+				<integer>255</integer>
+				<integer>255</integer>
+			</array>
+			<key>default</key>
+			<array>
+				<integer>255</integer>
+				<integer>255</integer>
+				<integer>255</integer>
+			</array>
+			<key>displayName</key>
+			<string>Outline Color</string>
+			<key>type</key>
+			<string>Color3</string>
+			<key>name</key>
+			<string>outlineColor</string>
+		</dict>
+		<dict>
+			<key>defaultSerialization</key>
+			<integer>0</integer>
+			<key>default</key>
+			<real>0</real>
+			<key>displayName</key>
+			<string>Outline Width</string>
+			<key>type</key>
+			<string>Float</string>
+			<key>name</key>
+			<string>outlineWidth</string>
+		</dict>
+		<dict>
+			<key>defaultSerialization</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
+			<key>default</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
+			<key>displayName</key>
+			<string>Shadow Color</string>
+			<key>type</key>
+			<string>Color3</string>
+			<key>name</key>
+			<string>shadowColor</string>
+		</dict>
+		<dict>
+			<key>default</key>
+			<integer>255</integer>
+			<key>defaultSerialization</key>
+			<integer>255</integer>
+			<key>displayName</key>
+			<string>Shadow Opacity</string>
+			<key>type</key>
+			<string>Float</string>
+			<key>name</key>
+			<string>shadowOpacity</string>
+		</dict>
+		<dict>
+			<key>defaultSerialization</key>
+			<integer>0</integer>
+			<key>default</key>
+			<integer>0</integer>
+			<key>displayName</key>
+			<string>Shadow Blur Radius</string>
+			<key>type</key>
+			<string>Float</string>
+			<key>name</key>
+			<string>shadowBlurRadius</string>
+		</dict>
+		<dict>
+			<key>default</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
+			<key>defaultSerialization</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
+			<key>displayName</key>
+			<string>Shadow offset</string>
+			<key>type</key>
+			<string>Point</string>
+			<key>name</key>
+			<string>shadowOffset</string>
 		</dict>
 	</array>
 </dict>

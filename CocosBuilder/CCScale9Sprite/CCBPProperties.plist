@@ -13,6 +13,11 @@
 	<key>propertiesOverridden</key>
 	<array>
 		<dict>
+			<key>default</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
 			<key>defaultSerialization</key>
 			<array>
 				<integer>0</integer>
@@ -85,6 +90,8 @@
 			<string>Preferred size</string>
 		</dict>
 		<dict>
+			<key>defaultSerialization</key>
+			<integer>255</integer>
 			<key>animatable</key>
 			<true/>
 			<key>default</key>

@@ -184,28 +184,16 @@
 			<string>outlineColor</string>
 		</dict>
 		<dict>
-			<key>affectsProperties</key>
-			<array>
-				<string>contentSize</string>
-			</array>
+			<key>defaultSerialization</key>
+			<integer>0</integer>
+			<key>default</key>
+			<integer>0</integer>
 			<key>displayName</key>
 			<string>Outline Width</string>
 			<key>type</key>
-			<string>FloatScale</string>
+			<string>Float</string>
 			<key>name</key>
 			<string>outlineWidth</string>
-		</dict>
-		<dict>
-			<key>affectsProperties</key>
-			<array>
-				<string>contentSize</string>
-			</array>
-			<key>displayName</key>
-			<string>Shadow Blur Radius</string>
-			<key>type</key>
-			<string>FloatScale</string>
-			<key>name</key>
-			<string>shadowBlurRadius</string>
 		</dict>
 		<dict>
 			<key>defaultSerialization</key>
@@ -214,10 +202,58 @@
 				<integer>0</integer>
 				<integer>0</integer>
 			</array>
+			<key>default</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
+			<key>displayName</key>
+			<string>Shadow Color</string>
+			<key>type</key>
+			<string>Color3</string>
+			<key>name</key>
+			<string>shadowColor</string>
+		</dict>
+		<dict>
+			<key>default</key>
+			<integer>255</integer>
+			<key>defaultSerialization</key>
+			<integer>255</integer>
+			<key>displayName</key>
+			<string>Shadow Opacity</string>
+			<key>type</key>
+			<string>Float</string>
+			<key>name</key>
+			<string>shadowOpacity</string>
+		</dict>
+		<dict>
+			<key>defaultSerialization</key>
+			<integer>0</integer>
+			<key>default</key>
+			<integer>0</integer>
+			<key>displayName</key>
+			<string>Shadow Blur Radius</string>
+			<key>type</key>
+			<string>Float</string>
+			<key>name</key>
+			<string>shadowBlurRadius</string>
+		</dict>
+		<dict>
+			<key>default</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
+			<key>defaultSerialization</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
 			<key>displayName</key>
 			<string>Shadow offset</string>
 			<key>type</key>
-			<string>Position</string>
+			<string>Point</string>
 			<key>name</key>
 			<string>shadowOffset</string>
 		</dict>
