@@ -1076,7 +1076,7 @@ static BOOL hideAllToNextSeparator;
         SequencerSequence* seq = [[SequencerSequence alloc] init];
         seq.name = @"Default Timeline";
         seq.sequenceId = 0;
-        seq.autoPlay = YES;
+        seq.autoPlay = NO;
         [sequences addObject:seq];
         [seq release];
     
@@ -1513,7 +1513,7 @@ static BOOL hideAllToNextSeparator;
     SequencerSequence* seq = [[[SequencerSequence alloc] init] autorelease];
     seq.name = @"Default Timeline";
     seq.sequenceId = 0;
-    seq.autoPlay = YES;
+    seq.autoPlay = NO;
     [sequences addObject:seq];
     
     currentDocument.sequences = sequences;
