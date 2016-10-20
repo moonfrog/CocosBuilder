@@ -2714,9 +2714,11 @@ static BOOL hideAllToNextSeparator;
 {
     @try
     {
-        if ([node isKindOfClass:[CCControlButton class]]) {
+        if ([node isKindOfClass:[CCControlButton class]]
+            && [node respondsToSelector:@selector(changeLanguageSelection:)]) {
             [node changeLanguageSelection:lang];
-        } else if ([node isKindOfClass:[CCLabelTTF class]]) {
+        } else if ([node isKindOfClass:[CCLabelTTF class]]
+                   && [node respondsToSelector:@selector(setLanguageSelection:)]) {
             [node setLanguageSelection:lang];
         }
     }
