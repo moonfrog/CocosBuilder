@@ -211,6 +211,13 @@
     [super setValue:value forUndefinedKey:key];
 }
 
+- (id)valueForKey:(NSString*)key {
+    if ([key isEqualToString:@"title|1"]) {
+        return self->localeString;
+    }
+    return [super valueForKey:key];
+}
+
 -(id)init {
     if (self = [super init])  {
         self->currentLocale = -1;
