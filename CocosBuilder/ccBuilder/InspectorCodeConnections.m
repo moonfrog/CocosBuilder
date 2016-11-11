@@ -81,6 +81,7 @@
     
     if (!memberVarAssignmentName) memberVarAssignmentName = @"";
     [selection setExtraProp:memberVarAssignmentName forKey:@"memberVarAssignmentName"];
+//    selection.displayName = memberVarAssignmentName;
 }
 
 - (NSString*) memberVarAssignmentName
