@@ -1492,6 +1492,7 @@ static BOOL hideAllToNextSeparator;
         && stageSize.width != 0 && stageSize.height != 0)
     {
         [PositionPropertySetter setSize:NSMakeSize(100, 100) type:kCCBSizeTypePercent forNode:[CocosScene cocosScene].rootNode prop:@"contentSize"];
+        [PositionPropertySetter setPosition:NSMakePoint(50, 50) type:kCCBPositionTypePercent forNode:[CocosScene cocosScene].rootNode prop:@"position"];
     }
     
     [outlineHierarchy reloadData];

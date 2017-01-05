@@ -112,7 +112,7 @@
 
     setting.name = @"Default";
     setting.width = 960;
-    setting.height = 640;
+    setting.height = 540;
     setting.ext = @"iphone";
     setting.scale = 1;
 
