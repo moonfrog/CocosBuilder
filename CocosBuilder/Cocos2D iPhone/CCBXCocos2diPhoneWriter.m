@@ -945,6 +945,21 @@
     NSArray* props = [node objectForKey:@"properties"];
     NSArray* customProps = [node objectForKey:@"customProperties"];
     
+    NSMutableArray* mainprops = [NSMutableArray array];
+
+    for (NSDictionary* object in props) {
+        if ([object objectForKey:@"name"] != nil && (
+                [[object objectForKey:@"name"] isEqualToString:@"languageSelection"]
+//                || [[object objectForKey:@"name"] isEqualToString:@"outlineWidth"]
+//                || [[object objectForKey:@"name"] isEqualToString:@"shadowBlurRadius"]
+        )) {
+            NSLog(@"useless");
+        } else {
+            [mainprops addObject:object];
+        }
+    }
+    props = mainprops;
+
     // Only write customProps if there is a custom class
     if (!hasCustomClass) customProps = [NSArray array];
     
