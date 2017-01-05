@@ -28,6 +28,9 @@
 #import "ResolutionSetting.h"
 #import "CCScale9Sprite.h"
 #import "ProjectSettings.h"
+#import "TexturePropertySetter.h"
+#import "ResourceManager.h"
+#import "ResourceManagerUtil.h"
 
 @implementation CCBControlButton
 
@@ -100,6 +103,47 @@
 - (float) insetRight
 {
     return iRight;
+}
+
+-(void)onSetSelectedTexture:(id)propertyName
+{
+    RMSpriteFrame* frame = [[CocosBuilderAppDelegate appDelegate] getSelectedResource];
+    if (frame == nil) return;
+    [[CocosBuilderAppDelegate appDelegate] saveUndoStateWillChangeProperty:propertyName];
+    CCNode* selection = [CocosBuilderAppDelegate appDelegate].selectedNode;
+
+    // Fetch info about the sprite name
+    NSString* ssf = [ResourceManagerUtil relativePathFromAbsolutePath:frame.spriteSheetFile];
+    NSString* sf = frame.spriteFrameName;
+
+    // Set the properties and sprite frames
+    if (sf && ssf)
+    {
+        [selection setExtraProp:sf forKey:propertyName];
+        [selection setExtraProp:ssf forKey:[NSString stringWithFormat:@"%@Sheet", propertyName]];
+
+        [TexturePropertySetter setSpriteFrameForNode:selection andProperty:propertyName withFile:sf andSheetFile:ssf];
+    }
+    [self onSetSizeFromTexture];
+    [[CocosBuilderAppDelegate appDelegate] updateInspectorFromSelection];
+}
+
+-(void)onSetSelectedTexture1
+{
+    NSString* propertyName = @"backgroundSpriteFrame|1";
+    [self onSetSelectedTexture:propertyName];
+}
+
+-(void)onSetSelectedTexture2
+{
+    NSString* propertyName = @"backgroundSpriteFrame|2";
+    [self onSetSelectedTexture:propertyName];
+}
+
+-(void)onSetSelectedTexture3
+{
+    NSString* propertyName = @"backgroundSpriteFrame|3";
+    [self onSetSelectedTexture:propertyName];
 }
 
 -(void)onSetSizeFromTexture

@@ -61,8 +61,8 @@
             [dimensionLabel setHidden:NO];
             [dimensionLabel setStringValue:[NSString stringWithFormat: @"%.0fx%.0f", [preview size].width, [preview size].height]];
         }
+        [[CocosBuilderAppDelegate appDelegate] setSelectedResource:selection];
     }
-    
     [previewMain setImage:preview];
     
     //if (preview) [lblNoPreview setHidden:YES];

@@ -77,6 +77,9 @@ typedef enum LocaleStates {
 
 @property (nonatomic,assign) CGFloat shadowOpacity;
 
--(void)onSetSizeFromTexture;
+-(void)onSetSelectedTexture1;
+-(void)onSetSelectedTexture2;
+-(void)onSetSelectedTexture3;
+-(void)onSetSelectedTexture:(id)propertyName;
 - (id)init;
 @end

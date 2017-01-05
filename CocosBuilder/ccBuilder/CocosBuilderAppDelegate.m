@@ -2532,6 +2532,19 @@ static BOOL hideAllToNextSeparator;
     [sequenceHandler collapseOutlineView];
 }
 
+- (void) setSelectedResource:(id)resource
+{
+    if ([resource isKindOfClass:[RMSpriteFrame class]]) {
+        selectedResource = resource;
+    } else {
+        selectedResource = nil;
+    }
+}
+
+- (RMSpriteFrame*) getSelectedResource
+{
+    return selectedResource;
+}
 
 - (IBAction) menuDeselect:(id)sender
 {

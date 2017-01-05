@@ -109,6 +109,7 @@ enum {
 @class CCBSplitHorizontalView;
 @class AboutWindow;
 @class ResourceManagerPreviewView;
+@class RMSpriteFrame;
 
 @interface CocosBuilderAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate>
 {
@@ -191,6 +192,7 @@ enum {
     IBOutlet NSSplitView* resourceManagerSplitView;
     
     //ResourceManagerPanel* resManagerPanel;
+    RMSpriteFrame* selectedResource;
     
     // Project
     ProjectSettings* projectSettings;
@@ -319,6 +321,8 @@ enum {
 - (IBAction) menuDeselect:(id)sender;
 - (IBAction) menuToggleVisibility:(id)sender;
 - (IBAction) menuCollapseAll:(id)sender;
+- (void) setSelectedResource:(id)resource;
+- (RMSpriteFrame*) getSelectedResource;
 
 - (void) closeProject;
 - (IBAction) performClose:(id)sender;

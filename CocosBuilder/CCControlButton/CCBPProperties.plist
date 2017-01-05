@@ -185,6 +185,14 @@
 		</dict>
 		<dict>
 			<key>displayName</key>
+			<string>Set Selected Sprite</string>
+			<key>type</key>
+			<string>Button</string>
+			<key>name</key>
+			<string>onSetSelectedTexture1</string>
+		</dict>
+		<dict>
+			<key>displayName</key>
 			<string>Title color</string>
 			<key>type</key>
 			<string>Color3</string>
@@ -212,6 +220,14 @@
 		</dict>
 		<dict>
 			<key>displayName</key>
+			<string>Set Selected Sprite</string>
+			<key>type</key>
+			<string>Button</string>
+			<key>name</key>
+			<string>onSetSelectedTexture2</string>
+		</dict>
+		<dict>
+			<key>displayName</key>
 			<string>Title color</string>
 			<key>type</key>
 			<string>Color3</string>
@@ -236,6 +252,14 @@
 			<string>SpriteFrame</string>
 			<key>name</key>
 			<string>backgroundSpriteFrame|3</string>
+		</dict>
+		<dict>
+			<key>displayName</key>
+			<string>Set Selected Sprite</string>
+			<key>type</key>
+			<string>Button</string>
+			<key>name</key>
+			<string>onSetSelectedTexture3</string>
 		</dict>
 		<dict>
 			<key>displayName</key>
