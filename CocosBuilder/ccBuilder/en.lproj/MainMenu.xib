@@ -874,6 +874,18 @@ CA
                                                 <action selector="menuSetDocumentLanguage:" target="-1" id="YcA-L8-usa"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Urdu" tag="6" id="dsk-yl-9Kr">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="menuSetDocumentLanguage:" target="-1" id="dsk-ur-9Kr"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Bangla" tag="7" id="aje-ku-6Tm">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="menuSetDocumentLanguage:" target="-1" id="aje-ku-6Hm"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>

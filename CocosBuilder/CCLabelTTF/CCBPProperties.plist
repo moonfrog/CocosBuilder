@@ -151,7 +151,7 @@
 			<key>name</key>
 			<string>languageSelection</string>
 			<key>extra</key>
-			<string>English|0|Hindi|1|Gujarati|2|Marathi|3|Telugu|4|Tamil|5</string>
+			<string>English|0|Hindi|1|Gujarati|2|Marathi|3|Telugu|4|Tamil|5|Urdu|6|Bangla|7</string>
 		</dict>
 		<dict>
 			<key>displayName</key>
