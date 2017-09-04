@@ -31,6 +31,8 @@ typedef enum LocaleStates {
     MARATHI,
     TELUGU,
     TAMIL,
+    URDU,
+    BANGLA,
     LOCALE_COUNT
 } Locale;
 

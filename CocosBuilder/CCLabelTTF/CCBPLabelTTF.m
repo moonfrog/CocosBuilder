@@ -97,6 +97,12 @@
         case TAMIL:
             fileName = @"Localized_tm";
             break;
+        case URDU:
+            fileName = @"Localized_ur";
+            break;
+        case BANGLA:
+            fileName = @"Localized_bn";
+            break;
         default:
             fileName = @"Localized_en";
             break;
