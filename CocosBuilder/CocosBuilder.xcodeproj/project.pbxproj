@@ -103,7 +103,6 @@
 		77E7D04F138F78F600E8EE67 /* StageSizeWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E7D04E138F78F600E8EE67 /* StageSizeWindow.m */; };
 		835DB052171561B8003A2F7B /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 835DAFA7171561B7003A2F7B /* LICENSE.txt */; };
 		835DB053171561B8003A2F7B /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 835DAFA8171561B7003A2F7B /* README.markdown */; };
-		835DB083171561B8003A2F7B /* About.txt in Resources */ = {isa = PBXBuildFile; fileRef = 835DB030171561B7003A2F7B /* About.txt */; };
 		835DB08B171561B8003A2F7B /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 835DB040171561B7003A2F7B /* README.txt */; };
 		835DB08D171562D6003A2F7B /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = 835DAF82171561B7003A2F7B /* DDData.m */; };
 		835DB08F171562D6003A2F7B /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 835DAF84171561B7003A2F7B /* DDNumber.m */; };
@@ -130,7 +129,6 @@
 		835DB0BD171562D6003A2F7B /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 835DB03D171561B7003A2F7B /* ContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		835DB0BF171562D6003A2F7B /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 835DB03F171561B7003A2F7B /* DispatchQueueLogFormatter.m */; };
 		835DB0C117156341003A2F7B /* CCBHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 835DAF4017156161003A2F7B /* CCBHTTPServer.m */; };
-		835DB0C6171563A8003A2F7B /* About.txt in Resources */ = {isa = PBXBuildFile; fileRef = 835DB0C3171563A8003A2F7B /* About.txt */; };
 		835DB0C9171563E1003A2F7B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 835DB0C5171563A8003A2F7B /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		835DB0CB17156421003A2F7B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 835DB0CA17156421003A2F7B /* Security.framework */; };
 		A09AB6AF14E9935F009C8B91 /* aabb.c in Sources */ = {isa = PBXBuildFile; fileRef = A09AB69F14E9935F009C8B91 /* aabb.c */; };
@@ -196,7 +194,6 @@
 		E3347415169C5402000737CC /* CCColourUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E3347404169C5402000737CC /* CCColourUtils.m */; };
 		E3347416169C5402000737CC /* CCScale9Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = E3347406169C5402000737CC /* CCScale9Sprite.m */; };
 		E3347417169C5402000737CC /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E3347408169C5402000737CC /* Utils.m */; };
-		E3347418169C5402000737CC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E334740A169C5402000737CC /* README.md */; };
 		E334741C169DC5A7000737CC /* APIDocsWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = E334741A169DC5A6000737CC /* APIDocsWindow.m */; };
 		E334741D169DC5A7000737CC /* APIDocsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E334741B169DC5A6000737CC /* APIDocsWindow.xib */; };
 		E334742F169DC9E0000737CC /* jsdoc in Resources */ = {isa = PBXBuildFile; fileRef = E334742E169DC9E0000737CC /* jsdoc */; };
@@ -470,7 +467,6 @@
 		E3A4746E16D4389D00DB0D61 /* CDXMacOSXSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A4746416D4389D00DB0D61 /* CDXMacOSXSupport.m */; };
 		E3A4746F16D4389D00DB0D61 /* CDXPropertyModifierAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A4746616D4389D00DB0D61 /* CDXPropertyModifierAction.m */; };
 		E3A4747016D4389D00DB0D61 /* CocosDenshion.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A4746816D4389D00DB0D61 /* CocosDenshion.m */; };
-		E3A4747116D4389D00DB0D61 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E3A4746916D4389D00DB0D61 /* README.md */; };
 		E3A4747216D4389D00DB0D61 /* SimpleAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A4746B16D4389D00DB0D61 /* SimpleAudioEngine.m */; };
 		E3A4747816D43B5800DB0D61 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A4747716D43B5800DB0D61 /* AudioToolbox.framework */; };
 		E3A4747A16D43BEA00DB0D61 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A4747916D43BEA00DB0D61 /* OpenAL.framework */; };
@@ -1045,7 +1041,6 @@
 		835DAFA6171561B7003A2F7B /* WebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSocket.m; sourceTree = "<group>"; };
 		835DAFA7171561B7003A2F7B /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		835DAFA8171561B7003A2F7B /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
-		835DB030171561B7003A2F7B /* About.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = About.txt; sourceTree = "<group>"; };
 		835DB031171561B7003A2F7B /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		835DB032171561B7003A2F7B /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
 		835DB033171561B7003A2F7B /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
@@ -1061,7 +1056,6 @@
 		835DB03E171561B7003A2F7B /* DispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueueLogFormatter.h; sourceTree = "<group>"; };
 		835DB03F171561B7003A2F7B /* DispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchQueueLogFormatter.m; sourceTree = "<group>"; };
 		835DB040171561B7003A2F7B /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		835DB0C3171563A8003A2F7B /* About.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = About.txt; sourceTree = "<group>"; };
 		835DB0C4171563A8003A2F7B /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		835DB0C5171563A8003A2F7B /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		835DB0CA17156421003A2F7B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1169,7 +1163,6 @@
 		E3347407169C5402000737CC /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		E3347408169C5402000737CC /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		E3347409169C5402000737CC /* CCControlExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCControlExtension.h; sourceTree = "<group>"; };
-		E334740A169C5402000737CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		E3347419169DC5A6000737CC /* APIDocsWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIDocsWindow.h; sourceTree = "<group>"; };
 		E334741A169DC5A6000737CC /* APIDocsWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIDocsWindow.m; sourceTree = "<group>"; };
 		E334741B169DC5A6000737CC /* APIDocsWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APIDocsWindow.xib; sourceTree = "<group>"; };
@@ -1645,7 +1638,6 @@
 		E3A4746616D4389D00DB0D61 /* CDXPropertyModifierAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDXPropertyModifierAction.m; sourceTree = "<group>"; };
 		E3A4746716D4389D00DB0D61 /* CocosDenshion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocosDenshion.h; sourceTree = "<group>"; };
 		E3A4746816D4389D00DB0D61 /* CocosDenshion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocosDenshion.m; sourceTree = "<group>"; };
-		E3A4746916D4389D00DB0D61 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		E3A4746A16D4389D00DB0D61 /* SimpleAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAudioEngine.h; sourceTree = "<group>"; };
 		E3A4746B16D4389D00DB0D61 /* SimpleAudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAudioEngine.m; sourceTree = "<group>"; };
 		E3A4747516D43B4300DB0D61 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
@@ -1780,7 +1772,6 @@
 		E3C9CCB7161D08B8008A3784 /* InspectorCodeConnectionsJS.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InspectorCodeConnectionsJS.xib; sourceTree = "<group>"; };
 		E3C9CCB9161D0BBF008A3784 /* InspectorCodeConnectionsJS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorCodeConnectionsJS.h; sourceTree = "<group>"; };
 		E3C9CCBA161D0BBF008A3784 /* InspectorCodeConnectionsJS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InspectorCodeConnectionsJS.m; sourceTree = "<group>"; };
-		E3D08A321524581100E55891 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		E3D59118150F50D1004180CA /* AUTHORS */ = {isa = PBXFileReference; lastKnownFileType = text; name = AUTHORS; path = ../AUTHORS; sourceTree = "<group>"; };
 		E3D59119150F50D1004180CA /* LICENSE_CocosBuilder.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE_CocosBuilder.txt; path = ../LICENSE_CocosBuilder.txt; sourceTree = "<group>"; };
 		E3D5911A150F50D1004180CA /* LICENSE_PSMTabBarControl.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE_PSMTabBarControl.txt; path = ../LICENSE_PSMTabBarControl.txt; sourceTree = "<group>"; };
@@ -2424,7 +2415,6 @@
 		7789ABB3133AA82000CEFCC7 = {
 			isa = PBXGroup;
 			children = (
-				E3D08A321524581100E55891 /* README.md */,
 				E3D59118150F50D1004180CA /* AUTHORS */,
 				E395DC7D1511FDF70075979E /* CHANGELOG */,
 				E3D59119150F50D1004180CA /* LICENSE_CocosBuilder.txt */,
@@ -2733,7 +2723,6 @@
 		835DB02F171561B7003A2F7B /* CocoaLumberjack */ = {
 			isa = PBXGroup;
 			children = (
-				835DB030171561B7003A2F7B /* About.txt */,
 				835DB031171561B7003A2F7B /* DDAbstractDatabaseLogger.h */,
 				835DB032171561B7003A2F7B /* DDAbstractDatabaseLogger.m */,
 				835DB033171561B7003A2F7B /* DDASLLogger.h */,
@@ -2764,7 +2753,6 @@
 		835DB0C2171563A8003A2F7B /* CocoaAsyncSocket */ = {
 			isa = PBXGroup;
 			children = (
-				835DB0C3171563A8003A2F7B /* About.txt */,
 				835DB0C4171563A8003A2F7B /* GCDAsyncSocket.h */,
 				835DB0C5171563A8003A2F7B /* GCDAsyncSocket.m */,
 			);
@@ -2902,7 +2890,6 @@
 			children = (
 				E33473ED169C5402000737CC /* CCControl */,
 				E3347409169C5402000737CC /* CCControlExtension.h */,
-				E334740A169C5402000737CC /* README.md */,
 			);
 			name = CCControlExtension;
 			path = ../../Examples/CocosBuilderExample/libs/CCBReader/CCControlExtension;
@@ -3660,7 +3647,6 @@
 				E3A4746616D4389D00DB0D61 /* CDXPropertyModifierAction.m */,
 				E3A4746716D4389D00DB0D61 /* CocosDenshion.h */,
 				E3A4746816D4389D00DB0D61 /* CocosDenshion.m */,
-				E3A4746916D4389D00DB0D61 /* README.md */,
 				E3A4746A16D4389D00DB0D61 /* SimpleAudioEngine.h */,
 				E3A4746B16D4389D00DB0D61 /* SimpleAudioEngine.m */,
 			);
@@ -4719,7 +4705,6 @@
 				E35D78D616826C0100A53BEF /* SpriteSheetSettingsWindow.xib in Resources */,
 				E3DEF5B7169B359C00B9DCF4 /* lame in Resources */,
 				E3DEF5B9169B35DF00B9DCF4 /* lame-COPYING in Resources */,
-				E3347418169C5402000737CC /* README.md in Resources */,
 				E334741D169DC5A7000737CC /* APIDocsWindow.xib in Resources */,
 				E334742F169DC9E0000737CC /* jsdoc in Resources */,
 				E3F4087416A9EEC5009A0253 /* ccz in Resources */,
@@ -4734,7 +4719,6 @@
 				E3DA6FFE16CB2C3C00B12FFB /* InspectorPopoverColor3.xib in Resources */,
 				E312972E16CC33B200A09155 /* SequencerPopoverBlock.xib in Resources */,
 				E312973516CC677400A09155 /* SequencerPopoverSound.xib in Resources */,
-				E3A4747116D4389D00DB0D61 /* README.md in Resources */,
 				E32FA2F816D5781600254653 /* seq-row-channel-bg.png in Resources */,
 				E3B5EE8A16D6E0AA00C07990 /* InspectorFloatXY.xib in Resources */,
 				E318CB3916D83F3B00348E0D /* InspectorPopoverFloatXY.xib in Resources */,
@@ -4855,9 +4839,7 @@
 				E398C02914FB81A30078E771 /* InfoPlist.strings in Resources */,
 				835DB052171561B8003A2F7B /* LICENSE.txt in Resources */,
 				835DB053171561B8003A2F7B /* README.markdown in Resources */,
-				835DB083171561B8003A2F7B /* About.txt in Resources */,
 				835DB08B171561B8003A2F7B /* README.txt in Resources */,
-				835DB0C6171563A8003A2F7B /* About.txt in Resources */,
 				A77EF590171FD30E00451DA4 /* cwebp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5645,6 +5627,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LIBRARY = "libc++";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -5664,6 +5647,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LIBRARY = "libc++";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -5707,7 +5691,8 @@
 					"\"$(SRCROOT)/libs/MMMarkdown\"",
 					"\"$(SRCROOT)/libs/Tupac\"",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--deep";
 				PRODUCT_NAME = CocosBuilder;
 				WRAPPER_EXTENSION = app;
 			};
@@ -5743,7 +5728,7 @@
 					"\"$(SRCROOT)/libs/MMMarkdown\"",
 					"\"$(SRCROOT)/libs/Tupac\"",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_NAME = CocosBuilder;
 				WRAPPER_EXTENSION = app;
 			};
