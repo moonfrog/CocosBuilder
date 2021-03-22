@@ -6,7 +6,7 @@
 	url = https://github.com/harimfl/ssziparchive
 [submodule "CocosBuilder/libs/Fragaria"]
 	path = CocosBuilder/libs/Fragaria
-	url = https://github.com/harimfl/Fragaria.git
+	url = https://github.com/moonfrog/fragaria-cocosbuilder.git
 [submodule "Examples/CocosBuilderExample/libs/CCBReader"]
 	path = Examples/CocosBuilderExample/libs/CCBReader
 	url = git://github.com/cocos2d/CCBReader.git
