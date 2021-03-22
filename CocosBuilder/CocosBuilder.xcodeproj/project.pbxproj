@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34FE40FD2603909100251B09 /* MGSFragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3F541CC15AED68500EAAFBD /* MGSFragaria.framework */; };
+		34FE40FE2603909100251B09 /* MGSFragaria.framework in Copy Files (Sparkle framework) */ = {isa = PBXBuildFile; fileRef = E3F541CC15AED68500EAAFBD /* MGSFragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		470D84DC1D1960DE005B31E5 /* CCBControlButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 470D84DB1D1960DE005B31E5 /* CCBControlButton.m */; };
 		472C0DDB1D364F1D006A6BFA /* InspectorButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 472C0DD61D364F13006A6BFA /* InspectorButton.xib */; };
 		472C0DDC1D364F23006A6BFA /* InspectorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 472C0DD51D364F13006A6BFA /* InspectorButton.m */; };
@@ -215,14 +217,13 @@
 		E335CB0F1578C2C600A612EE /* SequencerStructureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E335CB0E1578C2C600A612EE /* SequencerStructureCell.m */; };
 		E3366A39168159F30094BD94 /* PVRTexToolCL in Resources */ = {isa = PBXBuildFile; fileRef = E3366A38168159F30094BD94 /* PVRTexToolCL */; };
 		E33BC1971510B8D0009AE29A /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E33BC1961510B8D0009AE29A /* Sparkle.framework */; };
-		E33BC1981510B9DE009AE29A /* Sparkle.framework in Copy Files (Sparkle framework) */ = {isa = PBXBuildFile; fileRef = E33BC1961510B8D0009AE29A /* Sparkle.framework */; };
+		E33BC1981510B9DE009AE29A /* Sparkle.framework in Copy Files (Sparkle framework) */ = {isa = PBXBuildFile; fileRef = E33BC1961510B8D0009AE29A /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E33BC1B81510E4B6009AE29A /* NodeGraphPropertySetter.m in Sources */ = {isa = PBXBuildFile; fileRef = E33BC1B71510E4B6009AE29A /* NodeGraphPropertySetter.m */; };
 		E33C2AAC15C987EB0043EF9B /* ResourceManagerOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = E33C2AAB15C987EB0043EF9B /* ResourceManagerOutlineView.m */; };
 		E33C2AAF15C9A0D40043EF9B /* SequencerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E33C2AAE15C9A0D40043EF9B /* SequencerUtil.m */; };
 		E33C2AB515CAE2590043EF9B /* SequencerStretchWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E33C2AB415CAE2580043EF9B /* SequencerStretchWindow.xib */; };
 		E33C2AB815CAE3980043EF9B /* SequencerStretchWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = E33C2AB715CAE3960043EF9B /* SequencerStretchWindow.m */; };
 		E33C2ABA15CBF2580043EF9B /* seq-keyframe-hint.png in Resources */ = {isa = PBXBuildFile; fileRef = E33C2AB915CBF2580043EF9B /* seq-keyframe-hint.png */; };
-		E33C2B2615CD56020043EF9B /* MGSFragaria.framework in Copy Files (Sparkle framework) */ = {isa = PBXBuildFile; fileRef = E3F541CC15AED68500EAAFBD /* MGSFragaria.framework */; };
 		E34039BE1624BF610067C7B8 /* CCBDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = E34039BD1624BF610067C7B8 /* CCBDocumentController.m */; };
 		E3462867155BF6C50043EAB1 /* ResourceManagerOutlineHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E3462866155BF6C50043EAB1 /* ResourceManagerOutlineHandler.m */; };
 		E346286B155C18D80043EAB1 /* SavePanelLimiter.m in Sources */ = {isa = PBXBuildFile; fileRef = E346286A155C18D80043EAB1 /* SavePanelLimiter.m */; };
@@ -636,7 +637,6 @@
 		E3F3F849153DB893005443EE /* notes-close.png in Resources */ = {isa = PBXBuildFile; fileRef = E3F3F848153DB893005443EE /* notes-close.png */; };
 		E3F3F84B153DBA43005443EE /* notes-close-down.png in Resources */ = {isa = PBXBuildFile; fileRef = E3F3F84A153DBA43005443EE /* notes-close-down.png */; };
 		E3F4087416A9EEC5009A0253 /* ccz in Resources */ = {isa = PBXBuildFile; fileRef = E3F4087316A9EEC5009A0253 /* ccz */; };
-		E3F541CF15AED86800EAAFBD /* MGSFragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3F541CC15AED68500EAAFBD /* MGSFragaria.framework */; };
 		E3F541D415AF04E600EAAFBD /* JavaScriptDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F541D215AF04E600EAAFBD /* JavaScriptDocument.m */; };
 		E3F541D515AF04E600EAAFBD /* JavaScriptDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3F541D315AF04E600EAAFBD /* JavaScriptDocument.xib */; };
 		E3F59CCE15B5B7560015523B /* PlayerConsolePairingWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3F59CCD15B5B7560015523B /* PlayerConsolePairingWindow.xib */; };
@@ -797,13 +797,6 @@
 			remoteGlobalIDString = AB69B62B118B745700903D1D;
 			remoteInfo = MGSFragaria;
 		};
-		E3F541CD15AED85800EAAFBD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E3F541BC15AED68500EAAFBD /* Fragaria.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = AB69B62A118B745700903D1D;
-			remoteInfo = MGSFragaria;
-		};
 		E3FCE8721524859A0028E8E7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7789ABB5133AA82000CEFCC7 /* Project object */;
@@ -820,8 +813,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E33C2B2615CD56020043EF9B /* MGSFragaria.framework in Copy Files (Sparkle framework) */,
 				E33BC1981510B9DE009AE29A /* Sparkle.framework in Copy Files (Sparkle framework) */,
+				34FE40FE2603909100251B09 /* MGSFragaria.framework in Copy Files (Sparkle framework) */,
 			);
 			name = "Copy Files (Sparkle framework)";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1931,9 +1924,9 @@
 				E3A4747A16D43BEA00DB0D61 /* OpenAL.framework in Frameworks */,
 				E3A4747816D43B5800DB0D61 /* AudioToolbox.framework in Frameworks */,
 				E3B19F6B15E62ADA000B023E /* Carbon.framework in Frameworks */,
-				E3F541CF15AED86800EAAFBD /* MGSFragaria.framework in Frameworks */,
 				E3E0879015669FA2008F1FDB /* libffi.dylib in Frameworks */,
 				E3E0878E15669F58008F1FDB /* JavaScriptCore.framework in Frameworks */,
+				34FE40FD2603909100251B09 /* MGSFragaria.framework in Frameworks */,
 				776A37161395925D00960E94 /* Quartz.framework in Frameworks */,
 				77D33E95138E714700012A88 /* ExceptionHandling.framework in Frameworks */,
 				7789ABEE133AB12F00CEFCC7 /* libz.dylib in Frameworks */,
@@ -4120,7 +4113,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				E3F541CE15AED85800EAAFBD /* PBXTargetDependency */,
 				E398C02F14FB82090078E771 /* PBXTargetDependency */,
 				E3B7AED314E31AEF00DFD402 /* PBXTargetDependency */,
 				E3C365F814E9E4DD007CD5FF /* PBXTargetDependency */,
@@ -4438,6 +4430,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0450;
+				TargetAttributes = {
+					7789ABBD133AA82000CEFCC7 = {
+						ProvisioningStyle = Manual;
+					};
+				};
 			};
 			buildConfigurationList = 7789ABB8133AA82000CEFCC7 /* Build configuration list for PBXProject "CocosBuilder" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -5455,11 +5452,6 @@
 			target = E3D59120150F5367004180CA /* CCBFile */;
 			targetProxy = E3D5912D150F53CD004180CA /* PBXContainerItemProxy */;
 		};
-		E3F541CE15AED85800EAAFBD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MGSFragaria;
-			targetProxy = E3F541CD15AED85800EAAFBD /* PBXContainerItemProxy */;
-		};
 		E3FCE8731524859A0028E8E7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E3FCE8651524856D0028E8E7 /* CCScrollView */;
@@ -5665,7 +5657,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -5686,14 +5681,16 @@
 					"../Examples/CocosBuilderExample/libs/CCBReader/**",
 				);
 				INFOPLIST_FILE = "ccBuilder/CocosBuilder-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/MMMarkdown\"",
 					"\"$(SRCROOT)/libs/Tupac\"",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--deep";
 				PRODUCT_NAME = CocosBuilder;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -5702,8 +5699,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = YFC8T84PY6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -5723,13 +5723,15 @@
 					"../Examples/CocosBuilderExample/libs/CCBReader/**",
 				);
 				INFOPLIST_FILE = "ccBuilder/CocosBuilder-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libs/MMMarkdown\"",
 					"\"$(SRCROOT)/libs/Tupac\"",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_NAME = CocosBuilder;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

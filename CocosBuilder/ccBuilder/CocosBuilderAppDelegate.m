@@ -254,6 +254,7 @@ static CocosBuilderAppDelegate* sharedAppDelegate;
 
 - (void) setupGUIWindow
 {
+    return;
     NSRect frame = cocosView.frame;
     
     frame.origin = [cocosView convertPoint:NSZeroPoint toView:NULL];
