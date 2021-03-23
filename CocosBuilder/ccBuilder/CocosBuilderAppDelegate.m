@@ -254,7 +254,6 @@ static CocosBuilderAppDelegate* sharedAppDelegate;
 
 - (void) setupGUIWindow
 {
-    return;
     NSRect frame = cocosView.frame;
     
     frame.origin = [cocosView convertPoint:NSZeroPoint toView:NULL];
@@ -267,7 +266,7 @@ static CocosBuilderAppDelegate* sharedAppDelegate;
     [guiWindow setContentView:guiView];
     guiWindow.delegate = self;
     
-    [window addChildWindow:guiWindow ordered:NSWindowAbove];
+    [window addChildWindow:guiWindow ordered:NSWindowOut];
 }
 
 - (void) setupAutoCompleteHandler
