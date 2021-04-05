@@ -424,7 +424,7 @@
         }
         
         // Skip default values
-        if ([serializedValue isEqual:defaultSerialization] && !hasKeyframes)
+        if (![name isEqualTo:@"anchorPoint"] && [serializedValue isEqual:defaultSerialization] && !hasKeyframes)
         {
             continue;
         }
