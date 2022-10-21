@@ -164,7 +164,7 @@
 - (BOOL) isEditable
 {
     NSLog(@"isEditable (ImageAndTextCell)");
-    return YES;
+    return NO;
 }
 
 @end

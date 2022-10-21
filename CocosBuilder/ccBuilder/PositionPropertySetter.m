@@ -347,6 +347,10 @@
     }
     
     // Set the size value
+    if([prop isEqualTo:@"preferedSize"])
+        prop = @"preferredSize";
+    {
+    NSLog(@"YAnjali is %@", prop);
     [node setValue:[NSValue valueWithSize:absSize] forKey:prop];
     
     // Set the extra properties
@@ -354,6 +358,7 @@
     [node setExtraProp:[NSNumber numberWithInt:type] forKey:[NSString stringWithFormat:@"%@Type", prop]];
     
     [PositionPropertySetter refreshPositionsForChildren:node];
+    }
 }
 
 + (void) setSizeType:(int)type forNode:(CCNode*)node prop:(NSString*)prop
@@ -415,6 +420,8 @@
 
 + (NSSize) sizeForNode:(CCNode*)node prop:(NSString*)prop
 {
+    if([prop isEqualTo:@"preferedSize"])
+    prop = @"preferredSize";
     NSValue* sizeValue = [node extraPropForKey:prop];
     
     if (sizeValue) return [sizeValue sizeValue];
