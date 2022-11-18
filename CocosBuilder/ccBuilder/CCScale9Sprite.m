@@ -637,6 +637,7 @@ enum positions
 
 - (void) setInsetLeft:(float)insetLeft
 {
+    NSLog(@"Anjali CCScale9Sprite insetleft is %f", insetLeft);
     _insetLeft = insetLeft;
     [self updateCapInset_];
 }

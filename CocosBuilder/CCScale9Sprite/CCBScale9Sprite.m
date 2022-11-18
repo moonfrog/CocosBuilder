@@ -82,4 +82,73 @@
     return iRight;
 }
 
+- (GLubyte) opacity
+{
+    if(_opacity == 0)
+        return 255;
+    return _opacity;
+}
+
+- (void)setOpacity:(GLubyte)opacity
+{
+    NSLog(@"Anjali CCScale9Sprite original opcaity is %i", opacity);
+    if(opacity == 0)
+    {
+        _opacity = 255;
+        opacity = 255;
+    }
+    else
+        _opacity = opacity;
+    NSLog(@"Anjali CCScale9Sprite new opcaity is %i", _opacity);
+        for (CCNode<CCRGBAProtocol> *child in _scale9Image.children)
+    {
+        [child setOpacity:opacity];
+    }
+}
+
+- (GLubyte) displayedOpacity
+{
+    if(_displayedOpacity == 0)
+        return 255;
+    return _displayedOpacity;
+}
+
+- (void)updateDisplayedOpacity:(GLubyte)parentOpacity
+{
+    _displayedOpacity = _realOpacity * parentOpacity/255.0;
+
+    if (_cascadeOpacityEnabled)
+    {
+        id<CCRGBAProtocol> item;
+        CCARRAY_FOREACH(self.children, item)
+        {
+            if ([item conformsToProtocol:@protocol(CCRGBAProtocol)])
+            {
+                [item updateDisplayedOpacity:_displayedOpacity];
+            }
+        }
+    }
+    NSLog(@"Anjali CCScale9Sprite original displayed opcaity is %i", _displayedOpacity);
+}
+
+- (void)updateDisplayedColor:(ccColor3B)parentColor
+{
+    _displayedColor.r = _realColor.r * parentColor.r/255.0;
+    _displayedColor.g = _realColor.g * parentColor.g/255.0;
+    _displayedColor.b = _realColor.b * parentColor.b/255.0;
+
+    if (_cascadeColorEnabled) {
+        id<CCRGBAProtocol> item;
+        CCARRAY_FOREACH(self.children, item)
+        {
+            if ([item conformsToProtocol:@protocol(CCRGBAProtocol)])
+            {
+                [item updateDisplayedColor:_displayedColor];
+            }
+        }
+    }
+}
+
+
+
 @end
