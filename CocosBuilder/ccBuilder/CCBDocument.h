@@ -43,6 +43,8 @@
     
     NSMutableArray* sequences;
     int currentSequenceId;
+    @public
+    BOOL removed;
 }
 
 @property (nonatomic,retain) NSString* fileName;

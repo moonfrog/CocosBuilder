@@ -92,17 +92,27 @@
 - (void)setOpacity:(GLubyte)opacity
 {
     NSLog(@"Anjali CCScale9Sprite original opcaity is %i", opacity);
-    if(opacity == 0)
+    if(opacity == 0 && _opacity == 0)
     {
         _opacity = 255;
         opacity = 255;
     }
-    else
-        _opacity = opacity;
-    NSLog(@"Anjali CCScale9Sprite new opcaity is %i", _opacity);
-        for (CCNode<CCRGBAProtocol> *child in _scale9Image.children)
+    _opacity = opacity;
+//    else
+//    {
+//        if(opacity < 255)
+//            _opacity = opacity;
+//        else{
+//            NSLog(@"Anjali CCScale9Sprite original (2) opcaity is %i", _opacity);
+//        }
+//    }
+//    NSLog(@"Anjali CCScale9Sprite new opcaity is %i", _opacity);
+//    if(_opacity < 255)
     {
-        [child setOpacity:opacity];
+        for (CCNode<CCRGBAProtocol> *child in _scale9Image.children)
+        {
+            [child setOpacity:_opacity];
+        }
     }
 }
 

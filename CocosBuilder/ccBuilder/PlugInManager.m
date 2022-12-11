@@ -189,6 +189,7 @@
         
         NSDictionary* propInfo = [plugInProps objectAtIndex:i];
         
+        
         id defaultValue = [propInfo objectForKey:@"default"];
          
         if (defaultValue)
@@ -203,6 +204,9 @@
             }
             else
             {
+                if(name == @"opacity" || name == @"Opacity")
+                    NSLog(@"YAnjali property name is %@  %@", name,type);
+                NSLog(@"YAnjali property name is %@  %@", name,type);
                 // Set the property on the object
                 [CCBReaderInternal setProp:name ofType:type toValue:defaultValue forNode:node parentSize:CGSizeZero];
             }

@@ -193,6 +193,7 @@ enum positions
 - (void) updateWithBatchNode:(CCSpriteBatchNode *)batchnode rect:(CGRect)rect rotated:(BOOL)rotated capInsets:(CGRect)capInsets
 {
     GLubyte opacity = opacity;
+    NSLog(@"YAnjali ccscale9Sprite bupdateWithBatcNode is %i", opacity);
     ccColor3B color = _color;
     
     // Release old sprites
@@ -637,6 +638,7 @@ enum positions
 
 - (void) setInsetLeft:(float)insetLeft
 {
+    NSLog(@"Anjali CCScale9Sprite insetleft is %f", insetLeft);
     _insetLeft = insetLeft;
     [self updateCapInset_];
 }

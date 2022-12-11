@@ -63,6 +63,7 @@
 			<array>
 				<string>anchorPoint</string>
 				<string>insetLeft</string>
+				<string>opacity</string>
 				<string>insetTop</string>
 				<string>insetRight</string>
 				<string>insetBottom</string>
