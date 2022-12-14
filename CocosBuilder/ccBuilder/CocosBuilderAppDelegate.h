@@ -205,7 +205,7 @@ enum {
     NSMutableArray* delayOpenFiles;
     CCBDocument* currentDocument;
     BOOL hasOpenedDocument;
-    
+    BOOL tabPressed;
     // PlugIns (nodes)
     PlugInManager* plugInManager;
     
@@ -382,5 +382,6 @@ enum {
 - (void) modalStatusWindowStartWithTitle:(NSString*)title;
 - (void) modalStatusWindowFinish;
 - (void) modalStatusWindowUpdateStatusText:(NSString*) text;
+- (void) doAfterScheduledTime:(NSTimer*)t;
 
 @end

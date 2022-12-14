@@ -153,6 +153,7 @@ static CocosBuilderAppDelegate* sharedAppDelegate;
 
 - (void) setupCocos2d
 {
+    tabPressed = NO;
     // Insert code here to initialize your application
     CCDirectorMac *director = (CCDirectorMac*) [CCDirector sharedDirector];
 	
@@ -428,8 +429,22 @@ static CocosBuilderAppDelegate* sharedAppDelegate;
 
 - (void)tabView:(NSTabView*)tv didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
+//    if(tabPressed == YES)
+//        return;
+//    tabPressed = YES;
+//    [NSTimer scheduledTimerWithTimeInterval:3.0
+//    target:self
+//    selector:@selector(doAfterScheduledTime:)
+//    userInfo:nil
+//    repeats:NO];
     [self switchToDocument:[tabViewItem identifier] forceReload:NO fromOpenFil:NO];
 }
+
+- (void)doAfterScheduledTime:(NSTimer*)t
+{
+    tabPressed = NO;
+}
+
 
 - (void)tabView:(NSTabView *)aTabView didCloseTabViewItem:(NSTabViewItem *)tabViewItem
 {
@@ -1128,24 +1143,25 @@ static BOOL hideAllToNextSeparator;
 - (void) switchToDocument:(CCBDocument*) document forceReload:(BOOL)forceReload fromOpenFil:(BOOL)open
 {
     if (!forceReload && [document.fileName isEqualToString:currentDocument.fileName]) return;
-    if(!open)
-    {
-           CCBDocument* openDoc = [self findDocumentFromFile:document.fileName];
-           if(openDoc && !openDoc->removed)
-           {
-               NSTabViewItem* item = [self tabViewItemFromDoc:document];
-               if (!item) return;
-               
-               if ([self tabView:tabView shouldCloseTabViewItem:item])
-               {
-                   openDoc->removed = YES;
-                   [tabView removeTabViewItem:item];
-               }
-               [self openFile:document.fileName];
-                      return;
-           }
-       
-    }
+//    if(!open)
+//    {
+//           CCBDocument* openDoc = [self findDocumentFromFile:document.fileName];
+//           if(openDoc && !openDoc->removed)
+//           {
+//               tabPressed = YES;
+//               NSTabViewItem* item = [self tabViewItemFromDoc:document];
+//               if (!item) return;
+//
+//               if ([self tabView:tabView shouldCloseTabViewItem:item])
+//               {
+//                   openDoc->removed = YES;
+//                   [tabView removeTabViewItem:item];
+//               }
+//               [self openFile:document.fileName];
+//                      return;
+//           }
+//
+//    }
     [self prepareForDocumentSwitch];
     
     self.currentDocument = document;
@@ -1161,6 +1177,7 @@ static BOOL hideAllToNextSeparator;
     CocosScene* cs = [CocosScene cocosScene];
     [cs setStageZoom:document.stageZoom];
     [cs setScrollOffset:document.stageScrollOffset];
+    [sequenceHandler updatePropertiesToTimelinePosition];
 }
 
 - (void) switchToDocument:(CCBDocument*) document
@@ -1397,17 +1414,17 @@ static BOOL hideAllToNextSeparator;
 	[[[CCDirector sharedDirector] view] lockOpenGLContext];
     
     // Check if file is already open
-//    CCBDocument* openDoc = [self findDocumentFromFile:fileName];
-//    if (openDoc)
-//    {
-//        NSTabViewItem* item = [self tabViewItemFromDoc:openDoc];
-//        if (!item) return;
-//
+    CCBDocument* openDoc = [self findDocumentFromFile:fileName];
+    if (openDoc)
+    {
+        NSTabViewItem* item = [self tabViewItemFromDoc:openDoc];
+        if (!item) return;
+
 //        if ([self tabView:tabView shouldCloseTabViewItem:item])
 //        {
 //            [tabView removeTabViewItem:item];
 //        }
-//    }
+    }
     
     [self prepareForDocumentSwitch];
     
