@@ -63,6 +63,7 @@
 			<array>
 				<string>anchorPoint</string>
 				<string>insetLeft</string>
+				<string>opacity</string>
 				<string>insetTop</string>
 				<string>insetRight</string>
 				<string>insetBottom</string>
@@ -85,7 +86,7 @@
 			<key>type</key>
 			<string>Size</string>
 			<key>name</key>
-			<string>preferedSize</string>
+			<string>preferredSize</string>
 			<key>displayName</key>
 			<string>Preferred size</string>
 		</dict>

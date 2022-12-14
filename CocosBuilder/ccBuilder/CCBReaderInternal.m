@@ -323,7 +323,29 @@ NSDictionary* renamedProperties = NULL;
     NSArray* props = [dict objectForKey:@"properties"];
     NSString* baseClass = [dict objectForKey:@"baseClass"];
     NSArray* children = [dict objectForKey:@"children"];
-    
+    BOOL found = false;
+    NSUInteger f;
+    NSString* propName = @"CCScale9Sprite";
+    if([baseClass isEqualToString:propName])
+    {
+        for (f = 0; f < [props count]; f++) {
+            NSDictionary* ele = [props objectAtIndex:f];
+            NSString * stringFromArray = ele[@"name"];
+            if ([stringFromArray isEqualToString:@"opacity"]) {
+                found = YES;
+                break;
+            }
+        }
+        if(found == NO)
+        {
+            NSMutableDictionary *ele = [NSMutableDictionary dictionary];
+
+            [ele setObject: @"opacity"  forKey: @"name"];
+            [ele setObject: @"Byte" forKey:  @"type"];
+            [ele setObject: @"" forKey:  @"value"];
+            [props addObject:ele];
+        }
+    }
     // Create the node
     CCNode* node = [[PlugInManager sharedManager] createDefaultNodeOfType:baseClass];
     if (!node)

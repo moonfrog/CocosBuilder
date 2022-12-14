@@ -153,6 +153,7 @@ static CocosBuilderAppDelegate* sharedAppDelegate;
 
 - (void) setupCocos2d
 {
+    tabPressed = NO;
     // Insert code here to initialize your application
     CCDirectorMac *director = (CCDirectorMac*) [CCDirector sharedDirector];
 	
@@ -428,8 +429,22 @@ static CocosBuilderAppDelegate* sharedAppDelegate;
 
 - (void)tabView:(NSTabView*)tv didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
-    [self switchToDocument:[tabViewItem identifier]];
+//    if(tabPressed == YES)
+//        return;
+//    tabPressed = YES;
+//    [NSTimer scheduledTimerWithTimeInterval:3.0
+//    target:self
+//    selector:@selector(doAfterScheduledTime:)
+//    userInfo:nil
+//    repeats:NO];
+    [self switchToDocument:[tabViewItem identifier] forceReload:NO fromOpenFil:NO];
 }
+
+- (void)doAfterScheduledTime:(NSTimer*)t
+{
+    tabPressed = NO;
+}
+
 
 - (void)tabView:(NSTabView *)aTabView didCloseTabViewItem:(NSTabViewItem *)tabViewItem
 {
@@ -1125,10 +1140,28 @@ static BOOL hideAllToNextSeparator;
     [self updateCanvasBorderMenu];
 }
 
-- (void) switchToDocument:(CCBDocument*) document forceReload:(BOOL)forceReload
+- (void) switchToDocument:(CCBDocument*) document forceReload:(BOOL)forceReload fromOpenFil:(BOOL)open
 {
     if (!forceReload && [document.fileName isEqualToString:currentDocument.fileName]) return;
-    
+//    if(!open)
+//    {
+//           CCBDocument* openDoc = [self findDocumentFromFile:document.fileName];
+//           if(openDoc && !openDoc->removed)
+//           {
+//               tabPressed = YES;
+//               NSTabViewItem* item = [self tabViewItemFromDoc:document];
+//               if (!item) return;
+//
+//               if ([self tabView:tabView shouldCloseTabViewItem:item])
+//               {
+//                   openDoc->removed = YES;
+//                   [tabView removeTabViewItem:item];
+//               }
+//               [self openFile:document.fileName];
+//                      return;
+//           }
+//
+//    }
     [self prepareForDocumentSwitch];
     
     self.currentDocument = document;
@@ -1144,11 +1177,12 @@ static BOOL hideAllToNextSeparator;
     CocosScene* cs = [CocosScene cocosScene];
     [cs setStageZoom:document.stageZoom];
     [cs setScrollOffset:document.stageScrollOffset];
+    [sequenceHandler updatePropertiesToTimelinePosition];
 }
 
 - (void) switchToDocument:(CCBDocument*) document
 {
-    [self switchToDocument:document forceReload:NO];
+    [self switchToDocument:document forceReload:NO fromOpenFil:YES];
 }
 
 - (void) addDocument:(CCBDocument*) doc
@@ -1383,8 +1417,13 @@ static BOOL hideAllToNextSeparator;
     CCBDocument* openDoc = [self findDocumentFromFile:fileName];
     if (openDoc)
     {
-        [tabView selectTabViewItem:[self tabViewItemFromDoc:openDoc]];
-        return;
+        NSTabViewItem* item = [self tabViewItemFromDoc:openDoc];
+        if (!item) return;
+
+//        if ([self tabView:tabView shouldCloseTabViewItem:item])
+//        {
+//            [tabView removeTabViewItem:item];
+//        }
     }
     
     [self prepareForDocumentSwitch];
@@ -2184,11 +2223,11 @@ static BOOL hideAllToNextSeparator;
         CCBDocument* doc = [(NSTabViewItem*)[docs objectAtIndex:i] identifier];
          if (doc.isDirty)
          {
-             [self switchToDocument:doc forceReload:NO];
+             [self switchToDocument:doc forceReload:NO fromOpenFil:NO];
              [self saveDocument:sender];
          }
     }
-    [self switchToDocument:oldCurDoc forceReload:NO];
+    [self switchToDocument:oldCurDoc forceReload:NO fromOpenFil:NO];
 }
 
 - (void) publishAndRun:(BOOL)run runInBrowser:(NSString *)browser
@@ -3023,7 +3062,7 @@ static BOOL hideAllToNextSeparator;
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFrames];
     FNTConfigRemoveCache();  
   
-    [self switchToDocument:currentDocument forceReload:YES];
+    [self switchToDocument:currentDocument forceReload:YES fromOpenFil:NO];
     [sequenceHandler updatePropertiesToTimelinePosition];
 }
 
