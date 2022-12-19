@@ -97,6 +97,7 @@
         _opacity = 255;
         opacity = 255;
     }
+    if(opacity != 0)
     _opacity = opacity;
 //    else
 //    {

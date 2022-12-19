@@ -156,7 +156,7 @@
     
     [self willChangeValueForKey:@"preferredSize"];
     [self didChangeValueForKey:@"preferredSize"];
-    [[CocosBuilderAppDelegate appDelegate] refreshProperty:@"preferedSize"];
+    [[CocosBuilderAppDelegate appDelegate] refreshProperty:@"preferredSize"];
 }
 
 -(void) changeLanguageSelection:(Locale)selectedLocale
