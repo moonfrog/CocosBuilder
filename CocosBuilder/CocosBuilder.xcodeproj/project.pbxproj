@@ -2199,6 +2199,7 @@
 		776041EA1498FB600078095D /* Dialogs */ = {
 			isa = PBXGroup;
 			children = (
+				E335CAED1576031B00A612EE /* Sequencer */,
 				772BE57B134398EE0009B5B9 /* NewDocWindow.xib */,
 				771B2B301353818000B260BA /* NewDocWindowController.h */,
 				771B2B311353818000B260BA /* NewDocWindowController.m */,
@@ -2475,7 +2476,6 @@
 			children = (
 				776041E31498F5E80078095D /* AppDelegate & Cocos2D Scene */,
 				E346286C155C23100043EAB1 /* Rulers, Guides & Notes */,
-				E335CAED1576031B00A612EE /* Sequencer */,
 				E3C5C1A11504D144000CF6F3 /* Resource Manager */,
 				776041E11498F56D0078095D /* Application Settings & Globals */,
 				776041E01498F4A00078095D /* Document Readers & Writers */,

@@ -58,6 +58,7 @@ static SequencerHandler* sharedSequencerHandler;
 @synthesize timeScaleSlider;
 @synthesize scroller;
 @synthesize scrollView;
+@synthesize timeLineView;
 @synthesize contextKeyframe;
 
 #pragma mark Init and singleton object
@@ -105,6 +106,8 @@ static SequencerHandler* sharedSequencerHandler;
 - (void) timeScaleSliderUpdated:(id)sender
 {
     currentSequence.timelineScale = timeScaleSlider.floatValue;
+    [timeLineView setNeedsDisplay:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"seqTimeLineView"  object:timeLineView];
 }
 
 - (void) updateScaleSlider
@@ -646,6 +649,8 @@ static SequencerHandler* sharedSequencerHandler;
 - (void) redrawTimeline:(BOOL) reload
 {
     [scrubberSelectionView setNeedsDisplay:YES];
+    [timeLineView setNeedsDisplay:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"seqTimeLineView"  object:timeLineView];
     NSString* displayTime = [currentSequence currentDisplayTime];
     if (!displayTime) displayTime = @"00:00:00";
     [timeDisplay setStringValue:displayTime];

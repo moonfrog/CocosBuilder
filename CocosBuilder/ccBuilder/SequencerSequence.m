@@ -131,7 +131,7 @@
         
         if (sh.currentSequence == self)
         {
-            [sh redrawTimeline:NO];     // No need to reload Sequencer Outline View (No node has changed)
+            [sh redrawTimeline:YES];     // No need to reload Sequencer Outline View (No node has changed)
             [sh updatePropertiesToTimelinePosition];
             [[CocosBuilderAppDelegate appDelegate] updateInspectorFromSelection];
         }

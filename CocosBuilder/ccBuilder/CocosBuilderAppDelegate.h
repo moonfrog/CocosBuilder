@@ -110,6 +110,7 @@ enum {
 @class AboutWindow;
 @class ResourceManagerPreviewView;
 @class RMSpriteFrame;
+@class SequencerTimelineView;
 
 @interface CocosBuilderAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate>
 {
@@ -148,6 +149,7 @@ enum {
     SequencerHandler* sequenceHandler;
     IBOutlet NSOutlineView* outlineHierarchy;
     IBOutlet SequencerScrubberSelectionView* scrubberSelectionView;
+    IBOutlet SequencerTimelineView* timelineView;
     IBOutlet NSTextField* timeDisplay;
     IBOutlet NSSlider* timeScaleSlider;
     IBOutlet NSScroller* timelineScroller;

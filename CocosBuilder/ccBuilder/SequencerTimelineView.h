@@ -34,4 +34,6 @@
     NSImage* imgStartmarker;
     NSRect numberRects[10];
 }
+
+- (void) doAfterScheduledTime:(id)ele;
 @end

@@ -184,6 +184,7 @@ static CocosBuilderAppDelegate* sharedAppDelegate;
     sequenceHandler.timeScaleSlider = timeScaleSlider;
     sequenceHandler.scroller = timelineScroller;
     sequenceHandler.scrollView = sequenceScrollView;
+    sequenceHandler.timeLineView = timelineView;
     
     [self updateTimelineMenu];
     [sequenceHandler updateScaleSlider];
