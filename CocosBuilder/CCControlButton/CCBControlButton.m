@@ -47,7 +47,6 @@
     CCBDocument* currentDocument = [CocosBuilderAppDelegate appDelegate].currentDocument;
     
     ResolutionSetting* resolution = [currentDocument.resolutions objectAtIndex:currentDocument.currentResolution];
-    
     return resolution.scale;
 }
 
@@ -253,6 +252,8 @@
         }
     }
     [super setValue:value forUndefinedKey:key];
+    
+    [self onSetSizeFromTexture];
 }
 
 - (id)valueForKey:(NSString*)key {
@@ -339,5 +340,6 @@
         [label enableShadowWithOffset:CGSizeMake(shadowOffset.x, shadowOffset.y) opacity:shadowOpacity blur:shadowBlurRadius updateImage:YES];
     }
 }
+
 
 @end
