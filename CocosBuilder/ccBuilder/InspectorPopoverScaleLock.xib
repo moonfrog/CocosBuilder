@@ -12,7 +12,7 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="1">
             <rect key="frame" x="0.0" y="0.0" width="202" height="36"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -76,17 +76,17 @@
                 <button imageHugsTitle="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="28">
                     <rect key="frame" x="117" y="12" width="19" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSLockUnlockedTemplate" catalog="system" imagePosition="leading" alignment="left" alternateImage="NSLockLockedTemplate" state="on" borderStyle="border" inset="2" id="29">
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSLockUnlockedTemplate" imagePosition="leading" alignment="left" alternateImage="NSLockLockedTemplate" state="on" borderStyle="border" inset="2" id="29">
                         <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
+                        <binding destination="-2" name="value" keyPath="locked" id="45"/>
                         <binding destination="-2" name="enabled" keyPath="readOnly" id="40">
                             <dictionary key="options">
                                 <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
-                        <binding destination="-2" name="value" keyPath="locked" id="45"/>
                     </connections>
                 </button>
                 <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="46">
@@ -114,8 +114,8 @@
         <userDefaultsController representsSharedInstance="YES" id="17"/>
     </objects>
     <resources>
-        <image name="NSLockLockedTemplate" catalog="system" width="19" height="19"/>
-        <image name="NSLockUnlockedTemplate" catalog="system" width="21" height="19"/>
+        <image name="NSLockLockedTemplate" width="19" height="19"/>
+        <image name="NSLockUnlockedTemplate" width="21" height="19"/>
         <image name="scale-0" width="16" height="16"/>
         <image name="scale-1" width="16" height="16"/>
     </resources>

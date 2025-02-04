@@ -124,7 +124,7 @@ static NSInteger strSort(id num1, id num2, void *context)
         imageRect.size.height = sprite.contentSize.height;
         imageRect.size.width = sprite.contentSize.width;
         tex = [[NSImage alloc] initWithCGImage:iRep size:imageRect.size];
-        [tex setFlipped:YES];
+//        [tex setFlipped:YES];
         [tex autorelease];
         
         imgFrame = tex;
@@ -137,7 +137,7 @@ static NSInteger strSort(id num1, id num2, void *context)
         
         tex = [[NSImage alloc] initWithSize:NSMakeSize([bitmapRep pixelsWide], [bitmapRep pixelsHigh])];
         [tex addRepresentation:bitmapRep];
-        [tex setFlipped:YES];
+//        [tex setFlipped:YES];
         [tex autorelease];
         
         NSDictionary* dictFrames = [dict objectForKey:@"frames"];
@@ -163,7 +163,7 @@ static NSInteger strSort(id num1, id num2, void *context)
         {
             imgFrame = [[NSImage alloc] initWithSize:rect.size];
         }
-        [imgFrame setFlipped:YES];
+//        [imgFrame setFlipped:YES];
         [imgFrame lockFocus];
         
         if (rotated)
@@ -172,11 +172,11 @@ static NSInteger strSort(id num1, id num2, void *context)
             [transform rotateByDegrees:-90];
             [transform concat];
             
-            [tex drawAtPoint:NSMakePoint(-rect.size.width, 0) fromRect:rect operation:NSCompositeCopy fraction:1];
+            [tex drawAtPoint:NSMakePoint(-rect.size.width, 0) fromRect:rect operation:NSCompositingOperationCopy fraction:1];
         }
         else
         {
-            [tex drawAtPoint:NSZeroPoint fromRect:rect operation:NSCompositeCopy fraction:1];
+            [tex drawAtPoint:NSZeroPoint fromRect:rect operation:NSCompositingOperationCopy fraction:1];
         }
         
         [imgFrame unlockFocus];

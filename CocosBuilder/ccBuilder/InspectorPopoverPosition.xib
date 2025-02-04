@@ -12,7 +12,7 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="1">
             <rect key="frame" x="0.0" y="0.0" width="149" height="58"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -45,12 +45,12 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <binding destination="-2" name="value" keyPath="posX" id="23"/>
                         <binding destination="-2" name="enabled" keyPath="readOnly" id="30">
                             <dictionary key="options">
                                 <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
-                        <binding destination="-2" name="value" keyPath="posX" id="23"/>
                         <outlet property="delegate" destination="-2" id="44"/>
                     </connections>
                 </textField>
@@ -64,12 +64,12 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <binding destination="-2" name="value" keyPath="posY" id="26"/>
                         <binding destination="-2" name="enabled" keyPath="readOnly" id="33">
                             <dictionary key="options">
                                 <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
-                        <binding destination="-2" name="value" keyPath="posY" id="26"/>
                         <outlet property="delegate" destination="-2" id="45"/>
                     </connections>
                 </textField>
@@ -100,12 +100,12 @@
                         </segments>
                     </segmentedCell>
                     <connections>
+                        <binding destination="-2" name="selectedTag" keyPath="positionType" id="40"/>
                         <binding destination="-2" name="enabled" keyPath="readOnly" id="43">
                             <dictionary key="options">
                                 <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
-                        <binding destination="-2" name="selectedTag" keyPath="positionType" id="40"/>
                     </connections>
                 </segmentedControl>
             </subviews>

@@ -59,6 +59,7 @@ static SequencerHandler* sharedSequencerHandler;
 @synthesize scroller;
 @synthesize scrollView;
 @synthesize contextKeyframe;
+@synthesize timeLineView;
 
 #pragma mark Init and singleton object
 
@@ -194,7 +195,29 @@ static SequencerHandler* sharedSequencerHandler;
 {
     float newOffset = currentSequence.timelineOffset;
     float visibleTime = [self visibleTimeArea];
+
+    switch ([scroller hitPart]) {
+        case NSScrollerNoPart:
+            // No action needed
+            break;
+        case NSScrollerDecrementPage:
+            // Scroll one "page" backward
+            newOffset -= 300 / currentSequence.timelineScale;
+            break;
+        case NSScrollerKnob:
+        case NSScrollerKnobSlot:
+            // Adjust offset based on the knob position
+            newOffset = scroller.doubleValue * (currentSequence.timelineLength - visibleTime);
+            break;
+        case NSScrollerIncrementPage:
+            // Scroll one "page" forward
+            newOffset += 300 / currentSequence.timelineScale;
+            break;
+        default:
+            break;
+    }
     
+/*
     switch ([scroller hitPart]) {
         case NSScrollerNoPart:
             break;
@@ -219,7 +242,7 @@ static SequencerHandler* sharedSequencerHandler;
         default:
             break;
     }
-    
+*/
     
     currentSequence.timelineOffset = newOffset;
 }
@@ -262,8 +285,9 @@ static SequencerHandler* sharedSequencerHandler;
 
 - (void)collapseOutlineView {
     for (int i = 0; i < outlineHierarchy.numberOfRows; i++) {
-        if ([outlineHierarchy itemAtRow:i] != [CCBGlobals globals].rootNode) {
-            [outlineHierarchy collapseItem:i collapseChildren:YES];
+        id item = [outlineHierarchy itemAtRow:i]; // Retrieve the actual item at the row
+        if (item != nil) {
+            [outlineHierarchy collapseItem:item collapseChildren:YES];
         }
     }
     [self redrawTimeline];
@@ -646,6 +670,17 @@ static SequencerHandler* sharedSequencerHandler;
 - (void) redrawTimeline:(BOOL) reload
 {
     [scrubberSelectionView setNeedsDisplay:YES];
+    [timeLineView setNeedsDisplay:YES];
+    [outlineHierarchy setNeedsDisplay:YES];
+    
+    [timeDisplay setNeedsDisplay:YES];
+    [timeScaleSlider setNeedsDisplay:YES];
+    [scroller setNeedsDisplay:YES];
+    [scrollView setNeedsDisplay:YES];
+    [timeLineView setNeedsDisplay:YES];
+//    [contextKeyframe setNeedsDisplay:YES];
+    
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"seqTimeLineView"  object:timeLineView];
     NSString* displayTime = [currentSequence currentDisplayTime];
     if (!displayTime) displayTime = @"00:00:00";
     [timeDisplay setStringValue:displayTime];

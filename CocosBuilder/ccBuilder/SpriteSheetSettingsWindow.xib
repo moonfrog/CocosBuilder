@@ -16,7 +16,7 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Sprite sheet settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -67,7 +67,7 @@ Gw
                         <rect key="frame" x="146" y="216" width="249" height="25"/>
                         <popUpButtonCell key="cell" type="push" title="PNG" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="20" id="18">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="19">
                                 <items>
                                     <menuItem title="PNG" state="on" id="20"/>
@@ -103,8 +103,8 @@ Gw
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <binding destination="-2" name="enabled" keyPath="iOSEnabled" id="703"/>
                             <binding destination="-2" name="value" keyPath="dither" id="83"/>
+                            <binding destination="-2" name="enabled" keyPath="iOSEnabled" id="703"/>
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="41">
@@ -114,8 +114,8 @@ Gw
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <binding destination="-2" name="enabled" keyPath="iOSEnabled" id="705"/>
                             <binding destination="-2" name="value" keyPath="compress" id="86"/>
+                            <binding destination="-2" name="enabled" keyPath="iOSEnabled" id="705"/>
                         </connections>
                     </button>
                     <box autoresizesSubviews="NO" verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="88">
@@ -170,12 +170,12 @@ Gw
                     </textField>
                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="191">
                         <rect key="frame" x="146" y="134" width="249" height="25"/>
-                        <popUpButtonCell key="cell" type="push" title="PNG" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="192">
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="192">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="193">
                                 <items>
-                                    <menuItem title="PNG" state="on" id="201"/>
+                                    <menuItem title="PNG" id="201"/>
                                     <menuItem title="PNG 8-bit" tag="1" id="660">
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                     </menuItem>
@@ -245,12 +245,12 @@ Gw
                     </textField>
                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="625">
                         <rect key="frame" x="146" y="56" width="249" height="25"/>
-                        <popUpButtonCell key="cell" type="push" title="PNG" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="626">
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="626">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="627">
                                 <items>
-                                    <menuItem title="PNG" state="on" id="629"/>
+                                    <menuItem title="PNG" id="629"/>
                                     <menuItem title="PNG 8-bit" tag="1" id="632">
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                     </menuItem>

@@ -54,15 +54,15 @@
     NSRect rowRect = NSMakeRect(cellFrame.origin.x, cellFrame.origin.y-1+row*kCCBSeqDefaultRowHeight, cellFrame.size.width, kCCBSeqDefaultRowHeight+1);
     if (row == 0)
     {
-        [imgRowBg0 drawInRect:rowRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+        [imgRowBg0 drawInRect:rowRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
     }
     else if (row == 1)
     {
-        [imgRowBg1 drawInRect:rowRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+        [imgRowBg1 drawInRect:rowRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
     }
     else
     {
-        [imgRowBgN drawInRect:rowRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+        [imgRowBgN drawInRect:rowRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
     }
 
     
@@ -115,7 +115,7 @@
                 }
                 
                 if (!didDrawInterpolation) {
-                    [imgInterpolVis drawInRect:interpolRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:fraction];
+                    [imgInterpolVis drawInRect:interpolRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:fraction];
                 }
             }
             
@@ -145,7 +145,7 @@
                 }
             }
             
-            [img drawAtPoint:NSMakePoint(cellFrame.origin.x + xPos-3, cellFrame.origin.y+kCCBSeqDefaultRowHeight*row+1) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+            [img drawAtPoint:NSMakePoint(cellFrame.origin.x + xPos-3, cellFrame.origin.y+kCCBSeqDefaultRowHeight*row+1) fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
         }
     }
 }
@@ -172,22 +172,26 @@
 - (void) drawPropertyRowForSeq:(SequencerSequence*) seq nodeProp:(SequencerNodeProperty*)nodeProp row:(int)row withFrame:(NSRect)cellFrame inView:(NSView*)controlView isChannel:(BOOL) isChannel
 {
     // Draw background
-    NSRect rowRect = NSMakeRect(cellFrame.origin.x, cellFrame.origin.y+row*kCCBSeqDefaultRowHeight, cellFrame.size.width, kCCBSeqDefaultRowHeight);
+//    NSRect rowRect = NSMakeRect(cellFrame.origin.x, cellFrame.origin.y+row*kCCBSeqDefaultRowHeight, cellFrame.size.width, kCCBSeqDefaultRowHeight);
+
+//    SequencerSequence* seq = [SequencerHandler sharedHandler].currentSequence;
+//    float xPos = [seq timeToPosition:seq.timelineLength];
+    NSRect rowRect = NSMakeRect(cellFrame.origin.x, cellFrame.origin.y+row*kCCBSeqDefaultRowHeight, [seq timeToPosition:seq.timelineLength], kCCBSeqDefaultRowHeight);
     if (isChannel)
     {
-        [imgRowBgChannel drawInRect:rowRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+        [imgRowBgChannel drawInRect:rowRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
     } 
     else if (row == 0)
     {
-        [imgRowBg0 drawInRect:rowRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+        [imgRowBg0 drawInRect:rowRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
     }
     else if (row == 1)
     {
-        [imgRowBg1 drawInRect:rowRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+        [imgRowBg1 drawInRect:rowRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
     }
     else
     {
-        [imgRowBgN drawInRect:rowRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+        [imgRowBgN drawInRect:rowRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
     }
     
     if (nodeProp)
@@ -232,7 +236,7 @@
                 }
                 
                 if (!didDrawInterpolation) {
-                    [imgInterpol drawInRect:interpolRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:fraction];
+                    [imgInterpol drawInRect:interpolRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:fraction];
                 }
                 
                 BOOL easeIn = keyframe.easing.hasEaseIn;
@@ -247,12 +251,12 @@
                     
                     if (easeIn)
                     {
-                        [imgEaseIn drawAtPoint:NSMakePoint(cellFrame.origin.x + xPos + 5, cellFrame.origin.y+kCCBSeqDefaultRowHeight*row+7) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:fraction];
+                        [imgEaseIn drawAtPoint:NSMakePoint(cellFrame.origin.x + xPos + 5, cellFrame.origin.y+kCCBSeqDefaultRowHeight*row+7) fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:fraction];
                     }
                     
                     if (easeOut)
                     {
-                        [imgEaseOut drawAtPoint:NSMakePoint(cellFrame.origin.x + xPosNext - 18, cellFrame.origin.y+kCCBSeqDefaultRowHeight*row+7) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:fraction];
+                        [imgEaseOut drawAtPoint:NSMakePoint(cellFrame.origin.x + xPosNext - 18, cellFrame.origin.y+kCCBSeqDefaultRowHeight*row+7) fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:fraction];
                     }
                 
                     [gc restoreGraphicsState];
@@ -272,11 +276,11 @@
             
             if (isChannel)
             {
-                [img drawAtPoint:NSMakePoint(cellFrame.origin.x + xPos-3, cellFrame.origin.y+kCCBSeqDefaultRowHeight*row) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+                [img drawAtPoint:NSMakePoint(cellFrame.origin.x + xPos-3, cellFrame.origin.y+kCCBSeqDefaultRowHeight*row) fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
             }
             else
             {
-                [img drawAtPoint:NSMakePoint(cellFrame.origin.x + xPos-3, cellFrame.origin.y+kCCBSeqDefaultRowHeight*row+2) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+                [img drawAtPoint:NSMakePoint(cellFrame.origin.x + xPos-3, cellFrame.origin.y+kCCBSeqDefaultRowHeight*row+2) fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
             }
         }
     }
@@ -313,7 +317,7 @@
         float time = [timeVal floatValue];
         int xPos = [seq timeToPosition:time];
         
-        [imgKeyframeHint drawAtPoint:NSMakePoint(cellFrame.origin.x + xPos -3,cellFrame.origin.y+3) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+        [imgKeyframeHint drawAtPoint:NSMakePoint(cellFrame.origin.x + xPos -3,cellFrame.origin.y+3) fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
     }
 }
 
@@ -322,10 +326,14 @@
     NSGraphicsContext* gc = [NSGraphicsContext currentContext];
     [gc saveGraphicsState];
     
+    SequencerSequence* seq = [SequencerHandler sharedHandler].currentSequence;
+    float xPos = [seq timeToPosition:seq.timelineLength];
+    
     NSRect clipRect = cellFrame;
     clipRect.origin.y -= 1;
     clipRect.size.height += 1;
-    clipRect.size.width += TIMELINE_PAD_PIXELS;
+    clipRect.size.width += (xPos+TIMELINE_PAD_PIXELS);
+    
     [NSBezierPath clipRect:clipRect];
     
     if (!imagesLoaded)

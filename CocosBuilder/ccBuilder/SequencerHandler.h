@@ -33,6 +33,7 @@
 @class SequencerSequence;
 @class SequencerScrubberSelectionView;
 @class SequencerKeyframe;
+@class SequencerTimelineView;
 
 @interface SequencerHandler : NSObject <NSOutlineViewDataSource, NSOutlineViewDelegate>
 {
@@ -48,7 +49,8 @@
     NSSlider* timeScaleSlider;
     NSScroller* scroller;
     NSScrollView* scrollView;
-    
+    SequencerTimelineView* timeLineView;
+
     SequencerKeyframe* contextKeyframe;
 }
 
@@ -60,6 +62,7 @@
 @property (nonatomic,retain) NSSlider* timeScaleSlider;
 @property (nonatomic,retain) NSScroller* scroller;
 @property (nonatomic,retain) NSScrollView* scrollView;
+@property (nonatomic,retain) SequencerTimelineView* timeLineView;
 //@property (nonatomic,retain) NSMutableArray* sequences;
 
 @property (nonatomic,readonly) NSOutlineView* outlineHierarchy;

@@ -13,7 +13,7 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Publish Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -58,8 +58,8 @@ DQ
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="-2" name="enabled" keyPath="projectSettings.publishEnablediPhone" id="232"/>
                             <binding destination="-2" name="value" keyPath="projectSettings.publishDirectory" id="35"/>
+                            <binding destination="-2" name="enabled" keyPath="projectSettings.publishEnablediPhone" id="232"/>
                         </connections>
                     </textField>
                     <button imageHugsTitle="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="24">
@@ -110,12 +110,12 @@ DQ
                     <popUpButton imageHugsTitle="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="52">
                         <rect key="frame" x="363" y="102" width="100" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="53">
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="53">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="smallSystem"/>
                             <menu key="menu" title="OtherViews" id="54">
                                 <items>
-                                    <menuItem title="Item 1" state="on" id="55"/>
+                                    <menuItem title="Item 1" id="55"/>
                                     <menuItem title="Item 2" id="56"/>
                                     <menuItem title="Item 3" id="57"/>
                                 </items>
@@ -271,8 +271,8 @@ DQ
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="-2" name="enabled" keyPath="projectSettings.publishEnabledAndroid" id="253"/>
                             <binding destination="-2" name="value" keyPath="projectSettings.publishDirectoryAndroid" id="229"/>
+                            <binding destination="-2" name="enabled" keyPath="projectSettings.publishEnabledAndroid" id="253"/>
                         </connections>
                     </textField>
                     <button tag="1" imageHugsTitle="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="168">
@@ -419,8 +419,8 @@ DQ
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="-2" name="enabled" keyPath="projectSettings.publishEnabledHTML5" id="279"/>
                             <binding destination="-2" name="value" keyPath="projectSettings.publishDirectoryHTML5" id="333"/>
+                            <binding destination="-2" name="enabled" keyPath="projectSettings.publishEnabledHTML5" id="279"/>
                         </connections>
                     </textField>
                     <button tag="2" imageHugsTitle="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="189">

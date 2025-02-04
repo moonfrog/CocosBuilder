@@ -68,7 +68,7 @@
     {
         int ch = [str characterAtIndex:i] - '0';
         
-        [imgNumbers drawAtPoint:NSMakePoint(pt.x+i*6, pt.y) fromRect:numberRects[ch] operation:NSCompositeSourceOver fraction:1];
+        [imgNumbers drawAtPoint:NSMakePoint(pt.x+i*6, pt.y) fromRect:numberRects[ch] operation:NSCompositingOperationSourceOver fraction:1];
     }
 }
 
@@ -78,7 +78,7 @@
     SequencerSequence* seq = [SequencerHandler sharedHandler].currentSequence;
     
     // Draw background
-    [imgBg drawInRect:[self bounds] fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+    [imgBg drawInRect:[self bounds] fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
     
     // Retrieve timeline offset/scale
     float tlScale = seq.timelineScale;
@@ -103,7 +103,7 @@
         if (step % divisions == 0)
         {
             // Major marker
-            [imgMarkMajor drawAtPoint:NSMakePoint(xPos, 0) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+            [imgMarkMajor drawAtPoint:NSMakePoint(xPos, 0) fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
             
             [self drawNumber:secondMarker at:NSMakePoint(xPos+3, 1)];
             
@@ -112,7 +112,7 @@
         else
         {
             // Minor marker
-            [imgMarkMinor drawAtPoint:NSMakePoint(xPos, 0) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+            [imgMarkMinor drawAtPoint:NSMakePoint(xPos, 0) fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
         }
         
         step++;
@@ -121,13 +121,13 @@
     
     // Draw end marker
     xPos = roundf([seq timeToPosition: seq.timelineLength]);
-    [imgEndmarker drawAtPoint:NSMakePoint(xPos, 0) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+    [imgEndmarker drawAtPoint:NSMakePoint(xPos, 0) fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
 
     // draw start marker
     float xStartPos = [seq timeToPosition:0] - TIMELINE_PAD_PIXELS;
     [[NSGraphicsContext currentContext] saveGraphicsState];
     NSRectClip(NSMakeRect(0, 0, TIMELINE_PAD_PIXELS+1, self.bounds.size.height));
-    [imgStartmarker drawInRect:NSMakeRect(xStartPos, 0, TIMELINE_PAD_PIXELS+1, self.bounds.size.height) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+    [imgStartmarker drawInRect:NSMakeRect(xStartPos, 0, TIMELINE_PAD_PIXELS+1, self.bounds.size.height) fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
     [[NSGraphicsContext currentContext] restoreGraphicsState];
 
 }

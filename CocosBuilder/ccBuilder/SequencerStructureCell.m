@@ -44,7 +44,7 @@
     if (!node)
     {
         NSRect rowRect = NSMakeRect(0, /*cellFrame.origin.x,*/ cellFrame.origin.y, cellFrame.size.width+16, kCCBSeqDefaultRowHeight);
-        [imgRowBgChannel drawInRect:rowRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+        [imgRowBgChannel drawInRect:rowRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
         [super drawWithFrame:cellFrame inView:controlView];
         return;
     }
@@ -64,7 +64,7 @@
     
         // Right alignment
         NSMutableParagraphStyle *style = [[[NSMutableParagraphStyle alloc] init] autorelease];
-        [style setAlignment:NSRightTextAlignment];
+        [style setAlignment:NSTextAlignmentRight];
     
         // Setup attributes
         NSMutableDictionary* attrib = [NSMutableDictionary dictionary];
@@ -111,11 +111,11 @@
             
             if (hasKeyframes)
             {
-                [attrib setObject:[NSFont boldSystemFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]] forKey:NSFontAttributeName];
+                [attrib setObject:[NSFont boldSystemFontOfSize:[NSFont systemFontSizeForControlSize:NSControlSizeSmall]] forKey:NSFontAttributeName];
             }
             else
             {
-                [attrib setObject:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]] forKey:NSFontAttributeName];
+                [attrib setObject:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSControlSizeSmall]] forKey:NSFontAttributeName];
             }
             
             NSString* displayName = [[node.plugIn.nodePropertiesDict objectForKey:prop] objectForKey:@"displayName"];
@@ -138,7 +138,7 @@
 
 - (BOOL) isEditable
 {
-    NSLog(@"isEditable");
+//    NSLog(@"isEditable");
     return YES;
 }
 

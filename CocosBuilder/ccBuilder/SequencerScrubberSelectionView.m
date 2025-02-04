@@ -53,7 +53,11 @@
 
 - (float) activeWidth
 {
-    return [[SequencerHandler sharedHandler].outlineHierarchy tableColumnWithIdentifier:@"sequencer"].width;
+    SequencerSequence* seq = [SequencerHandler sharedHandler].currentSequence;
+    float timeline_len = [seq timeToPosition:seq.timelineLength];
+    return timeline_len+20;
+    
+//    return [[SequencerHandler sharedHandler].outlineHierarchy tableColumnWithIdentifier:@"sequencer"].width;
 }
 
 - (int) yMousePosToRow:(float)y
@@ -229,10 +233,10 @@
     float yPos = self.bounds.size.height - imgScrubHandle.size.height;
     
     // Handle
-    [imgScrubHandle drawAtPoint:NSMakePoint(currentPos-3, yPos-1) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+    [imgScrubHandle drawAtPoint:NSMakePoint(currentPos-3, yPos-1) fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
     
     // Line
-    [imgScrubLine drawInRect:NSMakeRect(currentPos, 0, 2, yPos) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
+    [imgScrubLine drawInRect:NSMakeRect(currentPos, 0, 2, yPos) fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1];
 }
 
 - (void) updateAutoScrollHorizontal
