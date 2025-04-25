@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # This script is used by Xcode to copy the built app and plug-ins to the build directory
-
+exit 0
 COCOSBUILDER_APP_BUILD_DIRECTORY=$1
 COCOSBUILDER_REGULAR_DIRECTORY=$2
 COCOSBUILDER_APP_BUNDLE=$3
