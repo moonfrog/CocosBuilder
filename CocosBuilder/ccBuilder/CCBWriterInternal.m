@@ -426,7 +426,9 @@
         // Skip default values
         if ([serializedValue isEqual:defaultSerialization] && !hasKeyframes)
         {
-            continue;
+            // (amudaliar): force anchorPoint to serialise even if its default value.
+            if (![name isEqualToString:@"anchorPoint"])
+                continue;
         }
         
         NSMutableDictionary* prop = [NSMutableDictionary dictionary];
