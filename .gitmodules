@@ -9,4 +9,4 @@
 	url = git@github.com:moonfrog/fragaria-cocosbuilder.git
 [submodule "Examples/CocosBuilderExample/libs/CCBReader"]
 	path = Examples/CocosBuilderExample/libs/CCBReader
-	url = git://github.com/cocos2d/CCBReader.git
+	url = https://github.com/cocos2d/CCBReader.git
