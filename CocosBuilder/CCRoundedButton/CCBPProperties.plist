@@ -64,6 +64,16 @@
         </dict>
         <dict>
             <key>displayName</key>
+            <string>Start Opacity</string>
+            <key>type</key>
+            <string>Byte</string>
+            <key>name</key>
+            <string>startOpacity</string>
+            <key>default</key>
+            <integer>255</integer>
+        </dict>
+        <dict>
+            <key>displayName</key>
             <string>End Color</string>
             <key>type</key>
             <string>Color3</string>
@@ -75,6 +85,16 @@
                 <integer>200</integer>
                 <integer>200</integer>
             </array>
+        </dict>
+        <dict>
+            <key>displayName</key>
+            <string>End Opacity</string>
+            <key>type</key>
+            <string>Byte</string>
+            <key>name</key>
+            <string>endOpacity</string>
+            <key>default</key>
+            <integer>255</integer>
         </dict>
         <dict>
             <key>displayName</key>

@@ -28,7 +28,9 @@
 {
     float radius;
     ccColor3B startColor;
+    GLubyte startOpacity;
     ccColor3B endColor;
+    GLubyte endOpacity;
     CGPoint gradientVector;
     float outlineWidth;
     ccColor3B outlineColor;
@@ -47,7 +49,9 @@
 
 @property (nonatomic, assign) float radius;
 @property (nonatomic, assign) ccColor3B startColor;
+@property (nonatomic, assign) GLubyte startOpacity;
 @property (nonatomic, assign) ccColor3B endColor;
+@property (nonatomic, assign) GLubyte endOpacity;
 @property (nonatomic, assign) CGPoint gradientVector;
 @property (nonatomic, assign) float outlineWidth;
 @property (nonatomic, assign) ccColor3B outlineColor;

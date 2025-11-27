@@ -31,7 +31,9 @@
 
 @synthesize radius;
 @synthesize startColor;
+@synthesize startOpacity;
 @synthesize endColor;
+@synthesize endOpacity;
 @synthesize gradientVector;
 @synthesize outlineWidth;
 @synthesize outlineColor;
@@ -59,7 +61,9 @@
     // Default values to match the plist defaults
     radius = 10.0f;
     startColor = ccc3(255, 255, 255);
+    startOpacity = 255;
     endColor = ccc3(200, 200, 200);
+    endOpacity = 255;
     gradientVector = ccp(0, 1);
     outlineWidth = 0.0f;
     outlineColor = ccc3(0, 0, 0);
@@ -227,7 +231,7 @@
         glVertices[i] = (ccVertex2F){ (GLfloat)vertices[i].x, (GLfloat)vertices[i].y };
         
         if (h == 0) {
-            colors[i] = ccc4f(startColor.r/255.0f, startColor.g/255.0f, startColor.b/255.0f, 1.0f);
+            colors[i] = ccc4f(startColor.r/255.0f, startColor.g/255.0f, startColor.b/255.0f, startOpacity/255.0f);
         } else {
             // Normalize position to [-1, 1]
             float nx = (vertices[i].x - center.x) / (size.width/2);
@@ -240,7 +244,7 @@
             colors[i].r = (endColor.r + (startColor.r - endColor.r) * t) / 255.0f;
             colors[i].g = (endColor.g + (startColor.g - endColor.g) * t) / 255.0f;
             colors[i].b = (endColor.b + (startColor.b - endColor.b) * t) / 255.0f;
-            colors[i].a = 1.0f;
+            colors[i].a = (endOpacity + (startOpacity - endOpacity) * t) / 255.0f;
         }
     }
     
@@ -354,10 +358,11 @@
         int layers = 15;
         for (int layer = 0; layer < layers; layer++) {
             float t = (float)layer / (float)layers;
-            ccColor3B color;
-            color.r = startColor.r + t * (endColor.r - startColor.r);
-            color.g = startColor.g + t * (endColor.g - startColor.g);
-            color.b = startColor.b + t * (endColor.b - startColor.b);
+            ccColor4F color;
+            color.r = (startColor.r + t * (endColor.r - startColor.r)) / 255.0f;
+            color.g = (startColor.g + t * (endColor.g - startColor.g)) / 255.0f;
+            color.b = (startColor.b + t * (endColor.b - startColor.b)) / 255.0f;
+            color.a = (startOpacity + t * (endOpacity - startOpacity)) / 255.0f;
             
             float layerRadius = r * (1.0f - t);
             int segments = 30;
@@ -366,7 +371,7 @@
                 float angle = (float)i / (float)segments * M_PI * 2.0f;
                 vertices[i] = ccp(center.x + cos(angle) * layerRadius, center.y + sin(angle) * layerRadius);
             }
-            ccDrawSolidPoly(vertices, segments, ccc4f(color.r/255.0f, color.g/255.0f, color.b/255.0f, 1.0f));
+            ccDrawSolidPoly(vertices, segments, color);
             free(vertices);
         }
     } else {
@@ -409,10 +414,11 @@
         int layers = 10;
         for (int layer = 0; layer < layers; layer++) {
             float t = (float)layer / (float)layers;
-            ccColor3B color;
-            color.r = startColor.r + t * (endColor.r - startColor.r);
-            color.g = startColor.g + t * (endColor.g - startColor.g);
-            color.b = startColor.b + t * (endColor.b - startColor.b);
+            ccColor4F color;
+            color.r = (startColor.r + t * (endColor.r - startColor.r)) / 255.0f;
+            color.g = (startColor.g + t * (endColor.g - startColor.g)) / 255.0f;
+            color.b = (startColor.b + t * (endColor.b - startColor.b)) / 255.0f;
+            color.a = (startOpacity + t * (endOpacity - startOpacity)) / 255.0f;
             
             float layerRadius = r * (1.0f - t);
             CGPoint layerVerts[7];
@@ -420,7 +426,7 @@
                 float angle = M_PI / 3.0f * i - M_PI / 2.0f;
                 layerVerts[i] = ccp(center.x + cos(angle) * layerRadius, center.y + sin(angle) * layerRadius);
             }
-            ccDrawSolidPoly(layerVerts, 7, ccc4f(color.r/255.0f, color.g/255.0f, color.b/255.0f, 1.0f));
+            ccDrawSolidPoly(layerVerts, 7, color);
         }
     } else {
         // Linear gradient using drawPolyGradient
@@ -454,10 +460,11 @@
         int layers = 10;
         for (int layer = 0; layer < layers; layer++) {
             float t = (float)layer / (float)layers;
-            ccColor3B color;
-            color.r = startColor.r + t * (endColor.r - startColor.r);
-            color.g = startColor.g + t * (endColor.g - startColor.g);
-            color.b = startColor.b + t * (endColor.b - startColor.b);
+            ccColor4F color;
+            color.r = (startColor.r + t * (endColor.r - startColor.r)) / 255.0f;
+            color.g = (startColor.g + t * (endColor.g - startColor.g)) / 255.0f;
+            color.b = (startColor.b + t * (endColor.b - startColor.b)) / 255.0f;
+            color.a = (startOpacity + t * (endOpacity - startOpacity)) / 255.0f;
             
             float layerSize = s * (1.0f - t);
             CGPoint vertices[5] = {
@@ -467,7 +474,7 @@
                 ccp(center.x - layerSize/2, center.y),
                 ccp(center.x, center.y + layerSize/2)
             };
-            ccDrawSolidPoly(vertices, 5, ccc4f(color.r/255.0f, color.g/255.0f, color.b/255.0f, 1.0f));
+            ccDrawSolidPoly(vertices, 5, color);
         }
     } else {
         // Linear gradient using drawPolyGradient
@@ -506,10 +513,11 @@
         int layers = 10;
         for (int layer = 0; layer < layers; layer++) {
             float t = (float)layer / (float)layers;
-            ccColor3B color;
-            color.r = startColor.r + t * (endColor.r - startColor.r);
-            color.g = startColor.g + t * (endColor.g - startColor.g);
-            color.b = startColor.b + t * (endColor.b - startColor.b);
+            ccColor4F color;
+            color.r = (startColor.r + t * (endColor.r - startColor.r)) / 255.0f;
+            color.g = (startColor.g + t * (endColor.g - startColor.g)) / 255.0f;
+            color.b = (startColor.b + t * (endColor.b - startColor.b)) / 255.0f;
+            color.a = (startOpacity + t * (endOpacity - startOpacity)) / 255.0f;
             
             float layerRadius = r * (1.0f - t);
             CGPoint vertices[11];
@@ -519,7 +527,7 @@
                 vertices[i] = ccp(center.x + cos(angle) * currentR, center.y + sin(angle) * currentR);
             }
             vertices[10] = vertices[0];
-            ccDrawSolidPoly(vertices, 11, ccc4f(color.r/255.0f, color.g/255.0f, color.b/255.0f, 1.0f));
+            ccDrawSolidPoly(vertices, 11, color);
         }
     } else {
         // Linear gradient using drawPolyGradient
