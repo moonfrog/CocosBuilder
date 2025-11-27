@@ -169,6 +169,10 @@
         case 5: // PILL
             [self drawFilledPillGradient:CGPointZero size:size];
             break;
+        case 6: // TRIANGLE
+            [self drawFilledTriangleGradient:ccp(size.width/2, size.height/2) 
+                                      radius:MIN(size.width, size.height)/2];
+            break;
     }
     
     // Draw outline if width > 0
@@ -197,6 +201,10 @@
                 break;
             case 5: // PILL
                 [self drawPillOutline:CGPointZero size:size];
+                break;
+            case 6: // TRIANGLE
+                [self drawTriangleOutline:ccp(size.width/2, size.height/2) 
+                                   radius:MIN(size.width, size.height)/2];
                 break;
         }
     }
@@ -570,6 +578,121 @@
     [self drawFilledRoundedRectGradient:origin size:size radius:r];
 }
 
+- (void)drawFilledTriangleGradient:(CGPoint)center radius:(float)r
+{
+    float gradMag = sqrt(gradientVector.x * gradientVector.x + gradientVector.y * gradientVector.y);
+    BOOL isRadial = (gradMag < 0.01f);
+    
+    if (isRadial) {
+        // Radial gradient: concentric rounded triangles
+        int layers = 15;
+        for (int layer = 0; layer < layers; layer++) {
+            float t = (float)layer / (float)layers;
+            ccColor4F color;
+            color.r = (startColor.r + t * (endColor.r - startColor.r)) / 255.0f;
+            color.g = (startColor.g + t * (endColor.g - startColor.g)) / 255.0f;
+            color.b = (startColor.b + t * (endColor.b - startColor.b)) / 255.0f;
+            color.a = (startOpacity + t * (endOpacity - startOpacity)) / 255.0f;
+            
+            float layerRadius = r * (1.0f - t);
+            float layerCornerRadius = self.radius * (1.0f - t);
+            if (layerCornerRadius > layerRadius / 2.0f) layerCornerRadius = layerRadius / 2.0f;
+            
+            // Generate vertices for this layer
+            CGPoint corners[3];
+            for (int i = 0; i < 3; i++) {
+                float angle = M_PI / 2.0f + i * (2.0f * M_PI / 3.0f);
+                corners[i] = ccp(center.x + cos(angle) * layerRadius, center.y + sin(angle) * layerRadius);
+            }
+            
+            if (layerCornerRadius < 0.5f) {
+                ccDrawSolidPoly(corners, 3, color);
+                continue;
+            }
+            
+            int segmentsPerCorner = 15;
+            int totalVerts = 3 * segmentsPerCorner;
+            CGPoint *vertices = malloc(sizeof(CGPoint) * totalVerts);
+            int vIndex = 0;
+            
+            for (int i = 0; i < 3; i++) {
+                CGPoint p = corners[i];
+                CGPoint v = ccpSub(p, center);
+                float len = ccpLength(v);
+                CGPoint dir = ccpMult(v, 1.0f/len);
+                CGPoint arcCenter = ccpSub(p, ccpMult(dir, 2.0f * layerCornerRadius));
+                
+                float cornerAngle = M_PI / 2.0f + i * (2.0f * M_PI / 3.0f);
+                float startAngle = cornerAngle + M_PI - M_PI/3.0f;
+                float endAngle = cornerAngle + M_PI + M_PI/3.0f;
+                
+                for (int j = 0; j < segmentsPerCorner; j++) {
+                    float aT = (float)j / (segmentsPerCorner - 1);
+                    float a = startAngle + aT * (endAngle - startAngle);
+                    vertices[vIndex++] = ccp(arcCenter.x + cos(a) * layerCornerRadius, arcCenter.y + sin(a) * layerCornerRadius);
+                }
+            }
+            ccDrawSolidPoly(vertices, totalVerts, color);
+            free(vertices);
+        }
+        return;
+    }
+
+    // Linear Gradient Logic (existing)
+    // Triangle vertices (equilateral pointing up)
+    CGPoint corners[3];
+    for (int i = 0; i < 3; i++) {
+        // Angles: 90, 210, 330
+        float angle = M_PI / 2.0f + i * (2.0f * M_PI / 3.0f);
+        corners[i] = ccp(center.x + cos(angle) * r, center.y + sin(angle) * r);
+    }
+    
+    // Rounded corners logic
+    float cornerRadius = self.radius;
+    if (cornerRadius > r / 2.0f) cornerRadius = r / 2.0f;
+    if (cornerRadius < 0) cornerRadius = 0;
+    
+    if (cornerRadius < 1.0f) {
+        // Sharp triangle
+        [self drawPolyGradient:corners count:3];
+        return;
+    }
+    
+    // Generate rounded vertices
+    int segmentsPerCorner = 15;
+    int totalVerts = 3 * segmentsPerCorner + 2; // +2 for center/close
+    CGPoint *vertices = malloc(sizeof(CGPoint) * totalVerts);
+    vertices[0] = center;
+    int vIndex = 1;
+    
+    for (int i = 0; i < 3; i++) {
+        CGPoint p = corners[i];
+        // Vector from center to corner
+        CGPoint v = ccpSub(p, center);
+        float len = ccpLength(v);
+        CGPoint dir = ccpMult(v, 1.0f/len); // Normalized direction to corner
+        
+        // Center of the arc is inward along the angle bisector (which is just -dir)
+        // Distance from corner to arc center is 2 * cornerRadius
+        // So ArcCenter = Corner - Dir * (2 * cornerRadius)
+        CGPoint arcCenter = ccpSub(p, ccpMult(dir, 2.0f * cornerRadius));
+        
+        float cornerAngle = M_PI / 2.0f + i * (2.0f * M_PI / 3.0f); // 90, 210, 330
+        float startAngle = cornerAngle + M_PI - M_PI/3.0f; // +180 - 60 = +120
+        float endAngle = cornerAngle + M_PI + M_PI/3.0f;   // +180 + 60 = +240
+        
+        for (int j = 0; j < segmentsPerCorner; j++) {
+            float t = (float)j / (segmentsPerCorner - 1);
+            float a = startAngle + t * (endAngle - startAngle);
+            vertices[vIndex++] = ccp(arcCenter.x + cos(a) * cornerRadius, arcCenter.y + sin(a) * cornerRadius);
+        }
+    }
+    vertices[vIndex] = vertices[1]; // Close
+    
+    [self drawPolyGradient:vertices count:vIndex+1];
+    free(vertices);
+}
+
 - (void)drawFilledPill:(CGPoint)origin size:(CGSize)size color:(ccColor4F)color
 {
     float r;
@@ -590,6 +713,51 @@
         r = size.width / 2.0f;
     }
     [self drawRoundedRectOutline:origin size:size radius:r];
+}
+
+- (void)drawTriangleOutline:(CGPoint)center radius:(float)r
+{
+    // Same logic as filled triangle but using ccDrawPoly
+    CGPoint corners[3];
+    for (int i = 0; i < 3; i++) {
+        float angle = M_PI / 2.0f + i * (2.0f * M_PI / 3.0f);
+        corners[i] = ccp(center.x + cos(angle) * r, center.y + sin(angle) * r);
+    }
+    
+    float cornerRadius = self.radius;
+    if (cornerRadius > r / 2.0f) cornerRadius = r / 2.0f;
+    if (cornerRadius < 0) cornerRadius = 0;
+    
+    if (cornerRadius < 1.0f) {
+        ccDrawPoly(corners, 3, YES);
+        return;
+    }
+    
+    int segmentsPerCorner = 15;
+    int totalVerts = 3 * segmentsPerCorner;
+    CGPoint *vertices = malloc(sizeof(CGPoint) * totalVerts);
+    int vIndex = 0;
+    
+    for (int i = 0; i < 3; i++) {
+        CGPoint p = corners[i];
+        CGPoint v = ccpSub(p, center);
+        float len = ccpLength(v);
+        CGPoint dir = ccpMult(v, 1.0f/len);
+        CGPoint arcCenter = ccpSub(p, ccpMult(dir, 2.0f * cornerRadius));
+        
+        float cornerAngle = M_PI / 2.0f + i * (2.0f * M_PI / 3.0f);
+        float startAngle = cornerAngle + M_PI - M_PI/3.0f;
+        float endAngle = cornerAngle + M_PI + M_PI/3.0f;
+        
+        for (int j = 0; j < segmentsPerCorner; j++) {
+            float t = (float)j / (segmentsPerCorner - 1);
+            float a = startAngle + t * (endAngle - startAngle);
+            vertices[vIndex++] = ccp(arcCenter.x + cos(a) * cornerRadius, arcCenter.y + sin(a) * cornerRadius);
+        }
+    }
+    
+    ccDrawPoly(vertices, totalVerts, YES);
+    free(vertices);
 }
 
 @end

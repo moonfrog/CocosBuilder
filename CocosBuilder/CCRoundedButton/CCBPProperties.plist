@@ -32,7 +32,7 @@
             <key>name</key>
             <string>shape</string>
             <key>extra</key>
-            <string>Rounded Rect|0|Circle|1|Hexagon|2|Diamond|3|Star|4|Pill|5</string>
+            <string>Rounded Rect|0|Circle|1|Hexagon|2|Diamond|3|Star|4|Pill|5|Triangle|6</string>
         </dict>
         
         <!-- Radius -->
