@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>inheritsFrom</key>
+	<string>CCControlButton</string>
+	<key>canHaveChildren</key>
+	<false/>
+	<key>className</key>
+	<string>RoundedButton</string>
+	<key>editorClassName</key>
+	<string>CCRoundedButton</string>
+	<key>properties</key>
+	<array>
+		<dict>
+			<key>displayName</key>
+			<string>RoundedButton</string>
+			<key>name</key>
+			<string>RoundedButton</string>
+			<key>type</key>
+			<string>Separator</string>
+			<key>dontSetInEditor</key>
+			<true/>
+		</dict>
+        
+        <!-- Shape -->
+        <dict>
+            <key>displayName</key>
+            <string>Shape</string>
+            <key>type</key>
+            <string>IntegerLabeled</string>
+            <key>name</key>
+            <string>shape</string>
+            <key>extra</key>
+            <string>Rounded Rect|0|Circle|1|Hexagon|2|Diamond|3|Star|4|Pill|5</string>
+        </dict>
+        
+        <!-- Radius -->
+		<dict>
+			<key>displayName</key>
+			<string>Corner Radius</string>
+			<key>type</key>
+			<string>Float</string>
+			<key>name</key>
+			<string>radius</string>
+			<key>default</key>
+			<real>10</real>
+		</dict>
+        
+        <!-- Gradient Colors -->
+        <dict>
+            <key>displayName</key>
+            <string>Start Color</string>
+            <key>type</key>
+            <string>Color3</string>
+            <key>name</key>
+            <string>startColor</string>
+            <key>default</key>
+            <array>
+                <integer>255</integer>
+                <integer>255</integer>
+                <integer>255</integer>
+            </array>
+        </dict>
+        <dict>
+            <key>displayName</key>
+            <string>End Color</string>
+            <key>type</key>
+            <string>Color3</string>
+            <key>name</key>
+            <string>endColor</string>
+            <key>default</key>
+            <array>
+                <integer>200</integer>
+                <integer>200</integer>
+                <integer>200</integer>
+            </array>
+        </dict>
+        <dict>
+            <key>displayName</key>
+            <string>Gradient Direction</string>
+            <key>type</key>
+            <string>Point</string>
+            <key>name</key>
+            <string>gradientVector</string>
+            <key>default</key>
+            <array>
+                <real>0</real>
+                <real>1</real>
+            </array>
+        </dict>
+
+        <!-- Outline -->
+        <dict>
+            <key>displayName</key>
+            <string>Outline</string>
+            <key>type</key>
+            <string>SeparatorSub</string>
+        </dict>
+        <dict>
+            <key>displayName</key>
+            <string>Width</string>
+            <key>type</key>
+            <string>Float</string>
+            <key>name</key>
+            <string>outlineWidth</string>
+            <key>default</key>
+            <real>0</real>
+        </dict>
+        <dict>
+            <key>displayName</key>
+            <string>Color</string>
+            <key>type</key>
+            <string>Color3</string>
+            <key>name</key>
+            <string>outlineColor</string>
+            <key>default</key>
+            <array>
+                <integer>0</integer>
+                <integer>0</integer>
+                <integer>0</integer>
+            </array>
+        </dict>
+
+        <!-- Shadow -->
+        <dict>
+            <key>displayName</key>
+            <string>Shadow</string>
+            <key>type</key>
+            <string>SeparatorSub</string>
+        </dict>
+        <dict>
+            <key>displayName</key>
+            <string>Color</string>
+            <key>type</key>
+            <string>Color3</string>
+            <key>name</key>
+            <string>shadowColor</string>
+            <key>default</key>
+            <array>
+                <integer>0</integer>
+                <integer>0</integer>
+                <integer>0</integer>
+            </array>
+        </dict>
+        <dict>
+            <key>displayName</key>
+            <string>Offset</string>
+            <key>type</key>
+            <string>Point</string>
+            <key>name</key>
+            <string>shadowOffset</string>
+            <key>default</key>
+            <array>
+                <real>2</real>
+                <real>-2</real>
+            </array>
+        </dict>
+        <dict>
+            <key>displayName</key>
+            <string>Blur Radius</string>
+            <key>type</key>
+            <string>Float</string>
+            <key>name</key>
+            <string>shadowBlur</string>
+            <key>default</key>
+            <real>0</real>
+        </dict>
+
+        <!-- Pressed State -->
+        <dict>
+            <key>displayName</key>
+            <string>Pressed State</string>
+            <key>type</key>
+            <string>SeparatorSub</string>
+        </dict>
+        <dict>
+            <key>displayName</key>
+            <string>Auto Darken</string>
+            <key>type</key>
+            <string>Check</string>
+            <key>name</key>
+            <string>autoDarkenOnPress</string>
+            <key>default</key>
+            <true/>
+        </dict>
+        <dict>
+            <key>displayName</key>
+            <string>Pressed Scale</string>
+            <key>type</key>
+            <string>Float</string>
+            <key>name</key>
+            <string>pressedScale</string>
+            <key>default</key>
+            <real>0.95</real>
+        </dict>
+        <dict>
+            <key>displayName</key>
+            <string>Pressed Start Color</string>
+            <key>type</key>
+            <string>Color3</string>
+            <key>name</key>
+            <string>pressedStartColor</string>
+            <key>default</key>
+            <array>
+                <integer>200</integer>
+                <integer>200</integer>
+                <integer>200</integer>
+            </array>
+        </dict>
+        <dict>
+            <key>displayName</key>
+            <string>Pressed End Color</string>
+            <key>type</key>
+            <string>Color3</string>
+            <key>name</key>
+            <string>pressedEndColor</string>
+            <key>default</key>
+            <array>
+                <integer>150</integer>
+                <integer>150</integer>
+                <integer>150</integer>
+            </array>
+        </dict>
+	</array>
+</dict>
+</plist>
