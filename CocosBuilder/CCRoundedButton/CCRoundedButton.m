@@ -23,6 +23,9 @@
  */
 
 #import "CCRoundedButton.h"
+#import "CCShaderCache.h"
+#import "CCGLProgram.h"
+#import "ccGLStateCache.h"
 
 @implementation CCRoundedButton
 
@@ -69,6 +72,9 @@
     pressedEndColor = ccc3(150, 150, 150);
     shape = 0; // ROUNDED_RECT
     
+    // Initialize shader program for drawing
+    self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
+    
     return self;
 }
 
@@ -81,26 +87,84 @@
         size = CGSizeMake(100, 40); // Default size
     }
     
-    // Draw rounded rectangle with gradient
-    [self drawRoundedRectWithSize:size];
+    // Draw shadow first (behind button)
+    if (self.shadowBlur > 0 && self.shadowColor.r + self.shadowColor.g + self.shadowColor.b > 0) {
+        [self drawShadow:size];
+    }
+    
+    // Draw the button shape with gradient and outline
+    [self drawButtonShape:size];
 }
 
-- (void)drawRoundedRectWithSize:(CGSize)size
+- (void)drawShadow:(CGSize)size
 {
-    float r = MIN(radius, MIN(size.width, size.height) / 2.0f);
-    
-    // Enable blending for colors
+    // Approximate shadow with semi-transparent shapes
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-    // Draw filled rounded rectangle with gradient
-    if (shape == 0) { // ROUNDED_RECT
-        [self drawFilledRoundedRect:CGPointZero size:size radius:r];
-    } else if (shape == 1) { // CIRCLE
-        [self drawFilledCircle:CGPointMake(size.width/2, size.height/2) radius:MIN(size.width, size.height)/2];
-    } else {
-        // For other shapes, draw simple rounded rect for now
-        [self drawFilledRoundedRect:CGPointZero size:size radius:r];
+    CGPoint offset = self.shadowOffset;
+    float blur = self.shadowBlur;
+    
+    // Draw multiple layers for blur effect
+    int layers = MIN(5, (int)blur);
+    for (int i = 0; i < layers; i++) {
+        float t = (float)i / (float)layers;
+        float alpha = (self.shadowColor.r / 255.0f) * (1.0f - t) * 0.3f;
+        
+        ccColor4F shadowCol = ccc4f(0, 0, 0, alpha);
+        CGPoint layerOffset = ccp(offset.x * (1.0f + t), offset.y * (1.0f + t));
+        
+        switch (shape) {
+            case 0: // ROUNDED_RECT
+                [self drawFilledRoundedRect:layerOffset size:size radius:radius color:shadowCol];
+                break;
+            case 1: // CIRCLE
+                [self drawFilledCircle:ccp(size.width/2 + layerOffset.x, size.height/2 + layerOffset.y) 
+                                radius:MIN(size.width, size.height)/2 
+                                 color:shadowCol];
+                break;
+            case 5: // PILL
+                [self drawFilledPill:layerOffset size:size color:shadowCol];
+                break;
+            default:
+                // For complex shapes, use simple rounded rect shadow
+                [self drawFilledRoundedRect:layerOffset size:size radius:radius color:shadowCol];
+                break;
+        }
+    }
+    
+    glDisable(GL_BLEND);
+}
+
+- (void)drawButtonShape:(CGSize)size
+{
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
+    // Draw filled shape with gradient
+    switch (shape) {
+        case 0: // ROUNDED_RECT
+            [self drawFilledRoundedRectGradient:CGPointZero size:size radius:radius];
+            break;
+        case 1: // CIRCLE
+            [self drawFilledCircleGradient:ccp(size.width/2, size.height/2) 
+                                    radius:MIN(size.width, size.height)/2];
+            break;
+        case 2: // HEXAGON
+            [self drawFilledHexagon:ccp(size.width/2, size.height/2) 
+                             radius:MIN(size.width, size.height)/2 - radius];
+            break;
+        case 3: // DIAMOND
+            [self drawFilledDiamond:ccp(size.width/2, size.height/2) 
+                               size:MIN(size.width, size.height) * 0.7f];
+            break;
+        case 4: // STAR
+            [self drawFilledStar:ccp(size.width/2, size.height/2) 
+                          radius:MIN(size.width, size.height) * 0.4f];
+            break;
+        case 5: // PILL
+            [self drawFilledPillGradient:CGPointZero size:size];
+            break;
     }
     
     // Draw outline if width > 0
@@ -108,48 +172,220 @@
         glLineWidth(self.outlineWidth);
         ccDrawColor4B(self.outlineColor.r, self.outlineColor.g, self.outlineColor.b, 255);
         
-        if (shape == 0) {
-            [self drawRoundedRectOutline:CGPointZero size:size radius:r];
-        } else if (shape == 1) {
-            [self drawCircleOutline:CGPointMake(size.width/2, size.height/2) radius:MIN(size.width, size.height)/2];
+        switch (shape) {
+            case 0: // ROUNDED_RECT
+                [self drawRoundedRectOutline:CGPointZero size:size radius:radius];
+                break;
+            case 1: // CIRCLE
+                ccDrawCircle(ccp(size.width/2, size.height/2), MIN(size.width, size.height)/2, 0, 30, NO);
+                break;
+            case 2: // HEXAGON
+                [self drawHexagonOutline:ccp(size.width/2, size.height/2) 
+                                  radius:MIN(size.width, size.height)/2 - radius];
+                break;
+            case 3: // DIAMOND
+                [self drawDiamondOutline:ccp(size.width/2, size.height/2) 
+                                    size:MIN(size.width, size.height) * 0.7f];
+                break;
+            case 4: // STAR
+                [self drawStarOutline:ccp(size.width/2, size.height/2) 
+                               radius:MIN(size.width, size.height) * 0.4f];
+                break;
+            case 5: // PILL
+                [self drawPillOutline:CGPointZero size:size];
+                break;
         }
     }
     
     glDisable(GL_BLEND);
 }
 
-- (void)drawFilledRoundedRect:(CGPoint)origin size:(CGSize)size radius:(float)r
+- (void)drawPolyGradient:(CGPoint*)vertices count:(int)count
 {
-    // Simple gradient approximation - draw multiple horizontal strips
-    int segments = 20;
-    float stripHeight = size.height / segments;
+    // Calculate colors for each vertex based on gradient vector
+    ccColor4F *colors = malloc(sizeof(ccColor4F) * count);
+    ccVertex2F *glVertices = malloc(sizeof(ccVertex2F) * count);
     
-    for (int i = 0; i < segments; i++) {
-        float t = (float)i / (float)segments; // 0.0 to 1.0
-        
-        // Interpolate color based on gradient vector
-        ccColor3B color;
-        color.r = startColor.r + t * (endColor.r - startColor.r);
-        color.g = startColor.g + t * (endColor.g - startColor.g);
-        color.b = startColor.b + t * (endColor.b - startColor.b);
-        
-        float y = origin.y + i * stripHeight;
-        
-        // Draw a filled rectangle for this strip
-        ccDrawSolidRect(ccp(origin.x, y), 
-                       ccp(origin.x + size.width, y + stripHeight),
-                       ccc4f(color.r/255.0f, color.g/255.0f, color.b/255.0f, 1.0f));
+    float h = ccpLength(gradientVector);
+    
+    // Gradient math setup
+    float c = sqrtf(2);
+    CGPoint u = CGPointZero;
+    if (h > 0) {
+        u = ccp(gradientVector.x / h, gradientVector.y / h);
+        // Compressed interpolation
+        float h2 = 1 / ( fabsf(u.x) + fabsf(u.y) );
+        u = ccpMult(u, h2 * c);
     }
+    
+    CGSize size = self.contentSize;
+    if (size.width == 0) size = CGSizeMake(100, 40);
+    CGPoint center = ccp(size.width/2, size.height/2);
+    
+    for (int i = 0; i < count; i++) {
+        // Convert to GL float format
+        glVertices[i] = (ccVertex2F){ (GLfloat)vertices[i].x, (GLfloat)vertices[i].y };
+        
+        if (h == 0) {
+            colors[i] = ccc4f(startColor.r/255.0f, startColor.g/255.0f, startColor.b/255.0f, 1.0f);
+        } else {
+            // Normalize position to [-1, 1]
+            float nx = (vertices[i].x - center.x) / (size.width/2);
+            float ny = (vertices[i].y - center.y) / (size.height/2);
+            
+            // Calculate interpolation factor t (0..1)
+            float t = 0.5f + (nx * -u.x + ny * -u.y) / (2.0f * c);
+            t = clampf(t, 0.0f, 1.0f);
+            
+            colors[i].r = (endColor.r + (startColor.r - endColor.r) * t) / 255.0f;
+            colors[i].g = (endColor.g + (startColor.g - endColor.g) * t) / 255.0f;
+            colors[i].b = (endColor.b + (startColor.b - endColor.b) * t) / 255.0f;
+            colors[i].a = 1.0f;
+        }
+    }
+    
+    // Draw using OpenGL
+    CC_NODE_DRAW_SETUP();
+    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color );
+    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, glVertices);
+    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_FLOAT, GL_FALSE, 0, colors);
+    glDrawArrays(GL_TRIANGLE_FAN, 0, count);
+    
+    free(colors);
+    free(glVertices);
+}
+
+- (void)drawFilledRoundedRectGradient:(CGPoint)origin size:(CGSize)size radius:(float)r
+{
+    // Generate vertices for rounded rect
+    int segments = 30; // Segments per corner
+    int totalVerts = 4 * segments + 2; // +2 for center and close
+    CGPoint *vertices = malloc(sizeof(CGPoint) * totalVerts);
+    
+    // Center
+    vertices[0] = ccp(origin.x + size.width/2, origin.y + size.height/2);
+    
+    int vIndex = 1;
+    // Corners: TR, TL, BL, BR
+    CGPoint corners[4] = {
+        ccp(origin.x + size.width - r, origin.y + size.height - r),
+        ccp(origin.x + r, origin.y + size.height - r),
+        ccp(origin.x + r, origin.y + r),
+        ccp(origin.x + size.width - r, origin.y + r)
+    };
+    
+    for (int c = 0; c < 4; c++) {
+        float startAngle = c * M_PI / 2.0f;
+        for (int i = 0; i < segments; i++) {
+            float angle = startAngle + (float)i / (segments - 1) * (M_PI / 2.0f);
+            vertices[vIndex++] = ccp(corners[c].x + cos(angle) * r, corners[c].y + sin(angle) * r);
+        }
+    }
+    vertices[vIndex] = vertices[1]; // Close loop
+    
+    [self drawPolyGradient:vertices count:totalVerts];
+    free(vertices);
+}
+
+- (void)drawFilledRoundedRect:(CGPoint)origin size:(CGSize)size radius:(float)r color:(ccColor4F)color
+{
+    // Generate vertices for rounded rect
+    int segments = 30;
+    int totalVerts = 4 * segments + 2;
+    CGPoint *vertices = malloc(sizeof(CGPoint) * totalVerts);
+    
+    vertices[0] = ccp(origin.x + size.width/2, origin.y + size.height/2);
+    
+    int vIndex = 1;
+    CGPoint corners[4] = {
+        ccp(origin.x + size.width - r, origin.y + size.height - r),
+        ccp(origin.x + r, origin.y + size.height - r),
+        ccp(origin.x + r, origin.y + r),
+        ccp(origin.x + size.width - r, origin.y + r)
+    };
+    
+    for (int c = 0; c < 4; c++) {
+        float startAngle = c * M_PI / 2.0f;
+        for (int i = 0; i < segments; i++) {
+            float angle = startAngle + (float)i / (segments - 1) * (M_PI / 2.0f);
+            vertices[vIndex++] = ccp(corners[c].x + cos(angle) * r, corners[c].y + sin(angle) * r);
+        }
+    }
+    vertices[vIndex] = vertices[1];
+    
+    ccDrawSolidPoly(vertices, totalVerts, color);
+    free(vertices);
 }
 
 - (void)drawRoundedRectOutline:(CGPoint)origin size:(CGSize)size radius:(float)r
 {
-    // Draw simple rectangle outline for now
-    // (Proper rounded corners would require bezier curves or segment drawing)
-    ccDrawRect(origin, ccp(origin.x + size.width, origin.y + size.height));
+    // Generate vertices for rounded rect outline
+    int segments = 30;
+    int totalVerts = 4 * segments;
+    CGPoint *vertices = malloc(sizeof(CGPoint) * totalVerts);
+    
+    int vIndex = 0;
+    CGPoint corners[4] = {
+        ccp(origin.x + size.width - r, origin.y + size.height - r),
+        ccp(origin.x + r, origin.y + size.height - r),
+        ccp(origin.x + r, origin.y + r),
+        ccp(origin.x + size.width - r, origin.y + r)
+    };
+    
+    for (int c = 0; c < 4; c++) {
+        float startAngle = c * M_PI / 2.0f;
+        for (int i = 0; i < segments; i++) {
+            float angle = startAngle + (float)i / (segments - 1) * (M_PI / 2.0f);
+            vertices[vIndex++] = ccp(corners[c].x + cos(angle) * r, corners[c].y + sin(angle) * r);
+        }
+    }
+    
+    ccDrawPoly(vertices, totalVerts, YES);
+    free(vertices);
 }
 
-- (void)drawFilledCircle:(CGPoint)center radius:(float)r
+- (void)drawFilledCircleGradient:(CGPoint)center radius:(float)r
+{
+    float gradMag = sqrt(gradientVector.x * gradientVector.x + gradientVector.y * gradientVector.y);
+    BOOL isRadial = (gradMag < 0.01f);
+    
+    if (isRadial) {
+        // Keep existing radial implementation
+        int layers = 15;
+        for (int layer = 0; layer < layers; layer++) {
+            float t = (float)layer / (float)layers;
+            ccColor3B color;
+            color.r = startColor.r + t * (endColor.r - startColor.r);
+            color.g = startColor.g + t * (endColor.g - startColor.g);
+            color.b = startColor.b + t * (endColor.b - startColor.b);
+            
+            float layerRadius = r * (1.0f - t);
+            int segments = 30;
+            CGPoint *vertices = malloc(sizeof(CGPoint) * segments);
+            for (int i = 0; i < segments; i++) {
+                float angle = (float)i / (float)segments * M_PI * 2.0f;
+                vertices[i] = ccp(center.x + cos(angle) * layerRadius, center.y + sin(angle) * layerRadius);
+            }
+            ccDrawSolidPoly(vertices, segments, ccc4f(color.r/255.0f, color.g/255.0f, color.b/255.0f, 1.0f));
+            free(vertices);
+        }
+    } else {
+        // Linear gradient using drawPolyGradient
+        int segments = 60;
+        CGPoint *vertices = malloc(sizeof(CGPoint) * (segments + 2));
+        vertices[0] = center;
+        
+        for (int i = 0; i <= segments; i++) {
+            float angle = (float)i / (float)segments * M_PI * 2.0f;
+            vertices[i+1] = ccp(center.x + cos(angle) * r, center.y + sin(angle) * r);
+        }
+        
+        [self drawPolyGradient:vertices count:segments+2];
+        free(vertices);
+    }
+}
+
+- (void)drawFilledCircle:(CGPoint)center radius:(float)r color:(ccColor4F)color
 {
     int segments = 30;
     CGPoint *vertices = malloc(sizeof(CGPoint) * segments);
@@ -159,21 +395,193 @@
         vertices[i] = ccp(center.x + cos(angle) * r, center.y + sin(angle) * r);
     }
     
-    // Draw gradient filled circle using triangle fan
-    ccColor3B avgColor;
-    avgColor.r = (startColor.r + endColor.r) / 2;
-    avgColor.g = (startColor.g + endColor.g) / 2;
-    avgColor.b = (startColor.b + endColor.b) / 2;
-    
-    ccDrawSolidPoly(vertices, segments, ccc4f(avgColor.r/255.0f, avgColor.g/255.0f, avgColor.b/255.0f, 1.0f));
-    
+    ccDrawSolidPoly(vertices, segments, color);
     free(vertices);
 }
 
-- (void)drawCircleOutline:(CGPoint)center radius:(float)r
+- (void)drawFilledHexagon:(CGPoint)center radius:(float)r
 {
-    ccDrawCircle(center, r, 0, 30, NO);
+    float gradMag = sqrt(gradientVector.x * gradientVector.x + gradientVector.y * gradientVector.y);
+    BOOL isRadial = (gradMag < 0.01f);
+    
+    if (isRadial) {
+        // Keep radial implementation
+        int layers = 10;
+        for (int layer = 0; layer < layers; layer++) {
+            float t = (float)layer / (float)layers;
+            ccColor3B color;
+            color.r = startColor.r + t * (endColor.r - startColor.r);
+            color.g = startColor.g + t * (endColor.g - startColor.g);
+            color.b = startColor.b + t * (endColor.b - startColor.b);
+            
+            float layerRadius = r * (1.0f - t);
+            CGPoint layerVerts[7];
+            for (int i = 0; i < 7; i++) {
+                float angle = M_PI / 3.0f * i - M_PI / 2.0f;
+                layerVerts[i] = ccp(center.x + cos(angle) * layerRadius, center.y + sin(angle) * layerRadius);
+            }
+            ccDrawSolidPoly(layerVerts, 7, ccc4f(color.r/255.0f, color.g/255.0f, color.b/255.0f, 1.0f));
+        }
+    } else {
+        // Linear gradient using drawPolyGradient
+        CGPoint vertices[8];
+        vertices[0] = center;
+        for (int i = 0; i < 7; i++) {
+            float angle = M_PI / 3.0f * i - M_PI / 2.0f;
+            vertices[i+1] = ccp(center.x + cos(angle) * r, center.y + sin(angle) * r);
+        }
+        [self drawPolyGradient:vertices count:8];
+    }
+}
+
+- (void)drawHexagonOutline:(CGPoint)center radius:(float)r
+{
+    CGPoint vertices[7];
+    for (int i = 0; i < 7; i++) {
+        float angle = M_PI / 3.0f * i - M_PI / 2.0f;
+        vertices[i] = ccp(center.x + cos(angle) * r, center.y + sin(angle) * r);
+    }
+    ccDrawPoly(vertices, 7, YES);
+}
+
+- (void)drawFilledDiamond:(CGPoint)center size:(float)s
+{
+    float gradMag = sqrt(gradientVector.x * gradientVector.x + gradientVector.y * gradientVector.y);
+    BOOL isRadial = (gradMag < 0.01f);
+    
+    if (isRadial) {
+        // Keep radial implementation
+        int layers = 10;
+        for (int layer = 0; layer < layers; layer++) {
+            float t = (float)layer / (float)layers;
+            ccColor3B color;
+            color.r = startColor.r + t * (endColor.r - startColor.r);
+            color.g = startColor.g + t * (endColor.g - startColor.g);
+            color.b = startColor.b + t * (endColor.b - startColor.b);
+            
+            float layerSize = s * (1.0f - t);
+            CGPoint vertices[5] = {
+                ccp(center.x, center.y + layerSize/2),
+                ccp(center.x + layerSize/2, center.y),
+                ccp(center.x, center.y - layerSize/2),
+                ccp(center.x - layerSize/2, center.y),
+                ccp(center.x, center.y + layerSize/2)
+            };
+            ccDrawSolidPoly(vertices, 5, ccc4f(color.r/255.0f, color.g/255.0f, color.b/255.0f, 1.0f));
+        }
+    } else {
+        // Linear gradient using drawPolyGradient
+        CGPoint vertices[6];
+        vertices[0] = center;
+        vertices[1] = ccp(center.x, center.y + s/2);
+        vertices[2] = ccp(center.x + s/2, center.y);
+        vertices[3] = ccp(center.x, center.y - s/2);
+        vertices[4] = ccp(center.x - s/2, center.y);
+        vertices[5] = vertices[1];
+        
+        [self drawPolyGradient:vertices count:6];
+    }
+}
+
+- (void)drawDiamondOutline:(CGPoint)center size:(float)s
+{
+    CGPoint vertices[5] = {
+        ccp(center.x, center.y + s/2),
+        ccp(center.x + s/2, center.y),
+        ccp(center.x, center.y - s/2),
+        ccp(center.x - s/2, center.y),
+        ccp(center.x, center.y + s/2)
+    };
+    ccDrawPoly(vertices, 5, NO);
+}
+
+- (void)drawFilledStar:(CGPoint)center radius:(float)r
+{
+    float gradMag = sqrt(gradientVector.x * gradientVector.x + gradientVector.y * gradientVector.y);
+    BOOL isRadial = (gradMag < 0.01f);
+    int points = 5;
+    
+    if (isRadial) {
+        // Keep radial implementation
+        int layers = 10;
+        for (int layer = 0; layer < layers; layer++) {
+            float t = (float)layer / (float)layers;
+            ccColor3B color;
+            color.r = startColor.r + t * (endColor.r - startColor.r);
+            color.g = startColor.g + t * (endColor.g - startColor.g);
+            color.b = startColor.b + t * (endColor.b - startColor.b);
+            
+            float layerRadius = r * (1.0f - t);
+            CGPoint vertices[11];
+            for (int i = 0; i < points * 2; i++) {
+                float angle = M_PI * i / points - M_PI / 2.0f;
+                float currentR = (i % 2 == 0) ? layerRadius : layerRadius * 0.4f;
+                vertices[i] = ccp(center.x + cos(angle) * currentR, center.y + sin(angle) * currentR);
+            }
+            vertices[10] = vertices[0];
+            ccDrawSolidPoly(vertices, 11, ccc4f(color.r/255.0f, color.g/255.0f, color.b/255.0f, 1.0f));
+        }
+    } else {
+        // Linear gradient using drawPolyGradient
+        CGPoint vertices[12];
+        vertices[0] = center;
+        for (int i = 0; i < points * 2; i++) {
+            float angle = M_PI * i / points - M_PI / 2.0f;
+            float currentR = (i % 2 == 0) ? r : r * 0.4f;
+            vertices[i+1] = ccp(center.x + cos(angle) * currentR, center.y + sin(angle) * currentR);
+        }
+        vertices[11] = vertices[1];
+        
+        [self drawPolyGradient:vertices count:12];
+    }
+}
+
+- (void)drawStarOutline:(CGPoint)center radius:(float)r
+{
+    int points = 5;
+    CGPoint vertices[11];
+    for (int i = 0; i < points * 2; i++) {
+        float angle = M_PI * i / points - M_PI / 2.0f;
+        float currentR = (i % 2 == 0) ? r : r * 0.4f;
+        vertices[i] = ccp(center.x + cos(angle) * currentR, center.y + sin(angle) * currentR);
+    }
+    vertices[10] = vertices[0]; // Close the shape
+    ccDrawPoly(vertices, 11, NO);
+}
+
+- (void)drawFilledPillGradient:(CGPoint)origin size:(CGSize)size
+{
+    // Pill is just a rounded rect with maximum radius
+    float r;
+    if (size.width > size.height) {
+        r = size.height / 2.0f;
+    } else {
+        r = size.width / 2.0f;
+    }
+    
+    [self drawFilledRoundedRectGradient:origin size:size radius:r];
+}
+
+- (void)drawFilledPill:(CGPoint)origin size:(CGSize)size color:(ccColor4F)color
+{
+    float r;
+    if (size.width > size.height) {
+        r = size.height / 2.0f;
+    } else {
+        r = size.width / 2.0f;
+    }
+    [self drawFilledRoundedRect:origin size:size radius:r color:color];
+}
+
+- (void)drawPillOutline:(CGPoint)origin size:(CGSize)size
+{
+    float r;
+    if (size.width > size.height) {
+        r = size.height / 2.0f;
+    } else {
+        r = size.width / 2.0f;
+    }
+    [self drawRoundedRectOutline:origin size:size radius:r];
 }
 
 @end
-
