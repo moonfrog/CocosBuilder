@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>inheritsFrom</key>
-	<string>CCControlButton</string>
+	<string>CCNode</string>
 	<key>canHaveChildren</key>
 	<false/>
 	<key>className</key>

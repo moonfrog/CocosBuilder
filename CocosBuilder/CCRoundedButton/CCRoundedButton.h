@@ -23,18 +23,17 @@
  */
 
 #import "cocos2d.h"
-#import "../CCControlButton/CCBControlButton.h"
 
-@interface CCRoundedButton : CCBControlButton
+@interface CCRoundedButton : CCNode
 {
     float radius;
     ccColor3B startColor;
     ccColor3B endColor;
     CGPoint gradientVector;
-//    float outlineWidth;
-//    ccColor3B outlineColor;
-//    ccColor3B shadowColor;
-//    CGPoint shadowOffset;
+    float outlineWidth;
+    ccColor3B outlineColor;
+    ccColor3B shadowColor;
+    CGPoint shadowOffset;
     float shadowBlur;
     
     // Pressed state

@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		34FE40FD2603909100251B09 /* MGSFragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3F541CC15AED68500EAAFBD /* MGSFragaria.framework */; };
 		34FE40FE2603909100251B09 /* MGSFragaria.framework in Copy Files (Sparkle framework) */ = {isa = PBXBuildFile; fileRef = E3F541CC15AED68500EAAFBD /* MGSFragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		428E3EBF2ED776BB00300718 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E3B7BCB715E417DE00CF95EF /* Icon.png */; };
 		428E3EC22ED7779400300718 /* CCRoundedButton.ccbPlugNode in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 428E3EBB2ED775F100300718 /* CCRoundedButton.ccbPlugNode */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		428E3ECC2ED77E5E00300718 /* CCBPProperties.plist in Resources */ = {isa = PBXBuildFile; fileRef = 428E3EC62ED77E5E00300718 /* CCBPProperties.plist */; };
 		428E3ECD2ED77E5E00300718 /* RoundedButton-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 428E3ECA2ED77E5E00300718 /* RoundedButton-Info.plist */; };
 		428E3ED02ED77F0B00300718 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7789ABC2133AA82000CEFCC7 /* Cocoa.framework */; };
 		42E9D1502ED833E000E94906 /* CCRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 428E3EC82ED77E5E00300718 /* CCRoundedButton.m */; };
+		42E9D1522ED83E4F00E94906 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 42E9D1512ED83E4F00E94906 /* Icon.png */; };
 		470D84DC1D1960DE005B31E5 /* CCBControlButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 470D84DB1D1960DE005B31E5 /* CCBControlButton.m */; };
 		472C0DDB1D364F1D006A6BFA /* InspectorButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 472C0DD61D364F13006A6BFA /* InspectorButton.xib */; };
 		472C0DDC1D364F23006A6BFA /* InspectorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 472C0DD51D364F13006A6BFA /* InspectorButton.m */; };
@@ -906,6 +906,7 @@
 		428E3EC72ED77E5E00300718 /* CCRoundedButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCRoundedButton.h; sourceTree = "<group>"; };
 		428E3EC82ED77E5E00300718 /* CCRoundedButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCRoundedButton.m; sourceTree = "<group>"; };
 		428E3ECA2ED77E5E00300718 /* RoundedButton-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RoundedButton-Info.plist"; sourceTree = "<group>"; };
+		42E9D1512ED83E4F00E94906 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		470D84DA1D1960DE005B31E5 /* CCBControlButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBControlButton.h; sourceTree = "<group>"; };
 		470D84DB1D1960DE005B31E5 /* CCBControlButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBControlButton.m; sourceTree = "<group>"; };
 		472C0DD41D364F13006A6BFA /* InspectorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorButton.h; sourceTree = "<group>"; };
@@ -2139,6 +2140,7 @@
 		428E3ECB2ED77E5E00300718 /* CCRoundedButton */ = {
 			isa = PBXGroup;
 			children = (
+				42E9D1512ED83E4F00E94906 /* Icon.png */,
 				428E3EC62ED77E5E00300718 /* CCBPProperties.plist */,
 				428E3EC72ED77E5E00300718 /* CCRoundedButton.h */,
 				428E3EC82ED77E5E00300718 /* CCRoundedButton.m */,
@@ -4650,9 +4652,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42E9D1522ED83E4F00E94906 /* Icon.png in Resources */,
 				428E3ECC2ED77E5E00300718 /* CCBPProperties.plist in Resources */,
 				428E3ECD2ED77E5E00300718 /* RoundedButton-Info.plist in Resources */,
-				428E3EBF2ED776BB00300718 /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

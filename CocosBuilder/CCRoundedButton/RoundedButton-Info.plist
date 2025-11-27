@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
-	<string>com.cocosbuilder.RoundedButton</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -24,5 +24,8 @@
 	<string>1</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright (c) 2024. All rights reserved.</string>
+	<key>NSPrincipalClass</key>
+	<string></string>
+
 </dict>
 </plist>
