@@ -111,11 +111,14 @@
     
     // Draw multiple layers for blur effect
     int layers = MIN(5, (int)blur);
+    if (layers < 1) layers = 1; // At least one layer if blur is 0 but shadow is enabled
+    
     for (int i = 0; i < layers; i++) {
         float t = (float)i / (float)layers;
-        float alpha = (self.shadowColor.r / 255.0f) * (1.0f - t) * 0.3f;
+        // Alpha fades out for outer layers
+        float alpha = 0.5f * (1.0f - t);
         
-        ccColor4F shadowCol = ccc4f(0, 0, 0, alpha);
+        ccColor4F shadowCol = ccc4f(self.shadowColor.r/255.0f, self.shadowColor.g/255.0f, self.shadowColor.b/255.0f, alpha);
         CGPoint layerOffset = ccp(offset.x * (1.0f + t), offset.y * (1.0f + t));
         
         switch (shape) {
@@ -127,11 +130,30 @@
                                 radius:MIN(size.width, size.height)/2 
                                  color:shadowCol];
                 break;
+            case 2: // HEXAGON
+                [self drawFilledHexagon:ccp(size.width/2 + layerOffset.x, size.height/2 + layerOffset.y) 
+                                 radius:MIN(size.width, size.height)/2 - radius 
+                                  color:shadowCol];
+                break;
+            case 3: // DIAMOND
+                [self drawFilledDiamond:ccp(size.width/2 + layerOffset.x, size.height/2 + layerOffset.y) 
+                                   size:MIN(size.width, size.height) * 0.7f 
+                                  color:shadowCol];
+                break;
+            case 4: // STAR
+                [self drawFilledStar:ccp(size.width/2 + layerOffset.x, size.height/2 + layerOffset.y) 
+                              radius:MIN(size.width, size.height) * 0.4f 
+                               color:shadowCol];
+                break;
             case 5: // PILL
                 [self drawFilledPill:layerOffset size:size color:shadowCol];
                 break;
+            case 6: // TRIANGLE
+                [self drawFilledTriangle:ccp(size.width/2 + layerOffset.x, size.height/2 + layerOffset.y) 
+                                  radius:MIN(size.width, size.height)/2 
+                                   color:shadowCol];
+                break;
             default:
-                // For complex shapes, use simple rounded rect shadow
                 [self drawFilledRoundedRect:layerOffset size:size radius:radius color:shadowCol];
                 break;
         }
@@ -412,6 +434,16 @@
     free(vertices);
 }
 
+- (void)drawFilledHexagon:(CGPoint)center radius:(float)r color:(ccColor4F)color
+{
+    CGPoint vertices[7];
+    for (int i = 0; i < 7; i++) {
+        float angle = M_PI / 3.0f * i - M_PI / 2.0f;
+        vertices[i] = ccp(center.x + cos(angle) * r, center.y + sin(angle) * r);
+    }
+    ccDrawSolidPoly(vertices, 7, color);
+}
+
 - (void)drawFilledHexagon:(CGPoint)center radius:(float)r
 {
     float gradMag = sqrt(gradientVector.x * gradientVector.x + gradientVector.y * gradientVector.y);
@@ -456,6 +488,18 @@
         vertices[i] = ccp(center.x + cos(angle) * r, center.y + sin(angle) * r);
     }
     ccDrawPoly(vertices, 7, YES);
+}
+
+- (void)drawFilledDiamond:(CGPoint)center size:(float)s color:(ccColor4F)color
+{
+    CGPoint vertices[5] = {
+        ccp(center.x, center.y + s/2),
+        ccp(center.x + s/2, center.y),
+        ccp(center.x, center.y - s/2),
+        ccp(center.x - s/2, center.y),
+        ccp(center.x, center.y + s/2)
+    };
+    ccDrawSolidPoly(vertices, 5, color);
 }
 
 - (void)drawFilledDiamond:(CGPoint)center size:(float)s
@@ -508,6 +552,19 @@
         ccp(center.x, center.y + s/2)
     };
     ccDrawPoly(vertices, 5, NO);
+}
+
+- (void)drawFilledStar:(CGPoint)center radius:(float)r color:(ccColor4F)color
+{
+    int points = 5;
+    CGPoint vertices[11];
+    for (int i = 0; i < points * 2; i++) {
+        float angle = M_PI * i / points - M_PI / 2.0f;
+        float currentR = (i % 2 == 0) ? r : r * 0.4f;
+        vertices[i] = ccp(center.x + cos(angle) * currentR, center.y + sin(angle) * currentR);
+    }
+    vertices[10] = vertices[0];
+    ccDrawSolidPoly(vertices, 11, color);
 }
 
 - (void)drawFilledStar:(CGPoint)center radius:(float)r
@@ -576,6 +633,51 @@
     }
     
     [self drawFilledRoundedRectGradient:origin size:size radius:r];
+}
+
+- (void)drawFilledTriangle:(CGPoint)center radius:(float)r color:(ccColor4F)color
+{
+    // Triangle vertices (equilateral pointing up)
+    CGPoint corners[3];
+    for (int i = 0; i < 3; i++) {
+        float angle = M_PI / 2.0f + i * (2.0f * M_PI / 3.0f);
+        corners[i] = ccp(center.x + cos(angle) * r, center.y + sin(angle) * r);
+    }
+    
+    float cornerRadius = self.radius;
+    if (cornerRadius > r / 2.0f) cornerRadius = r / 2.0f;
+    if (cornerRadius < 0) cornerRadius = 0;
+    
+    if (cornerRadius < 1.0f) {
+        ccDrawSolidPoly(corners, 3, color);
+        return;
+    }
+    
+    int segmentsPerCorner = 15;
+    int totalVerts = 3 * segmentsPerCorner;
+    CGPoint *vertices = malloc(sizeof(CGPoint) * totalVerts);
+    int vIndex = 0;
+    
+    for (int i = 0; i < 3; i++) {
+        CGPoint p = corners[i];
+        CGPoint v = ccpSub(p, center);
+        float len = ccpLength(v);
+        CGPoint dir = ccpMult(v, 1.0f/len);
+        CGPoint arcCenter = ccpSub(p, ccpMult(dir, 2.0f * cornerRadius));
+        
+        float cornerAngle = M_PI / 2.0f + i * (2.0f * M_PI / 3.0f);
+        float startAngle = cornerAngle + M_PI - M_PI/3.0f;
+        float endAngle = cornerAngle + M_PI + M_PI/3.0f;
+        
+        for (int j = 0; j < segmentsPerCorner; j++) {
+            float aT = (float)j / (segmentsPerCorner - 1);
+            float a = startAngle + aT * (endAngle - startAngle);
+            vertices[vIndex++] = ccp(arcCenter.x + cos(a) * cornerRadius, arcCenter.y + sin(a) * cornerRadius);
+        }
+    }
+    
+    ccDrawSolidPoly(vertices, totalVerts, color);
+    free(vertices);
 }
 
 - (void)drawFilledTriangleGradient:(CGPoint)center radius:(float)r
