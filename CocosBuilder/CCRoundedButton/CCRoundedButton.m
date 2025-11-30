@@ -862,4 +862,32 @@
     free(vertices);
 }
 
+
+#pragma mark - KVC Compliance for Custom Structs
+
+- (id) valueForKey:(NSString *)key
+{
+    if ([key isEqualToString:@"startColor"]) return [NSValue value:&startColor withObjCType:@encode(ccColor3B)];
+    if ([key isEqualToString:@"endColor"]) return [NSValue value:&endColor withObjCType:@encode(ccColor3B)];
+    if ([key isEqualToString:@"outlineColor"]) return [NSValue value:&outlineColor withObjCType:@encode(ccColor3B)];
+    if ([key isEqualToString:@"shadowColor"]) return [NSValue value:&shadowColor withObjCType:@encode(ccColor3B)];
+    if ([key isEqualToString:@"pressedStartColor"]) return [NSValue value:&pressedStartColor withObjCType:@encode(ccColor3B)];
+    if ([key isEqualToString:@"pressedEndColor"]) return [NSValue value:&pressedEndColor withObjCType:@encode(ccColor3B)];
+    
+    return [super valueForKey:key];
+}
+
+- (void) setValue:(id)value forKey:(NSString *)key
+{
+    NSLog(@"CCRoundedButton setValue:%@ forKey:%@", value, key);
+    if ([key isEqualToString:@"startColor"]) { ccColor3B c; [value getValue:&c]; self.startColor = c; return; }
+    if ([key isEqualToString:@"endColor"]) { ccColor3B c; [value getValue:&c]; self.endColor = c; return; }
+    if ([key isEqualToString:@"outlineColor"]) { ccColor3B c; [value getValue:&c]; self.outlineColor = c; return; }
+    if ([key isEqualToString:@"shadowColor"]) { ccColor3B c; [value getValue:&c]; self.shadowColor = c; return; }
+    if ([key isEqualToString:@"pressedStartColor"]) { ccColor3B c; [value getValue:&c]; self.pressedStartColor = c; return; }
+    if ([key isEqualToString:@"pressedEndColor"]) { ccColor3B c; [value getValue:&c]; self.pressedEndColor = c; return; }
+
+    [super setValue:value forKey:key];
+}
+
 @end
