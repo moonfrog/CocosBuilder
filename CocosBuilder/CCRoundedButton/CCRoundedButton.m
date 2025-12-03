@@ -159,7 +159,7 @@
         }
     }
     
-    glDisable(GL_BLEND);
+    // glDisable(GL_BLEND);
 }
 
 - (void)drawButtonShape:(CGSize)size
@@ -229,9 +229,10 @@
                                    radius:MIN(size.width, size.height)/2];
                 break;
         }
+        glLineWidth(1.0f);
     }
     
-    glDisable(GL_BLEND);
+    // glDisable(GL_BLEND);
 }
 
 - (void)drawPolyGradient:(CGPoint*)vertices count:(int)count
