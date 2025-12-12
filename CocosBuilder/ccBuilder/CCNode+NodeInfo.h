@@ -35,6 +35,7 @@
 @property (nonatomic,copy) NSString* displayName;
 @property (nonatomic,retain) NSMutableArray* customProperties;
 @property (nonatomic,assign) CGPoint transformStartPosition;
+@property (nonatomic,assign) BOOL hideSelection;
 
 - (id) extraPropForKey:(NSString*)key;
 - (void) setExtraProp:(id)prop forKey:(NSString*)key;

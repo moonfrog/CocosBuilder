@@ -135,6 +135,54 @@
 		</dict>
 		<dict>
 			<key>displayName</key>
+			<string>Start Color</string>
+			<key>type</key>
+			<string>Color3</string>
+			<key>name</key>
+			<string>outlineStartColor</string>
+			<key>default</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
+		</dict>
+		<dict>
+			<key>displayName</key>
+			<string>Start Opacity</string>
+			<key>type</key>
+			<string>Byte</string>
+			<key>name</key>
+			<string>outlineStartOpacity</string>
+			<key>default</key>
+			<integer>255</integer>
+		</dict>
+		<dict>
+			<key>displayName</key>
+			<string>End Color</string>
+			<key>type</key>
+			<string>Color3</string>
+			<key>name</key>
+			<string>outlineEndColor</string>
+			<key>default</key>
+			<array>
+				<integer>0</integer>
+				<integer>0</integer>
+				<integer>0</integer>
+			</array>
+		</dict>
+		<dict>
+			<key>displayName</key>
+			<string>End Opacity</string>
+			<key>type</key>
+			<string>Byte</string>
+			<key>name</key>
+			<string>outlineEndOpacity</string>
+			<key>default</key>
+			<integer>255</integer>
+		</dict>
+		<dict>
+			<key>displayName</key>
 			<string>Shadow</string>
 			<key>type</key>
 			<string>SeparatorSub</string>

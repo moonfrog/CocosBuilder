@@ -204,6 +204,18 @@
 			<key>displayName</key>
 			<string>Ignore anchor point</string>
 		</dict>
+		<dict>
+			<key>defaultSerialization</key>
+			<false/>
+			<key>default</key>
+			<false/>
+			<key>type</key>
+			<string>Check</string>
+			<key>name</key>
+			<string>hideSelection</string>
+			<key>displayName</key>
+			<string>Hide Selection</string>
+		</dict>
 	</array>
 	<key>propertiesOverridden</key>
 	<array/>

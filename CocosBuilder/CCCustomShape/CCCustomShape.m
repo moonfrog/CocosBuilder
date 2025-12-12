@@ -37,6 +37,10 @@
 @synthesize gradientVector;
 @synthesize outlineWidth;
 @synthesize outlineColor;
+@synthesize outlineStartColor;
+@synthesize outlineStartOpacity;
+@synthesize outlineEndColor;
+@synthesize outlineEndOpacity;
 @synthesize shadowColor;
 @synthesize shadowOffset;
 @synthesize shadowBlur;
@@ -67,6 +71,10 @@
     gradientVector = ccp(0, 1);
     outlineWidth = 0.0f;
     outlineColor = ccc3(0, 0, 0);
+    outlineStartColor = ccc3(0, 0, 0);
+    outlineStartOpacity = 255;
+    outlineEndColor = ccc3(0, 0, 0);
+    outlineEndOpacity = 255;
     shadowColor = ccc3(0, 0, 0);
     shadowOffset = ccp(2, -2);
     shadowBlur = 0.0f;
@@ -200,39 +208,97 @@
     // Draw outline if width > 0
     if (self.outlineWidth > 0) {
         glLineWidth(self.outlineWidth);
-        ccDrawColor4B(self.outlineColor.r, self.outlineColor.g, self.outlineColor.b, 255);
         
         switch (shape) {
             case 0: // ROUNDED_RECT
-                [self drawRoundedRectOutline:CGPointZero size:size radius:radius];
+                [self drawRoundedRectOutlineGradient:CGPointZero size:size radius:radius];
                 break;
             case 1: // CIRCLE
-                ccDrawCircle(ccp(size.width/2, size.height/2), MIN(size.width, size.height)/2, 0, 30, NO);
+                [self drawCircleOutlineGradient:ccp(size.width/2, size.height/2) 
+                                          radius:MIN(size.width, size.height)/2];
                 break;
             case 2: // HEXAGON
-                [self drawHexagonOutline:ccp(size.width/2, size.height/2) 
-                                  radius:MIN(size.width, size.height)/2 - radius];
+                [self drawHexagonOutlineGradient:ccp(size.width/2, size.height/2) 
+                                           radius:MIN(size.width, size.height)/2 - radius];
                 break;
             case 3: // DIAMOND
-                [self drawDiamondOutline:ccp(size.width/2, size.height/2) 
-                                    size:MIN(size.width, size.height) * 0.7f];
+                [self drawDiamondOutlineGradient:ccp(size.width/2, size.height/2) 
+                                             size:MIN(size.width, size.height) * 0.7f];
                 break;
             case 4: // STAR
-                [self drawStarOutline:ccp(size.width/2, size.height/2) 
-                               radius:MIN(size.width, size.height) * 0.4f];
+                [self drawStarOutlineGradient:ccp(size.width/2, size.height/2) 
+                                       radius:MIN(size.width, size.height) * 0.4f];
                 break;
             case 5: // PILL
-                [self drawPillOutline:CGPointZero size:size];
+                [self drawPillOutlineGradient:CGPointZero size:size];
                 break;
             case 6: // TRIANGLE
-                [self drawTriangleOutline:ccp(size.width/2, size.height/2) 
-                                   radius:MIN(size.width, size.height)/2];
+                [self drawTriangleOutlineGradient:ccp(size.width/2, size.height/2) 
+                                            radius:MIN(size.width, size.height)/2];
                 break;
         }
         glLineWidth(1.0f);
     }
     
     // glDisable(GL_BLEND);
+}
+
+- (void)drawPolyOutlineGradient:(CGPoint*)vertices count:(int)count
+{
+    if (count <= 0) return;
+    
+    // Calculate colors for each vertex based on gradient vector
+    ccColor4F *colors = malloc(sizeof(ccColor4F) * count);
+    ccVertex2F *glVertices = malloc(sizeof(ccVertex2F) * count);
+    
+    float h = ccpLength(gradientVector);
+    
+    // Gradient math setup (same as fill gradient)
+    float c = sqrtf(2);
+    CGPoint u = CGPointZero;
+    if (h > 0) {
+        u = ccp(gradientVector.x / h, gradientVector.y / h);
+        float h2 = 1 / ( fabsf(u.x) + fabsf(u.y) );
+        u = ccpMult(u, h2 * c);
+    }
+    
+    CGSize size = self.contentSize;
+    if (size.width == 0) size = CGSizeMake(100, 40);
+    CGPoint center = ccp(size.width/2, size.height/2);
+    
+    for (int i = 0; i < count; i++) {
+        // Convert to GL float format
+        glVertices[i] = (ccVertex2F){ (GLfloat)vertices[i].x, (GLfloat)vertices[i].y };
+        
+        if (h == 0) {
+            // No gradient vector, use start color
+            colors[i] = ccc4f(outlineStartColor.r/255.0f, outlineStartColor.g/255.0f, outlineStartColor.b/255.0f, outlineStartOpacity/255.0f);
+        } else {
+            // Normalize position to [-1, 1]
+            float nx = (vertices[i].x - center.x) / (size.width/2);
+            float ny = (vertices[i].y - center.y) / (size.height/2);
+            
+            // Calculate interpolation factor t (0..1)
+            float t = 0.5f + (nx * -u.x + ny * -u.y) / (2.0f * c);
+            t = clampf(t, 0.0f, 1.0f);
+            
+            // Interpolate between end and start colors
+            colors[i].r = (outlineEndColor.r + (outlineStartColor.r - outlineEndColor.r) * t) / 255.0f;
+            colors[i].g = (outlineEndColor.g + (outlineStartColor.g - outlineEndColor.g) * t) / 255.0f;
+            colors[i].b = (outlineEndColor.b + (outlineStartColor.b - outlineEndColor.b) * t) / 255.0f;
+            colors[i].a = (outlineEndOpacity + (outlineStartOpacity - outlineEndOpacity) * t) / 255.0f;
+        }
+    }
+    
+    // Draw using OpenGL
+    CC_NODE_DRAW_SETUP();
+    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color );
+    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, glVertices);
+    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_FLOAT, GL_FALSE, 0, colors);
+    glDrawArrays(GL_LINE_LOOP, 0, count);
+    
+    free(colors);
+    free(glVertices);
 }
 
 - (void)drawPolyGradient:(CGPoint*)vertices count:(int)count
@@ -863,6 +929,135 @@
     free(vertices);
 }
 
+// Gradient outline methods
+- (void)drawRoundedRectOutlineGradient:(CGPoint)origin size:(CGSize)size radius:(float)r
+{
+    int segments = 30;
+    int totalVerts = 4 * segments;
+    CGPoint *vertices = malloc(sizeof(CGPoint) * totalVerts);
+    
+    int vIndex = 0;
+    CGPoint corners[4] = {
+        ccp(origin.x + size.width - r, origin.y + size.height - r),
+        ccp(origin.x + r, origin.y + size.height - r),
+        ccp(origin.x + r, origin.y + r),
+        ccp(origin.x + size.width - r, origin.y + r)
+    };
+    
+    for (int c = 0; c < 4; c++) {
+        float startAngle = c * M_PI / 2.0f;
+        for (int i = 0; i < segments; i++) {
+            float angle = startAngle + (float)i / (segments - 1) * (M_PI / 2.0f);
+            vertices[vIndex++] = ccp(corners[c].x + cos(angle) * r, corners[c].y + sin(angle) * r);
+        }
+    }
+    
+    [self drawPolyOutlineGradient:vertices count:totalVerts];
+    free(vertices);
+}
+
+- (void)drawCircleOutlineGradient:(CGPoint)center radius:(float)r
+{
+    int segments = 60;
+    CGPoint *vertices = malloc(sizeof(CGPoint) * segments);
+    
+    for (int i = 0; i < segments; i++) {
+        float angle = (float)i / (float)segments * M_PI * 2.0f;
+        vertices[i] = ccp(center.x + cos(angle) * r, center.y + sin(angle) * r);
+    }
+    
+    [self drawPolyOutlineGradient:vertices count:segments];
+    free(vertices);
+}
+
+- (void)drawHexagonOutlineGradient:(CGPoint)center radius:(float)r
+{
+    CGPoint vertices[6];
+    for (int i = 0; i < 6; i++) {
+        float angle = M_PI / 3.0f * i - M_PI / 2.0f;
+        vertices[i] = ccp(center.x + cos(angle) * r, center.y + sin(angle) * r);
+    }
+    [self drawPolyOutlineGradient:vertices count:6];
+}
+
+- (void)drawDiamondOutlineGradient:(CGPoint)center size:(float)s
+{
+    CGPoint vertices[4] = {
+        ccp(center.x, center.y + s/2),
+        ccp(center.x + s/2, center.y),
+        ccp(center.x, center.y - s/2),
+        ccp(center.x - s/2, center.y)
+    };
+    [self drawPolyOutlineGradient:vertices count:4];
+}
+
+- (void)drawStarOutlineGradient:(CGPoint)center radius:(float)r
+{
+    int points = 5;
+    CGPoint vertices[10];
+    for (int i = 0; i < points * 2; i++) {
+        float angle = M_PI * i / points - M_PI / 2.0f;
+        float currentR = (i % 2 == 0) ? r : r * 0.4f;
+        vertices[i] = ccp(center.x + cos(angle) * currentR, center.y + sin(angle) * currentR);
+    }
+    [self drawPolyOutlineGradient:vertices count:10];
+}
+
+- (void)drawPillOutlineGradient:(CGPoint)origin size:(CGSize)size
+{
+    float r;
+    if (size.width > size.height) {
+        r = size.height / 2.0f;
+    } else {
+        r = size.width / 2.0f;
+    }
+    [self drawRoundedRectOutlineGradient:origin size:size radius:r];
+}
+
+- (void)drawTriangleOutlineGradient:(CGPoint)center radius:(float)r
+{
+    CGPoint corners[3];
+    for (int i = 0; i < 3; i++) {
+        float angle = M_PI / 2.0f + i * (2.0f * M_PI / 3.0f);
+        corners[i] = ccp(center.x + cos(angle) * r, center.y + sin(angle) * r);
+    }
+    
+    float cornerRadius = self.radius;
+    if (cornerRadius > r / 2.0f) cornerRadius = r / 2.0f;
+    if (cornerRadius < 0) cornerRadius = 0;
+    
+    if (cornerRadius < 1.0f) {
+        [self drawPolyOutlineGradient:corners count:3];
+        return;
+    }
+    
+    int segmentsPerCorner = 15;
+    int totalVerts = 3 * segmentsPerCorner;
+    CGPoint *vertices = malloc(sizeof(CGPoint) * totalVerts);
+    int vIndex = 0;
+    
+    for (int i = 0; i < 3; i++) {
+        CGPoint p = corners[i];
+        CGPoint v = ccpSub(p, center);
+        float len = ccpLength(v);
+        CGPoint dir = ccpMult(v, 1.0f/len);
+        CGPoint arcCenter = ccpSub(p, ccpMult(dir, 2.0f * cornerRadius));
+        
+        float cornerAngle = M_PI / 2.0f + i * (2.0f * M_PI / 3.0f);
+        float startAngle = cornerAngle + M_PI - M_PI/3.0f;
+        float endAngle = cornerAngle + M_PI + M_PI/3.0f;
+        
+        for (int j = 0; j < segmentsPerCorner; j++) {
+            float t = (float)j / (segmentsPerCorner - 1);
+            float a = startAngle + t * (endAngle - startAngle);
+            vertices[vIndex++] = ccp(arcCenter.x + cos(a) * cornerRadius, arcCenter.y + sin(a) * cornerRadius);
+        }
+    }
+    
+    [self drawPolyOutlineGradient:vertices count:totalVerts];
+    free(vertices);
+}
+
 
 #pragma mark - KVC Compliance for Custom Structs
 
@@ -871,6 +1066,8 @@
     if ([key isEqualToString:@"startColor"]) return [NSValue value:&startColor withObjCType:@encode(ccColor3B)];
     if ([key isEqualToString:@"endColor"]) return [NSValue value:&endColor withObjCType:@encode(ccColor3B)];
     if ([key isEqualToString:@"outlineColor"]) return [NSValue value:&outlineColor withObjCType:@encode(ccColor3B)];
+    if ([key isEqualToString:@"outlineStartColor"]) return [NSValue value:&outlineStartColor withObjCType:@encode(ccColor3B)];
+    if ([key isEqualToString:@"outlineEndColor"]) return [NSValue value:&outlineEndColor withObjCType:@encode(ccColor3B)];
     if ([key isEqualToString:@"shadowColor"]) return [NSValue value:&shadowColor withObjCType:@encode(ccColor3B)];
     if ([key isEqualToString:@"pressedStartColor"]) return [NSValue value:&pressedStartColor withObjCType:@encode(ccColor3B)];
     if ([key isEqualToString:@"pressedEndColor"]) return [NSValue value:&pressedEndColor withObjCType:@encode(ccColor3B)];
@@ -884,6 +1081,8 @@
     if ([key isEqualToString:@"startColor"]) { ccColor3B c; [value getValue:&c]; self.startColor = c; return; }
     if ([key isEqualToString:@"endColor"]) { ccColor3B c; [value getValue:&c]; self.endColor = c; return; }
     if ([key isEqualToString:@"outlineColor"]) { ccColor3B c; [value getValue:&c]; self.outlineColor = c; return; }
+    if ([key isEqualToString:@"outlineStartColor"]) { ccColor3B c; [value getValue:&c]; self.outlineStartColor = c; return; }
+    if ([key isEqualToString:@"outlineEndColor"]) { ccColor3B c; [value getValue:&c]; self.outlineEndColor = c; return; }
     if ([key isEqualToString:@"shadowColor"]) { ccColor3B c; [value getValue:&c]; self.shadowColor = c; return; }
     if ([key isEqualToString:@"pressedStartColor"]) { ccColor3B c; [value getValue:&c]; self.pressedStartColor = c; return; }
     if ([key isEqualToString:@"pressedEndColor"]) { ccColor3B c; [value getValue:&c]; self.pressedEndColor = c; return; }

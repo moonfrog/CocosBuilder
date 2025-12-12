@@ -386,6 +386,12 @@ static CocosScene* sharedCocosScene;
     {
         for (CCNode* node in nodes)
         {
+            // Skip rendering selection if hideSelection is enabled
+            if (node.hideSelection)
+            {
+                continue;
+            }
+            
             CGPoint localAnchor = ccp(node.anchorPoint.x * node.contentSize.width,
                                       node.anchorPoint.y * node.contentSize.height);
             

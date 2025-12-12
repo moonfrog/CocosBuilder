@@ -781,4 +781,14 @@
     return [[self extraPropForKey:@"usesFlashSkew"] boolValue];
 }
 
+- (void) setHideSelection:(BOOL)hideSelection
+{
+    [self setExtraProp:[NSNumber numberWithBool:hideSelection] forKey:@"hideSelection"];
+}
+
+- (BOOL) hideSelection
+{
+    return [[self extraPropForKey:@"hideSelection"] boolValue];
+}
+
 @end

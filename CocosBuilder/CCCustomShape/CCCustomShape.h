@@ -34,6 +34,10 @@
     CGPoint gradientVector;
     float outlineWidth;
     ccColor3B outlineColor;
+    ccColor3B outlineStartColor;
+    GLubyte outlineStartOpacity;
+    ccColor3B outlineEndColor;
+    GLubyte outlineEndOpacity;
     ccColor3B shadowColor;
     CGPoint shadowOffset;
     float shadowBlur;
@@ -55,6 +59,10 @@
 @property (nonatomic, assign) CGPoint gradientVector;
 @property (nonatomic, assign) float outlineWidth;
 @property (nonatomic, assign) ccColor3B outlineColor;
+@property (nonatomic, assign) ccColor3B outlineStartColor;
+@property (nonatomic, assign) GLubyte outlineStartOpacity;
+@property (nonatomic, assign) ccColor3B outlineEndColor;
+@property (nonatomic, assign) GLubyte outlineEndOpacity;
 @property (nonatomic, assign) ccColor3B shadowColor;
 @property (nonatomic, assign) CGPoint shadowOffset;
 @property (nonatomic, assign) float shadowBlur;
