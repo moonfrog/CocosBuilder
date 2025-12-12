@@ -22,12 +22,12 @@
  * THE SOFTWARE.
  */
 
-#import "CCRoundedButton.h"
+#import "CCCustomShape.h"
 #import "CCShaderCache.h"
 #import "CCGLProgram.h"
 #import "ccGLStateCache.h"
 
-@implementation CCRoundedButton
+@implementation CCCustomShape
 
 @synthesize radius;
 @synthesize startColor;
@@ -50,7 +50,7 @@
 + (void)load
 {
     // Force the Objective-C runtime to register this class
-    NSLog(@"CCRoundedButton +load called");
+    NSLog(@"CCCustomShape +load called");
 }
 
 - (id)init
@@ -880,7 +880,7 @@
 
 - (void) setValue:(id)value forKey:(NSString *)key
 {
-    NSLog(@"CCRoundedButton setValue:%@ forKey:%@", value, key);
+    NSLog(@"CCCustomShape setValue:%@ forKey:%@", value, key);
     if ([key isEqualToString:@"startColor"]) { ccColor3B c; [value getValue:&c]; self.startColor = c; return; }
     if ([key isEqualToString:@"endColor"]) { ccColor3B c; [value getValue:&c]; self.endColor = c; return; }
     if ([key isEqualToString:@"outlineColor"]) { ccColor3B c; [value getValue:&c]; self.outlineColor = c; return; }

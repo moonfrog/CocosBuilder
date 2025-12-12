@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		34FE40FD2603909100251B09 /* MGSFragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3F541CC15AED68500EAAFBD /* MGSFragaria.framework */; };
 		34FE40FE2603909100251B09 /* MGSFragaria.framework in Copy Files (Sparkle framework) */ = {isa = PBXBuildFile; fileRef = E3F541CC15AED68500EAAFBD /* MGSFragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		428E3EC22ED7779400300718 /* CCRoundedButton.ccbPlugNode in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 428E3EBB2ED775F100300718 /* CCRoundedButton.ccbPlugNode */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		428E3ECC2ED77E5E00300718 /* CCBPProperties.plist in Resources */ = {isa = PBXBuildFile; fileRef = 428E3EC62ED77E5E00300718 /* CCBPProperties.plist */; };
-		428E3ECD2ED77E5E00300718 /* RoundedButton-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 428E3ECA2ED77E5E00300718 /* RoundedButton-Info.plist */; };
-		428E3ED02ED77F0B00300718 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7789ABC2133AA82000CEFCC7 /* Cocoa.framework */; };
-		42E9D1502ED833E000E94906 /* CCRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 428E3EC82ED77E5E00300718 /* CCRoundedButton.m */; };
-		42E9D1522ED83E4F00E94906 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 42E9D1512ED83E4F00E94906 /* Icon.png */; };
+		42AFF8A32EEC87A5002CF22D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7789ABC2133AA82000CEFCC7 /* Cocoa.framework */; };
+		42AFF8AB2EEC87E8002CF22D /* CCCustomShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 42AFF8A72EEC87E8002CF22D /* CCCustomShape.m */; };
+		42AFF8AC2EEC87E8002CF22D /* CCBPProperties.plist in Resources */ = {isa = PBXBuildFile; fileRef = 42AFF8A52EEC87E8002CF22D /* CCBPProperties.plist */; };
+		42AFF8AD2EEC87E8002CF22D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 42AFF8A92EEC87E8002CF22D /* Icon.png */; };
+		42AFF8AE2EEC87E8002CF22D /* CustomShape-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 42AFF8A82EEC87E8002CF22D /* CustomShape-Info.plist */; };
+		42AFF8B12EEC89EE002CF22D /* CCCustomShape.ccbPlugNode in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 42AFF8972EEC8719002CF22D /* CCCustomShape.ccbPlugNode */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		470D84DC1D1960DE005B31E5 /* CCBControlButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 470D84DB1D1960DE005B31E5 /* CCBControlButton.m */; };
 		472C0DDB1D364F1D006A6BFA /* InspectorButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 472C0DD61D364F13006A6BFA /* InspectorButton.xib */; };
 		472C0DDC1D364F23006A6BFA /* InspectorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 472C0DD51D364F13006A6BFA /* InspectorButton.m */; };
@@ -676,6 +676,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		42AFF8AF2EEC8914002CF22D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7789ABB5133AA82000CEFCC7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 42AFF8962EEC8719002CF22D;
+			remoteInfo = CCCustomShape;
+		};
 		508C8B802DBB9A8400CDECD8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 508C8B752DBB9A8400CDECD8 /* MMMarkdown.xcodeproj */;
@@ -865,7 +872,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				428E3EC22ED7779400300718 /* CCRoundedButton.ccbPlugNode in Copy PlugIns */,
+				42AFF8B12EEC89EE002CF22D /* CCCustomShape.ccbPlugNode in Copy PlugIns */,
 				E3FCE874152485A20028E8E7 /* CCScrollView.ccbPlugNode in Copy PlugIns */,
 				E3C65124151BB8DF00D639C0 /* CCControl.ccbPlugNode in Copy PlugIns */,
 				E3B84C48151A2C93004B743C /* CCControlButton.ccbPlugNode in Copy PlugIns */,
@@ -900,13 +907,13 @@
 
 /* Begin PBXFileReference section */
 		428E3EB62ED7617C00300718 /* CocosBuilder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CocosBuilder.entitlements; sourceTree = "<group>"; };
-		428E3EBB2ED775F100300718 /* CCRoundedButton.ccbPlugNode */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CCRoundedButton.ccbPlugNode; sourceTree = BUILT_PRODUCTS_DIR; };
-		428E3EC02ED7773100300718 /* CCBPProperties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = CCBPProperties.plist; path = CCRoundedButton/CCBPProperties.plist; sourceTree = "<group>"; };
-		428E3EC62ED77E5E00300718 /* CCBPProperties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CCBPProperties.plist; sourceTree = "<group>"; };
-		428E3EC72ED77E5E00300718 /* CCRoundedButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCRoundedButton.h; sourceTree = "<group>"; };
-		428E3EC82ED77E5E00300718 /* CCRoundedButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCRoundedButton.m; sourceTree = "<group>"; };
-		428E3ECA2ED77E5E00300718 /* RoundedButton-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RoundedButton-Info.plist"; sourceTree = "<group>"; };
-		42E9D1512ED83E4F00E94906 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		428E3EC02ED7773100300718 /* CCBPProperties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = CCBPProperties.plist; path = CCCustomShape/CCBPProperties.plist; sourceTree = "<group>"; };
+		42AFF8972EEC8719002CF22D /* CCCustomShape.ccbPlugNode */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CCCustomShape.ccbPlugNode; sourceTree = BUILT_PRODUCTS_DIR; };
+		42AFF8A52EEC87E8002CF22D /* CCBPProperties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CCBPProperties.plist; sourceTree = "<group>"; };
+		42AFF8A62EEC87E8002CF22D /* CCCustomShape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCCustomShape.h; sourceTree = "<group>"; };
+		42AFF8A72EEC87E8002CF22D /* CCCustomShape.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCCustomShape.m; sourceTree = "<group>"; };
+		42AFF8A82EEC87E8002CF22D /* CustomShape-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CustomShape-Info.plist"; sourceTree = "<group>"; };
+		42AFF8A92EEC87E8002CF22D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		470D84DA1D1960DE005B31E5 /* CCBControlButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBControlButton.h; sourceTree = "<group>"; };
 		470D84DB1D1960DE005B31E5 /* CCBControlButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBControlButton.m; sourceTree = "<group>"; };
 		472C0DD41D364F13006A6BFA /* InspectorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InspectorButton.h; sourceTree = "<group>"; };
@@ -1965,11 +1972,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		428E3EB82ED775F100300718 /* Frameworks */ = {
+		42AFF8942EEC8719002CF22D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				428E3ED02ED77F0B00300718 /* Cocoa.framework in Frameworks */,
+				42AFF8A32EEC87A5002CF22D /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2137,16 +2144,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		428E3ECB2ED77E5E00300718 /* CCRoundedButton */ = {
+		42AFF8AA2EEC87E8002CF22D /* CCCustomShape */ = {
 			isa = PBXGroup;
 			children = (
-				42E9D1512ED83E4F00E94906 /* Icon.png */,
-				428E3EC62ED77E5E00300718 /* CCBPProperties.plist */,
-				428E3EC72ED77E5E00300718 /* CCRoundedButton.h */,
-				428E3EC82ED77E5E00300718 /* CCRoundedButton.m */,
-				428E3ECA2ED77E5E00300718 /* RoundedButton-Info.plist */,
+				42AFF8A52EEC87E8002CF22D /* CCBPProperties.plist */,
+				42AFF8A62EEC87E8002CF22D /* CCCustomShape.h */,
+				42AFF8A72EEC87E8002CF22D /* CCCustomShape.m */,
+				42AFF8A82EEC87E8002CF22D /* CustomShape-Info.plist */,
+				42AFF8A92EEC87E8002CF22D /* Icon.png */,
 			);
-			path = CCRoundedButton;
+			path = CCCustomShape;
 			sourceTree = "<group>";
 		};
 		508C8B762DBB9A8400CDECD8 /* Products */ = {
@@ -2530,7 +2537,7 @@
 				E3C65116151BB89500D639C0 /* CCControl.ccbPlugNode */,
 				E3FCE8661524856D0028E8E7 /* CCScrollView.ccbPlugNode */,
 				FA98CFC1154E7D1C006E58C5 /* ccbpublish */,
-				428E3EBB2ED775F100300718 /* CCRoundedButton.ccbPlugNode */,
+				42AFF8972EEC8719002CF22D /* CCCustomShape.ccbPlugNode */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3145,11 +3152,11 @@
 		E35392481518AD4100471721 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				42AFF8AA2EEC87E8002CF22D /* CCCustomShape */,
 				E3FCE8681524856D0028E8E7 /* CCScrollView */,
 				E35392791518D78D00471721 /* CCScale9Sprite */,
 				E3C65118151BB89500D639C0 /* CCControl */,
 				E3B84C3B151A2C02004B743C /* CCControlButton */,
-				428E3ECB2ED77E5E00300718 /* CCRoundedButton */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -4184,23 +4191,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		428E3EBA2ED775F100300718 /* CCRoundedButton */ = {
+		42AFF8962EEC8719002CF22D /* CCCustomShape */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 428E3EBC2ED775F100300718 /* Build configuration list for PBXNativeTarget "CCRoundedButton" */;
+			buildConfigurationList = 42AFF8A22EEC8719002CF22D /* Build configuration list for PBXNativeTarget "CCCustomShape" */;
 			buildPhases = (
-				428E3EB72ED775F100300718 /* Sources */,
-				428E3EB82ED775F100300718 /* Frameworks */,
-				428E3EB92ED775F100300718 /* Resources */,
+				42AFF8932EEC8719002CF22D /* Sources */,
+				42AFF8942EEC8719002CF22D /* Frameworks */,
+				42AFF8952EEC8719002CF22D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = CCRoundedButton;
+			name = CCCustomShape;
 			packageProductDependencies = (
 			);
-			productName = CCRoundedButton;
-			productReference = 428E3EBB2ED775F100300718 /* CCRoundedButton.ccbPlugNode */;
+			productName = CCCustomShape;
+			productReference = 42AFF8972EEC8719002CF22D /* CCCustomShape.ccbPlugNode */;
 			productType = "com.apple.product-type.bundle";
 		};
 		7789ABBD133AA82000CEFCC7 /* CocosBuilder */ = {
@@ -4218,6 +4225,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				42AFF8B02EEC8914002CF22D /* PBXTargetDependency */,
 				E398C02F14FB82090078E771 /* PBXTargetDependency */,
 				E3B7AED314E31AEF00DFD402 /* PBXTargetDependency */,
 				E3C365F814E9E4DD007CD5FF /* PBXTargetDependency */,
@@ -4537,7 +4545,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
-					428E3EBA2ED775F100300718 = {
+					42AFF8962EEC8719002CF22D = {
 						CreatedOnToolsVersion = 16.4;
 					};
 				};
@@ -4566,11 +4574,12 @@
 			projectRoot = "";
 			targets = (
 				E398C02114FB81A30078E771 /* Cocos2D iPhone */,
-				E3B7AEC414E3193500DFD402 /* CCNode */,
 				E3C365EA14E9E4D1007CD5FF /* CCSprite */,
 				E35DBB6714F21E7D0070A6E4 /* CCLayer */,
+				42AFF8962EEC8719002CF22D /* CCCustomShape */,
 				E35DBB7F14F225D30070A6E4 /* CCLayerColor */,
 				E35DBB9714F244BB0070A6E4 /* CCLayerGradient */,
+				E3B7AEC414E3193500DFD402 /* CCNode */,
 				E35DBBAC14F2781D0070A6E4 /* CCMenu */,
 				E35DBBCB14F2AA350070A6E4 /* CCLabelBMFont */,
 				E35DBBE814F3E2390070A6E4 /* CCLabelTTF */,
@@ -4580,7 +4589,6 @@
 				E35392761518D78D00471721 /* CCScale9Sprite */,
 				E3C65115151BB89500D639C0 /* CCControl */,
 				E3B84C38151A2C02004B743C /* CCControlButton */,
-				428E3EBA2ED775F100300718 /* CCRoundedButton */,
 				E3FCE8651524856D0028E8E7 /* CCScrollView */,
 				7789ABBD133AA82000CEFCC7 /* CocosBuilder */,
 				FA98CFC0154E7D1C006E58C5 /* ccbpublish */,
@@ -4648,13 +4656,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
-		428E3EB92ED775F100300718 /* Resources */ = {
+		42AFF8952EEC8719002CF22D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42E9D1522ED83E4F00E94906 /* Icon.png in Resources */,
-				428E3ECC2ED77E5E00300718 /* CCBPProperties.plist in Resources */,
-				428E3ECD2ED77E5E00300718 /* RoundedButton-Info.plist in Resources */,
+				42AFF8AC2EEC87E8002CF22D /* CCBPProperties.plist in Resources */,
+				42AFF8AD2EEC87E8002CF22D /* Icon.png in Resources */,
+				42AFF8AE2EEC87E8002CF22D /* CustomShape-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5076,11 +5084,11 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		428E3EB72ED775F100300718 /* Sources */ = {
+		42AFF8932EEC8719002CF22D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42E9D1502ED833E000E94906 /* CCRoundedButton.m in Sources */,
+				42AFF8AB2EEC87E8002CF22D /* CCCustomShape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5541,6 +5549,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		42AFF8B02EEC8914002CF22D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 42AFF8962EEC8719002CF22D /* CCCustomShape */;
+			targetProxy = 42AFF8AF2EEC8914002CF22D /* PBXContainerItemProxy */;
+		};
 		E325F66914F6611300D29BCF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E325F65914F65C8E00D29BCF /* CCMenuItemImage */;
@@ -5779,7 +5792,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		428E3EBD2ED775F100300718 /* Debug */ = {
+		42AFF8982EEC8719002CF22D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -5799,7 +5812,6 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "";
-				"DEBUG_INFORMATION_FORMAT[sdk=macosx*]" = dwarf;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -5822,7 +5834,7 @@
 					"-undefined",
 					dynamic_lookup,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cocosbuilder.plug.node.CCRoundedButton;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cocosbuilder.plug.node.CCCustomShape.CCCustomShape;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -5830,7 +5842,7 @@
 			};
 			name = Debug;
 		};
-		428E3EBE2ED775F100300718 /* Release */ = {
+		42AFF8992EEC8719002CF22D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -5868,7 +5880,7 @@
 					"-undefined",
 					dynamic_lookup,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cocosbuilder.plug.node.CCRoundedButton;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cocosbuilder.plug.node.CCCustomShape.CCCustomShape;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -7028,11 +7040,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		428E3EBC2ED775F100300718 /* Build configuration list for PBXNativeTarget "CCRoundedButton" */ = {
+		42AFF8A22EEC8719002CF22D /* Build configuration list for PBXNativeTarget "CCCustomShape" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				428E3EBD2ED775F100300718 /* Debug */,
-				428E3EBE2ED775F100300718 /* Release */,
+				42AFF8982EEC8719002CF22D /* Debug */,
+				42AFF8992EEC8719002CF22D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

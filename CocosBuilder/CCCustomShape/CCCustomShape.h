@@ -24,7 +24,7 @@
 
 #import "cocos2d.h"
 
-@interface CCRoundedButton : CCNode
+@interface CCCustomShape : CCNode
 {
     float radius;
     ccColor3B startColor;
