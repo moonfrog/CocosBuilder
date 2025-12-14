@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		34FE40FD2603909100251B09 /* MGSFragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3F541CC15AED68500EAAFBD /* MGSFragaria.framework */; };
 		34FE40FE2603909100251B09 /* MGSFragaria.framework in Copy Files (Sparkle framework) */ = {isa = PBXBuildFile; fileRef = E3F541CC15AED68500EAAFBD /* MGSFragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		421C1AA72EEF19B70047366C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7789ABC2133AA82000CEFCC7 /* Cocoa.framework */; };
+		421C1ABE2EEF19F40047366C /* CCCustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 421C1ABA2EEF19F40047366C /* CCCustomButton.m */; };
+		421C1ABF2EEF19F40047366C /* CCBPProperties.plist in Resources */ = {isa = PBXBuildFile; fileRef = 421C1AB82EEF19F40047366C /* CCBPProperties.plist */; };
+		421C1AC02EEF19F40047366C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 421C1ABC2EEF19F40047366C /* Icon.png */; };
+		421C1AC12EEF19F40047366C /* CustomButton-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 421C1ABB2EEF19F40047366C /* CustomButton-Info.plist */; };
+		421C1AC42EEF1A540047366C /* CCCustomButton.ccbPlugNode in Copy PlugIns */ = {isa = PBXBuildFile; fileRef = 421C1AAF2EEF19B70047366C /* CCCustomButton.ccbPlugNode */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		42AFF8A32EEC87A5002CF22D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7789ABC2133AA82000CEFCC7 /* Cocoa.framework */; };
 		42AFF8AB2EEC87E8002CF22D /* CCCustomShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 42AFF8A72EEC87E8002CF22D /* CCCustomShape.m */; };
 		42AFF8AC2EEC87E8002CF22D /* CCBPProperties.plist in Resources */ = {isa = PBXBuildFile; fileRef = 42AFF8A52EEC87E8002CF22D /* CCBPProperties.plist */; };
@@ -676,6 +682,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		421C1AC22EEF1A4B0047366C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7789ABB5133AA82000CEFCC7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 421C1AA32EEF19B70047366C;
+			remoteInfo = CCCustomButton;
+		};
 		42AFF8AF2EEC8914002CF22D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7789ABB5133AA82000CEFCC7 /* Project object */;
@@ -872,6 +885,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				421C1AC42EEF1A540047366C /* CCCustomButton.ccbPlugNode in Copy PlugIns */,
 				42AFF8B12EEC89EE002CF22D /* CCCustomShape.ccbPlugNode in Copy PlugIns */,
 				E3FCE874152485A20028E8E7 /* CCScrollView.ccbPlugNode in Copy PlugIns */,
 				E3C65124151BB8DF00D639C0 /* CCControl.ccbPlugNode in Copy PlugIns */,
@@ -906,6 +920,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		421C1AAF2EEF19B70047366C /* CCCustomButton.ccbPlugNode */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CCCustomButton.ccbPlugNode; sourceTree = BUILT_PRODUCTS_DIR; };
+		421C1AB82EEF19F40047366C /* CCBPProperties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CCBPProperties.plist; sourceTree = "<group>"; };
+		421C1AB92EEF19F40047366C /* CCCustomButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCCustomButton.h; sourceTree = "<group>"; };
+		421C1ABA2EEF19F40047366C /* CCCustomButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCCustomButton.m; sourceTree = "<group>"; };
+		421C1ABB2EEF19F40047366C /* CustomButton-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CustomButton-Info.plist"; sourceTree = "<group>"; };
+		421C1ABC2EEF19F40047366C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		428E3EB62ED7617C00300718 /* CocosBuilder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CocosBuilder.entitlements; sourceTree = "<group>"; };
 		428E3EC02ED7773100300718 /* CCBPProperties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = CCBPProperties.plist; path = CCCustomShape/CCBPProperties.plist; sourceTree = "<group>"; };
 		42AFF8972EEC8719002CF22D /* CCCustomShape.ccbPlugNode */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CCCustomShape.ccbPlugNode; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1972,6 +1992,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		421C1AA62EEF19B70047366C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				421C1AA72EEF19B70047366C /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		42AFF8942EEC8719002CF22D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -2144,6 +2172,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		421C1ABD2EEF19F40047366C /* CCCustomButton */ = {
+			isa = PBXGroup;
+			children = (
+				421C1AB82EEF19F40047366C /* CCBPProperties.plist */,
+				421C1AB92EEF19F40047366C /* CCCustomButton.h */,
+				421C1ABA2EEF19F40047366C /* CCCustomButton.m */,
+				421C1ABB2EEF19F40047366C /* CustomButton-Info.plist */,
+				421C1ABC2EEF19F40047366C /* Icon.png */,
+			);
+			path = CCCustomButton;
+			sourceTree = "<group>";
+		};
 		42AFF8AA2EEC87E8002CF22D /* CCCustomShape */ = {
 			isa = PBXGroup;
 			children = (
@@ -2538,6 +2578,7 @@
 				E3FCE8661524856D0028E8E7 /* CCScrollView.ccbPlugNode */,
 				FA98CFC1154E7D1C006E58C5 /* ccbpublish */,
 				42AFF8972EEC8719002CF22D /* CCCustomShape.ccbPlugNode */,
+				421C1AAF2EEF19B70047366C /* CCCustomButton.ccbPlugNode */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3152,6 +3193,7 @@
 		E35392481518AD4100471721 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				421C1ABD2EEF19F40047366C /* CCCustomButton */,
 				42AFF8AA2EEC87E8002CF22D /* CCCustomShape */,
 				E3FCE8681524856D0028E8E7 /* CCScrollView */,
 				E35392791518D78D00471721 /* CCScale9Sprite */,
@@ -4191,6 +4233,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		421C1AA32EEF19B70047366C /* CCCustomButton */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 421C1AAC2EEF19B70047366C /* Build configuration list for PBXNativeTarget "CCCustomButton" */;
+			buildPhases = (
+				421C1AA42EEF19B70047366C /* Sources */,
+				421C1AA62EEF19B70047366C /* Frameworks */,
+				421C1AA82EEF19B70047366C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CCCustomButton;
+			packageProductDependencies = (
+			);
+			productName = CCCustomShape;
+			productReference = 421C1AAF2EEF19B70047366C /* CCCustomButton.ccbPlugNode */;
+			productType = "com.apple.product-type.bundle";
+		};
 		42AFF8962EEC8719002CF22D /* CCCustomShape */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 42AFF8A22EEC8719002CF22D /* Build configuration list for PBXNativeTarget "CCCustomShape" */;
@@ -4225,6 +4286,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				421C1AC32EEF1A4B0047366C /* PBXTargetDependency */,
 				42AFF8B02EEC8914002CF22D /* PBXTargetDependency */,
 				E398C02F14FB82090078E771 /* PBXTargetDependency */,
 				E3B7AED314E31AEF00DFD402 /* PBXTargetDependency */,
@@ -4592,6 +4654,7 @@
 				E3FCE8651524856D0028E8E7 /* CCScrollView */,
 				7789ABBD133AA82000CEFCC7 /* CocosBuilder */,
 				FA98CFC0154E7D1C006E58C5 /* ccbpublish */,
+				421C1AA32EEF19B70047366C /* CCCustomButton */,
 			);
 		};
 /* End PBXProject section */
@@ -4656,6 +4719,16 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		421C1AA82EEF19B70047366C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				421C1ABF2EEF19F40047366C /* CCBPProperties.plist in Resources */,
+				421C1AC02EEF19F40047366C /* Icon.png in Resources */,
+				421C1AC12EEF19F40047366C /* CustomButton-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		42AFF8952EEC8719002CF22D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -5084,6 +5157,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		421C1AA42EEF19B70047366C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				421C1ABE2EEF19F40047366C /* CCCustomButton.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		42AFF8932EEC8719002CF22D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -5549,6 +5630,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		421C1AC32EEF1A4B0047366C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 421C1AA32EEF19B70047366C /* CCCustomButton */;
+			targetProxy = 421C1AC22EEF1A4B0047366C /* PBXContainerItemProxy */;
+		};
 		42AFF8B02EEC8914002CF22D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 42AFF8962EEC8719002CF22D /* CCCustomShape */;
@@ -5792,6 +5878,102 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		421C1AAD2EEF19B70047366C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPrincipalClass = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cocosbuilder.plug.node.CCCustomShape.CCCustomShape;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				WRAPPER_EXTENSION = ccbPlugNode;
+			};
+			name = Debug;
+		};
+		421C1AAE2EEF19B70047366C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPrincipalClass = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cocosbuilder.plug.node.CCCustomShape.CCCustomShape;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				WRAPPER_EXTENSION = ccbPlugNode;
+			};
+			name = Release;
+		};
 		42AFF8982EEC8719002CF22D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -7040,6 +7222,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		421C1AAC2EEF19B70047366C /* Build configuration list for PBXNativeTarget "CCCustomButton" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				421C1AAD2EEF19B70047366C /* Debug */,
+				421C1AAE2EEF19B70047366C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		42AFF8A22EEC8719002CF22D /* Build configuration list for PBXNativeTarget "CCCustomShape" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
