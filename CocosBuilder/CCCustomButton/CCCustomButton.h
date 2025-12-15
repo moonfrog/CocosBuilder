@@ -52,6 +52,11 @@
     
     // State tracking for button
     BOOL isPressed;
+    
+    // Label text properties
+    id titleLabel;
+    ccColor3B fontColor;
+    CGFloat shadowOpacity;
 }
 
 @property (nonatomic, assign) float radius;
@@ -74,6 +79,12 @@
 @property (nonatomic, assign) ccColor3B pressedStartColor;
 @property (nonatomic, assign) ccColor3B pressedEndColor;
 @property (nonatomic, assign) int shape;
+
+// Label text properties
+@property (nonatomic, strong) id titleLabel;
+@property (nonatomic, assign) ccColor3B fontColor;
+@property (nonatomic, assign) CGFloat shadowOpacity;
+@property (nonatomic, assign) CGFloat shadowBlurRadius;
 
 - (id)init;
 

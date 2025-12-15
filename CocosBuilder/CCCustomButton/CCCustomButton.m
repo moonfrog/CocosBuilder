@@ -49,6 +49,10 @@
 @synthesize pressedStartColor;
 @synthesize pressedEndColor;
 @synthesize shape;
+@synthesize titleLabel;
+@synthesize fontColor;
+@synthesize shadowOpacity;
+@synthesize shadowBlurRadius;
 
 + (void)load
 {
@@ -83,6 +87,16 @@
     shape = 0; // ROUNDED_RECT
     
     isPressed = NO;
+    
+    // Create title label with default text
+    titleLabel = [CCLabelTTF labelWithString:@"Button" fontName:@"Helvetica" fontSize:17];
+    [(CCLabelTTF*)titleLabel setFontFillColor:ccc3(255, 255, 255) updateImage:YES];
+    [self addChild:titleLabel];
+    
+    // Label text defaults
+    fontColor = ccc3(255, 255, 255);
+    shadowOpacity = 0.0f;
+    shadowBlurRadius = 0.0f;
     
     self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
     
@@ -800,6 +814,8 @@
     if ([key isEqualToString:@"outlineEndColor"]) return [NSValue value:&outlineEndColor withObjCType:@encode(ccColor3B)];
     if ([key isEqualToString:@"pressedStartColor"]) return [NSValue value:&pressedStartColor withObjCType:@encode(ccColor3B)];
     if ([key isEqualToString:@"pressedEndColor"]) return [NSValue value:&pressedEndColor withObjCType:@encode(ccColor3B)];
+    if ([key isEqualToString:@"Text"]) return @""; // Separator property, return empty string
+    if ([key isEqualToString:@"title|1"]) return [(CCLabelTTF*)self.titleLabel string];
     
     return [super valueForKey:key];
 }
@@ -815,8 +831,107 @@
     if ([key isEqualToString:@"shadowColor"]) { ccColor3B c; [value getValue:&c]; self.shadowColor = c; return; }
     if ([key isEqualToString:@"pressedStartColor"]) { ccColor3B c; [value getValue:&c]; self.pressedStartColor = c; return; }
     if ([key isEqualToString:@"pressedEndColor"]) { ccColor3B c; [value getValue:&c]; self.pressedEndColor = c; return; }
+    if ([key isEqualToString:@"fontColor"]) { ccColor3B c; [value getValue:&c]; self.fontColor = c; return; }
 
     [super setValue:value forKey:key];
+}
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    if ([key isEqualToString:@"title|1"])
+    {
+        NSString* str = value;
+        if (str && [str length] > 0)
+        {
+            [(CCLabelTTF*)self.titleLabel setString:str];
+        }
+        return;
+    }
+    else if ([key isEqualToString:@"titleTTF|1"])
+    {
+        NSString* fontName = value;
+        if (fontName && [fontName length] > 0)
+        {
+            [(CCLabelTTF*)self.titleLabel setFontName:fontName];
+        }
+        return;
+    }
+    else if ([key isEqualToString:@"titleTTFSize|1"])
+    {
+        CGFloat fontSize = [value floatValue];
+        if (fontSize > 0)
+        {
+            [(CCLabelTTF*)self.titleLabel setFontSize:fontSize];
+        }
+        return;
+    }
+    
+    [super setValue:value forUndefinedKey:key];
+}
+
+- (id) getLabel
+{
+    id label = self.titleLabel;
+    if (label) {
+        [label setFontFillColor:self.fontColor updateImage:NO];
+    }
+    return label;
+}
+
+- (void) setOutlineColor:(ccColor3B)outlineClr
+{
+    outlineColor = outlineClr;
+    id label = [self getLabel];
+    if (!label) return;
+    if (self.outlineWidth == 0.0) {
+        [label disableStrokeAndUpdateImage:YES];
+    } else {
+        [label enableStrokeWithColor:outlineClr size:self.outlineWidth updateImage:YES];
+    }
+}
+
+- (void) setOutlineWidth:(CGFloat)outlineWid
+{
+    outlineWidth = outlineWid;
+    [self setOutlineColor:outlineColor];
+}
+
+- (void) setShadowOpacity:(CGFloat)shadowOty
+{
+    shadowOpacity = shadowOty;
+    id label = self.titleLabel;
+    if (!label) return;
+    [label enableShadowWithOffset:CGSizeMake(shadowOffset.x, shadowOffset.y) opacity:shadowOpacity blur:shadowBlurRadius updateImage:YES];
+}
+
+- (void) setShadowColor:(ccColor3B)shadowClr
+{
+    shadowColor = shadowClr;
+    id label = self.titleLabel;
+    if (!label) return;
+    [label enableShadowWithOffset:CGSizeMake(shadowOffset.x, shadowOffset.y) opacity:shadowOpacity blur:shadowBlurRadius updateImage:YES];
+}
+
+-(void) setShadowBlurRadius:(CGFloat)shadowBlurRad
+{
+    id label = self.titleLabel;
+    if (!label) return;
+    if (shadowBlurRad == 0) {
+        [label disableShadowAndUpdateImage:YES];
+        return;
+    }
+    shadowBlurRadius = shadowBlurRad;
+    [label enableShadowWithOffset:CGSizeMake(shadowOffset.x, shadowOffset.y) opacity:shadowOpacity blur:shadowBlurRadius updateImage:YES];
+}
+
+-(void) setShadowOffset:(CGPoint)shadowOffsetInPoint
+{
+    shadowOffset = shadowOffsetInPoint;
+    id label = self.titleLabel;
+    if (!label) return;
+    if (shadowBlurRadius > 0) {
+        [label enableShadowWithOffset:CGSizeMake(shadowOffset.x, shadowOffset.y) opacity:shadowOpacity blur:shadowBlurRadius updateImage:YES];
+    }
 }
 
 @end
