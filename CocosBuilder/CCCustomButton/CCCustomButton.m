@@ -88,11 +88,6 @@
     
     isPressed = NO;
     
-    // Create title label with default text
-    titleLabel = [CCLabelTTF labelWithString:@"Button" fontName:@"Helvetica" fontSize:17];
-    [(CCLabelTTF*)titleLabel setFontFillColor:ccc3(255, 255, 255) updateImage:YES];
-    [self addChild:titleLabel];
-    
     // Label text defaults
     fontColor = ccc3(255, 255, 255);
     shadowOpacity = 0.0f;
@@ -100,8 +95,15 @@
     
     self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
     
-    // Set default size
+    // Set default size FIRST
     [self setContentSize:CGSizeMake(100, 40)];
+    
+    // Create title label with default text and center it
+    titleLabel = [CCLabelTTF labelWithString:@"Button" fontName:@"Helvetica" fontSize:17];
+    [(CCLabelTTF*)titleLabel setFontFillColor:fontColor updateImage:YES];
+    [(CCLabelTTF*)titleLabel setAnchorPoint:ccp(0.5f, 0.5f)];
+    [(CCLabelTTF*)titleLabel setPosition:ccp(self.contentSize.width / 2.0f, self.contentSize.height / 2.0f)];
+    [self addChild:titleLabel z:1];
     
     return self;
 }
@@ -116,6 +118,15 @@
 {
     [super setSelected:selected];
     isPressed = selected;
+}
+
+- (void)setContentSize:(CGSize)size
+{
+    [super setContentSize:size];
+    // Keep label centered when size changes
+    if (self.titleLabel) {
+        [(CCLabelTTF*)self.titleLabel setPosition:ccp(size.width / 2.0f, size.height / 2.0f)];
+    }
 }
 
 - (void)draw
@@ -831,7 +842,16 @@
     if ([key isEqualToString:@"shadowColor"]) { ccColor3B c; [value getValue:&c]; self.shadowColor = c; return; }
     if ([key isEqualToString:@"pressedStartColor"]) { ccColor3B c; [value getValue:&c]; self.pressedStartColor = c; return; }
     if ([key isEqualToString:@"pressedEndColor"]) { ccColor3B c; [value getValue:&c]; self.pressedEndColor = c; return; }
-    if ([key isEqualToString:@"fontColor"]) { ccColor3B c; [value getValue:&c]; self.fontColor = c; return; }
+    if ([key isEqualToString:@"fontColor"]) { 
+        ccColor3B c; 
+        [value getValue:&c]; 
+        self.fontColor = c;
+        // Apply color to label immediately
+        if (self.titleLabel) {
+            [(CCLabelTTF*)self.titleLabel setFontFillColor:c updateImage:YES];
+        }
+        return; 
+    }
 
     [super setValue:value forKey:key];
 }
