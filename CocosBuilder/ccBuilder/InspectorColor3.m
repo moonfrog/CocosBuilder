@@ -50,7 +50,7 @@
     ccColor3B c;
     [colorValue getValue:&c];
     
-    return [NSColor colorWithCalibratedRed:c.r/255.0 green:c.g/255.0 blue:c.b/255.0 alpha:1];
+    return [NSColor colorWithColorSpace:[NSColorSpace deviceRGBColorSpace] components:(CGFloat[]){c.r/255.0, c.g/255.0, c.b/255.0, 1.0} count:4];
 }
 
 @end
