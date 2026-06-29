@@ -2,7 +2,7 @@
  * CocosBuilder: http://www.cocosbuilder.com
  *
  * Copyright (c) 2011 Viktor Lidholt
- * Copyright (c) 2012 Zynga Inc.
+ * Copyright (c) 2026 Moonfrog Private Labs Ltd.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal

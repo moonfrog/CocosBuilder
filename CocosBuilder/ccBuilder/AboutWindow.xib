@@ -57,7 +57,7 @@
                         </constraints>
                         <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" allowsEditingTextAttributes="YES" id="43">
                             <font key="font" metaFont="miniSystem"/>
-                            <string key="title">Copyright 2012-2013 Zynga Inc.
+                            <string key="title">Copyright 2026 Moonfrog Private Labs Ltd.
 Copyright 2011 Viktor Lidholt
 
 CocosBuilder is released open source under MIT licence. Please see LICENSE_CocosBuilder.txt for full license text.
