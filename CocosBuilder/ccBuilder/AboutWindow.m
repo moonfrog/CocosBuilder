@@ -1,7 +1,7 @@
 /*
  * CocosBuilder: http://www.cocosbuilder.com
  *
- * Copyright (c) 2012 Zynga Inc.
+ * Copyright (c) 2026 Moonfrog Private Labs Ltd.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -43,12 +43,22 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    
-    // Load version file into version text field
-    NSString* versionPath = [[NSBundle mainBundle] pathForResource:@"Version" ofType:@"txt" inDirectory:@"version"];
-    
-    NSString* version = [NSString stringWithContentsOfFile:versionPath encoding:NSUTF8StringEncoding error:NULL];
-    
+
+    // Build the version string from the app bundle's Info.plist (the canonical source).
+    NSDictionary* info = [[NSBundle mainBundle] infoDictionary];
+    NSString* shortVersion = [info objectForKey:@"CFBundleShortVersionString"];
+    NSString* build = [info objectForKey:@"CFBundleVersion"];
+
+    NSString* version = nil;
+    if (shortVersion && build)
+    {
+        version = [NSString stringWithFormat:@"Version %@ (build %@)", shortVersion, build];
+    }
+    else if (shortVersion)
+    {
+        version = [NSString stringWithFormat:@"Version %@", shortVersion];
+    }
+
     if (version)
     {
         [txtVersion setStringValue:version];

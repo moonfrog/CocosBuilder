@@ -1,7 +1,7 @@
 /*
  * CocosBuilder: http://www.cocosbuilder.com
  *
- * Copyright (c) 2012 Zynga Inc.
+ * Copyright (c) 2026 Moonfrog Private Labs Ltd.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -50,7 +50,7 @@
     ccColor3B c;
     [colorValue getValue:&c];
     
-    return [NSColor colorWithCalibratedRed:c.r/255.0 green:c.g/255.0 blue:c.b/255.0 alpha:1];
+    return [NSColor colorWithColorSpace:[NSColorSpace deviceRGBColorSpace] components:(CGFloat[]){c.r/255.0, c.g/255.0, c.b/255.0, 1.0} count:4];
 }
 
 @end
